@@ -1,40 +1,71 @@
-# ResurchIn — optimized Next.js / TypeScript build
+# ResurchIn
 
-Performance-focused conversion of the exact August 15 ResurchIn live-site backup.
+Website for ResurchIn, a research fellowship/community focused on helping students get into research and understand the process better.
 
-## Run
+This is the current production version of the site rebuilt with Next.js and TypeScript.
+
+## Stack
+
+* Next.js
+* TypeScript
+* CSS
+* Firebase Hosting
+
+## Running it locally
+
+Clone the repo and install the dependencies.
 
 ```bash
 npm install
+```
+
+Then start the dev server:
+
+```bash
 npm run dev
 ```
 
-Production verification:
+Open `http://localhost:3000`.
+
+For a production build:
 
 ```bash
-npm run typecheck
 npm run build
-npm start
 ```
 
-## Performance work included
+## Pages
 
-- Server components by default; no custom React client component exists solely to boot legacy interactions.
-- Deferred vanilla interaction runtime (`site-v2.js`) with requestAnimationFrame throttling for pointer-heavy effects.
-- Route-aware CSS imports: shared foundation, homepage layer, and inner-page layer are no longer all requested on every route.
-- Existing AVIF assets retained instead of recompressing already-efficient originals.
-- Responsive native `srcset`/`sizes` for Pexels AVIFs, including dynamic image swaps.
-- Above-the-fold hero images use eager/high-priority loading; below-the-fold media stays lazy.
-- Intrinsic image width/height + async decoding reduce layout shift and decode blocking.
-- Critical local fonts are preloaded; all fonts remain self-hosted.
-- Long-lived immutable cache headers for versioned/static assets.
-- Conservative `content-visibility` containment on repeated below-fold inner-page cards/figures.
-- Production source maps disabled, compression enabled, framework header removed.
+The site currently includes:
 
-## Visual fidelity
+* Home
+* About
+* Program
+* Curriculum
+* Mentors
+* Community
+* Apply
+* Application success page
+* Resources
+* Resource article page
 
-No layout, copy, route, brand color, typography choice, or interaction concept was redesigned. The optimization pass changes delivery/runtime behavior, not the intended appearance.
+## Performance
 
-## Note about this environment
+I also spent some time cleaning up the production version, mostly around images and unnecessary client-side work.
 
-The source was statically validated and packaged here. `npm install` could not complete in the current sandbox because access to the npm registry timed out, so the final `next build` must run in an environment with registry access (local machine, GitHub Actions, Vercel, etc.).
+Images have smaller responsive versions so mobile devices don't have to load the same large files as desktop, and most of the site can render without turning every component into a client component.
+
+## Project structure
+
+```text
+app/          pages and routes
+components/   shared components
+public/       images, fonts and other assets
+```
+
+## Deployment
+
+The site is set up to be exported and hosted on Firebase Hosting.
+
+---
+
+Still working on the site, so I'll update this README when anything important changes.
