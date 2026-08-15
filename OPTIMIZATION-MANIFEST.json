@@ -1,0 +1,43 @@
+{
+  "source": "resurchin-next-tsx-final.zip / exact August 15 backup conversion",
+  "output": "resurchin-next-tsx-optimized",
+  "optimization_version": "2.0.0",
+  "principle": "preserve visual design; optimize delivery/runtime",
+  "changes": [
+    "route-aware Next CSS chunks",
+    "removed runtime-only React hydration island",
+    "deferred vanilla runtime",
+    "responsive AVIF srcsets",
+    "priority LCP images",
+    "intrinsic image dimensions",
+    "async image decoding",
+    "font preloads",
+    "immutable asset caching",
+    "rAF-throttled pointer effects",
+    "background-tab carousel pause",
+    "conservative content-visibility containment"
+  ],
+  "responsive_avif_widths": [
+    480,
+    640,
+    768,
+    828,
+    960,
+    1080,
+    1200,
+    1400,
+    1600,
+    1800
+  ],
+  "verification": {
+    "routes": 10,
+    "tsx_files": 15,
+    "html_files": 0,
+    "custom_use_client_components": 0,
+    "typescript_syntax": "passed 16/16",
+    "runtime_js_syntax": "passed",
+    "css_parse": "passed 3/3",
+    "direct_asset_refs": "passed",
+    "framework_build": "not run: npm registry timed out in sandbox"
+  }
+}

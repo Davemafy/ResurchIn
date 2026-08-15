@@ -1,0 +1,65 @@
+{
+  "source": "resurchin-exact-final-backup.zip",
+  "routes": [
+    {
+      "route": "/",
+      "source_html": "index.html",
+      "body_class": "home-v16 home-v17",
+      "title": "ResurchIn — Find the question. Earn the claim."
+    },
+    {
+      "route": "/about/",
+      "source_html": "about/index.html",
+      "body_class": "inner-page about-page",
+      "title": "About — ResurchIn"
+    },
+    {
+      "route": "/apply/",
+      "source_html": "apply/index.html",
+      "body_class": "",
+      "title": "Apply — ResurchIn"
+    },
+    {
+      "route": "/apply/success/",
+      "source_html": "apply/success/index.html",
+      "body_class": "",
+      "title": "Application received — ResurchIn"
+    },
+    {
+      "route": "/community/",
+      "source_html": "community/index.html",
+      "body_class": "inner-page community-page",
+      "title": "Community — ResurchIn"
+    },
+    {
+      "route": "/curriculum/",
+      "source_html": "curriculum/index.html",
+      "body_class": "inner-page curriculum-page",
+      "title": "Curriculum — ResurchIn"
+    },
+    {
+      "route": "/mentors/",
+      "source_html": "mentors/index.html",
+      "body_class": "inner-page mentors-page",
+      "title": "Mentorship — ResurchIn"
+    },
+    {
+      "route": "/program/",
+      "source_html": "program/index.html",
+      "body_class": "inner-page program-page",
+      "title": "Program dossier — ResurchIn"
+    },
+    {
+      "route": "/resources/how-to-read-a-research-paper-without-getting-lost/",
+      "source_html": "resources/how-to-read-a-research-paper-without-getting-lost/index.html",
+      "body_class": "",
+      "title": "How to read a research paper — ResurchIn"
+    },
+    {
+      "route": "/resources/",
+      "source_html": "resources/index.html",
+      "body_class": "inner-page resources-page",
+      "title": "Resources — ResurchIn"
+    }
+  ]
+}
