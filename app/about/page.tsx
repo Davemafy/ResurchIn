@@ -1,0 +1,115 @@
+import "../inner.css";
+import type { Metadata } from "next";
+import { PageClass } from "@/components/PageClass";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+
+export const metadata: Metadata = {
+  title: "About — ResurchIn",
+  description: "Research training built around practice, mentorship and real work.",
+};
+
+export default function Page() {
+  return (
+    <>
+      <PageClass className={"inner-page about-page"} />
+      <SiteHeader active={"about"} />
+    <main>
+      <section className={"page-hero split"}>
+        <div>
+          <p className={"kicker"}>ABOUT / WHY THIS EXISTS</p>
+          <h1>Research should not be inherited through access.</h1>
+          <p className={"lead"}>
+            ResurchIn exists for people with the curiosity to investigate, but without an insider teaching them how research decisions are actually made.
+          </p>
+        </div>
+        <figure className={"photo green"}>
+          <div><ResponsiveImage src={"/assets/images/pexels-5940830-w1800.avif"} priority={true} sizes={"(max-width: 720px) 100vw, 58vw"} alt={"A group learning together in a classroom"} /></div>
+          <figcaption>
+            A group learning together in a classroom
+            <span>Editorial photograph / Pexels</span>
+          </figcaption>
+        </figure>
+      </section>
+      <section className={"founder-story"}>
+        <span>01 / FOUNDER</span>
+        <div>
+          <blockquote>
+            Learn the work
+            <br />
+            by doing the work.
+          </blockquote>
+          <p>
+            Happiness supports Alzheimer’s biomarker research at the UPMC Karikari Biofluid Biomarker Laboratory, University of Pittsburgh. ResurchIn extends that working-researcher perspective into a free, volunteer-led training community.
+          </p>
+          <strong>HAPPINESS ERIC AIGBOGUN / CREATOR + LEAD</strong>
+        </div>
+      </section>
+      <section className={"visual-evidence"}>
+        <header>
+          <span>WHY IT EXISTS / IN PRACTICE</span>
+          <h2>Access changes when the room opens.</h2>
+          <p>Not a polished campaign image—a record of people reading, testing, asking and revising together.</p>
+        </header>
+        <div className={"evidence-grid"}>
+          <figure data-index={"01"}>
+            <ResponsiveImage src={"/assets/images/pexels-9243385-w1600.avif"} alt={"A researcher working at a microscope"} />
+            <figcaption>
+              <span>RESEARCH PRACTICE</span>
+              <span>LAB / FIELD</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"02"}>
+            <ResponsiveImage src={"/assets/images/pexels-5940830-w1600.avif"} alt={"A research learning group in a classroom"} />
+            <figcaption>
+              <span>THE OPEN ROOM</span>
+              <span>LEARN / SHARE</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"03"}>
+            <ResponsiveImage src={"/assets/images/pexels-5940711-w1200.avif"} alt={"Students working through research material"} />
+            <figcaption>
+              <span>THE WORK</span>
+              <span>READ / MARK</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"04"}>
+            <ResponsiveImage src={"/assets/images/pexels-5940715-w1200.avif"} alt={"A mentor and students revising together"} />
+            <figcaption>
+              <span>THE GUIDANCE</span>
+              <span>REVIEW / REVISE</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section className={"principles"}>
+        <p className={"kicker"}>WHAT THE PROGRAM PROTECTS</p>
+        <div>
+          <article>
+            <b>01</b>
+            <h3>Practice before polish</h3>
+            <p>Participants work with real data and keep the drafts that show how their decisions changed.</p>
+          </article>
+          <article>
+            <b>02</b>
+            <h3>Guidance that is usable</h3>
+            <p>Feedback should tell you what to inspect, question or revise next.</p>
+          </article>
+          <article>
+            <b>03</b>
+            <h3>Access without tuition</h3>
+            <p>The program remains free and volunteer-driven for emerging researchers worldwide.</p>
+          </article>
+        </div>
+      </section>
+      <section className={"closing"}>
+        <p className={"kicker"}>ADMISSIONS / NEXT COHORT</p>
+        <h2>Learn research by doing it.</h2>
+        <a className={"button light"} href={"/apply/"}>Submit an application ↗</a>
+      </section>
+    </main>
+      <SiteFooter />
+    </>
+  );
+}
