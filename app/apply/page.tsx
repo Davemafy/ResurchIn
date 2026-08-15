@@ -72,11 +72,11 @@ export default function Page() {
           </label>
           <label>
             What question keeps pulling at you? *
-            <textarea name={"question"} rows={"5"} required></textarea>
+            <textarea name={"question"} rows={5} required></textarea>
           </label>
           <label>
             Why do you want to join now? *
-            <textarea name={"why"} rows={"5"} required></textarea>
+            <textarea name={"why"} rows={5} required></textarea>
           </label>
           <label className={"check"}>
             <input type={"checkbox"} required />
