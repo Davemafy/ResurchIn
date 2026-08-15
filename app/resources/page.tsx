@@ -1,0 +1,99 @@
+import "../inner.css";
+import type { Metadata } from "next";
+import { PageClass } from "@/components/PageClass";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+
+export const metadata: Metadata = {
+  title: "Resources — ResurchIn",
+  description: "Research training built around practice, mentorship and real work.",
+};
+
+export default function Page() {
+  return (
+    <>
+      <PageClass className={"inner-page resources-page"} />
+      <SiteHeader active={"resources"} />
+    <main>
+      <section className={"resource-hero"}>
+        <div>
+          <p className={"kicker"}>OPEN RESOURCES / START HERE</p>
+          <h1>Use these when the work stops moving.</h1>
+          <p>Field guides for the exact moments a paper becomes confusing, a question stays vague or a draft stops improving.</p>
+        </div>
+        <figure className={"photo blue"}>
+          <div><ResponsiveImage src={"/assets/images/pexels-5940711-w1800.avif"} priority={true} sizes={"(max-width: 720px) 100vw, 58vw"} alt={"Students studying with laptops in a library"} /></div>
+          <figcaption>
+            Students studying with laptops in a library
+            <span>Editorial photograph / Pexels</span>
+          </figcaption>
+        </figure>
+      </section>
+      <section className={"resource-index"}>
+        <article className={"featured"}>
+          <span>FIELD GUIDE 01</span>
+          <h2>How to read a research paper without getting lost.</h2>
+          <p>A six-pass method for finding the question, following the evidence and deciding what the paper can claim.</p>
+          <a href={"/resources/how-to-read-a-research-paper-without-getting-lost/"}>Read the guide →</a>
+        </article>
+        <article>
+          <span>WORKSHEET / SOON</span>
+          <h2>Turn an interest into a researchable question.</h2>
+        </article>
+        <article>
+          <span>FIELD NOTE / SOON</span>
+          <h2>Write a limitation that improves your argument.</h2>
+        </article>
+        <article>
+          <span>CHECKLIST / SOON</span>
+          <h2>Prepare a draft for useful feedback.</h2>
+        </article>
+      </section>
+      <section className={"visual-evidence"}>
+        <header>
+          <span>FIELD NOTES / OPEN</span>
+          <h2>Research becomes clearer when you can see the work.</h2>
+          <p>Read the paper, mark the claim, compare the evidence, then keep the note that changed your mind.</p>
+        </header>
+        <div className={"evidence-grid"}>
+          <figure data-index={"01"}>
+            <ResponsiveImage src={"/assets/images/pexels-5940711-w1600.avif"} alt={"Students reading and comparing papers"} />
+            <figcaption>
+              <span>READING DESK</span>
+              <span>GUIDE / 01</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"02"}>
+            <ResponsiveImage src={"/assets/images/pexels-8197503-w1600.avif"} alt={"Students working through research material in class"} />
+            <figcaption>
+              <span>WORKING SESSION</span>
+              <span>NOTES / OPEN</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"03"}>
+            <ResponsiveImage src={"/assets/images/pexels-9243385-w1200.avif"} alt={"Researcher observing through a microscope"} />
+            <figcaption>
+              <span>OBSERVATION</span>
+              <span>METHOD / FIELD</span>
+            </figcaption>
+          </figure>
+          <figure data-index={"04"}>
+            <ResponsiveImage src={"/assets/images/pexels-5940830-w1200.avif"} alt={"A group presenting research findings"} />
+            <figcaption>
+              <span>EXPLANATION</span>
+              <span>PRESENT / 06</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section className={"closing"}>
+        <p className={"kicker"}>ADMISSIONS / NEXT COHORT</p>
+        <h2>Start with the guide. Stay for the work.</h2>
+        <a className={"button light"} href={"/apply/"}>Submit an application ↗</a>
+      </section>
+    </main>
+      <SiteFooter />
+    </>
+  );
+}
