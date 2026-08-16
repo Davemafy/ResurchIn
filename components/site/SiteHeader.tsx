@@ -48,7 +48,7 @@ export function SiteHeader({ active }: { active?: NavSection }) {
 
         <nav className="pf-nav-links" aria-label="Primary navigation">
           {links.map((link) => (
-            <Link key={link.href} className={active === link.section ? "active" : undefined} href={link.href} onClick={() => setOpen(false)}>
+            <Link key={link.href} className={active === link.section ? "active" : undefined} aria-current={active === link.section ? "page" : undefined} href={link.href} onClick={() => setOpen(false)}>
               <small>{link.index}</small><span>{link.label}</span>
             </Link>
           ))}
@@ -65,7 +65,7 @@ export function SiteHeader({ active }: { active?: NavSection }) {
         <div className="pf-mobile-meta"><span>RESURCHIN / NAVIGATION</span><span>R—01 / 2026</span></div>
         <nav aria-label="Mobile navigation">
           {links.map((link) => (
-            <Link key={link.href} className={active === link.section ? "active" : undefined} href={link.href} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+            <Link key={link.href} className={active === link.section ? "active" : undefined} aria-current={active === link.section ? "page" : undefined} href={link.href} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
               <small>{link.index}</small><span>{link.label}</span><b>↗</b>
             </Link>
           ))}

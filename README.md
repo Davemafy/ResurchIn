@@ -1,28 +1,24 @@
 # ResurchIn
 
-Current ResurchIn site built with Next.js and TypeScript.
+Website for ResurchIn, a six-month research apprenticeship for emerging researchers.
 
-The interactive parts are React components now. There is no old global `site.js` runtime.
+The main idea is simple: the site should behave like the work. One question gets framed, tested, revised and defended across the experience instead of the pages reading like a normal program brochure.
 
-## Run locally
+Built with Next.js, React and TypeScript. The interactions are React components; there is no old global site runtime.
+
+## Run it
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Then open `http://localhost:3000`.
 
-## Check the build
+## Before pushing
 
 ```bash
 npm run check
 ```
 
-Main folders:
-
-```text
-app/          routes
-components/   shared and interactive React components
-public/       site images, fonts and CSS
-```
+The app lives in `app/`, interactive pieces are in `components/experience/`, and the local images/fonts are under `public/assets/`.
