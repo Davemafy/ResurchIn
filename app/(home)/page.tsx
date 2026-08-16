@@ -1,12 +1,12 @@
-import { AwardsHome } from "@/components/direction/AwardsHome";
+import { ProofHome } from "@/components/experience/ProofHome";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
-export default function HomePage() {
+export default function Page() {
   return (
     <>
       <SiteHeader />
-      <AwardsHome />
+      <ProofHome />
       <SiteFooter variant="home" />
     </>
   );
