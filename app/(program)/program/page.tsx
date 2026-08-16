@@ -3,99 +3,73 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
 const phases = [
-  ["01", "FRAME", "Give the question a boundary.", "QUESTION MEMO / V3"],
-  ["02", "READ", "Arrange the field by disagreement.", "EVIDENCE MATRIX / 18 SOURCES"],
-  ["03", "DESIGN", "Choose the evidence before collecting it.", "METHOD + DATA PLAN"],
-  ["04", "ANALYSE", "Keep the result smaller than the ambition.", "ANALYSIS LOG / V4"],
-  ["05", "WRITE", "Make every claim earn its confidence.", "RESEARCH DRAFT / V6"],
-  ["06", "PRESENT", "Defend the decision, not the performance.", "DEFENCE / PORTFOLIO"],
-] as const;
+  ["01", "FRAME", "Make the question small enough to answer.", "Question memo / v03"],
+  ["02", "READ", "Map what is known, argued and still uncertain.", "Evidence matrix / v02"],
+  ["03", "DESIGN", "Choose a method that can meet the question.", "Method note / v04"],
+  ["04", "ANALYSE", "Separate pattern from interpretation.", "Analysis log / v05"],
+  ["05", "WRITE", "Cut every claim the evidence cannot carry.", "Draft / v06"],
+  ["06", "DEFEND", "Present the result and the limit with equal clarity.", "Defence deck / final"],
+];
 
 export default function Page() {
   return (
     <>
       <SiteHeader active="program" />
-      <main className="studio-program">
-        <section className="studio-page-intro studio-page-intro--dark">
-          <div className="studio-page-meta">
-            <span>PROGRAM DOSSIER / 2026</span>
-            <span>R—01 / SIX MONTHS</span>
+      <main className="instrument-inner program-page-new">
+        <section className="inner-hero program-hero-new">
+          <div className="inner-hero-index"><span>PROGRAM / 01</span><span>24 WEEKS / ONE PROJECT</span></div>
+          <div className="inner-hero-copy">
+            <p className="micro">THE SIX-MONTH APPRENTICESHIP</p>
+            <h1>One question.<br /><em>Twenty-four weeks<br />under review.</em></h1>
+            <p>Not a course you finish by watching it. You move one project through six decisions, keep the earlier versions and learn to explain why the work changed.</p>
+            <Link className="signal-button" href="/apply/">Apply for the next cohort <span>↗</span></Link>
           </div>
-          <div className="studio-page-copy">
-            <p className="studio-eyebrow"><span>01</span> THE APPRENTICESHIP</p>
-            <h1>Twenty-four weeks.<br /><em>One question under review.</em></h1>
-            <p className="studio-lead">Every week ends with visible evidence: a sharper question, a documented choice, a corrected claim or a stronger draft.</p>
-            <Link className="studio-primary" href="/apply/">Apply for the next cohort <span>↗</span></Link>
-          </div>
-          <figure className="studio-page-image studio-page-image--tall">
-            <img src="/assets/images/pexels-5940715-w1800.avif" alt="A mentor and students reviewing research work together" />
-            <figcaption><span>RESEARCH IN PRACTICE</span><b>REVIEW SESSION / 04</b></figcaption>
+          <figure className="hero-photo-slice">
+            <img src="/assets/images/pexels-5940715-w1800.avif" alt="Mentor and students reviewing research work" />
+            <figcaption>REVIEW ROOM / WORK IN PROGRESS / 2026</figcaption>
           </figure>
-          <div className="studio-page-index" aria-hidden="true">01—06</div>
         </section>
 
-        <section className="program-brief">
-          <aside>
-            <span>OPERATING BRIEF</span>
-            <b>THE PROGRAM IS BUILT AROUND VERSIONS.</b>
-          </aside>
-          <div>
-            <h2>Nothing moves forward just because the calendar says so.</h2>
-            <p>The work advances when the reasoning gets better. Earlier drafts stay in the record so you can point to the decision that changed.</p>
-          </div>
-          <dl>
-            <div><dt>TIME</dt><dd>6 months</dd></div>
-            <div><dt>LIVE RHYTHM</dt><dd>2–3 sessions / week</dd></div>
-            <div><dt>COST</dt><dd>$0 tuition</dd></div>
-            <div><dt>OUTPUT</dt><dd>Portfolio + defence</dd></div>
-          </dl>
+        <section className="program-manifesto">
+          <span className="micro">THE OPERATING RULE</span>
+          <blockquote>Nothing moves forward just because the calendar says so.</blockquote>
+          <p>Every week should leave evidence behind: a sharper question, a documented choice, a corrected claim, a stronger draft or a limitation you can finally name.</p>
         </section>
 
-        <section className="program-phases" aria-labelledby="program-phases-title">
-          <header>
-            <span>02 / THE PROCESS</span>
-            <h2 id="program-phases-title">One project changes shape six times.</h2>
-            <p>Each phase produces a document another person can inspect.</p>
-          </header>
-          <div className="program-phase-grid">
-            {phases.map(([index, label, title, output]) => (
-              <article key={index}>
-                <b>{index}</b>
-                <span>{label}</span>
-                <h3>{title}</h3>
-                <small>{output}</small>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="program-photo-sequence" aria-label="Program in practice">
-          <figure className="program-photo-wide"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students comparing research documents" /><figcaption>FRAME / READ</figcaption></figure>
-          <figure className="program-photo-narrow"><img src="/assets/images/pexels-9243385-w1600.avif" alt="Researcher making a laboratory observation" /><figcaption>DESIGN / TEST</figcaption></figure>
-          <figure className="program-photo-square"><img src="/assets/images/pexels-5940839-w1600.avif" alt="Researchers discussing findings" /><figcaption>ANALYSE / DEFEND</figcaption></figure>
+        <section className="phase-stack" aria-label="Six program phases">
+          {phases.map(([n, label, title, artifact]) => (
+            <article key={n}>
+              <b>{n}</b>
+              <span>{label}</span>
+              <h2>{title}</h2>
+              <small>{artifact}</small>
+            </article>
+          ))}
         </section>
 
         <section className="program-rhythm">
-          <div className="program-rhythm-title"><span>03 / THE WEEK</span><h2>Repeat the research loop until the work can survive a question.</h2></div>
-          <div className="program-rhythm-rows">
-            <article><b>MON</b><span>CONTEXT</span><strong>Learn the idea needed for the week’s task.</strong><em>LIVE SESSION</em></article>
-            <article><b>WED</b><span>PRACTICE</span><strong>Apply it to your question, data or draft.</strong><em>PROJECT DESK</em></article>
-            <article><b>FRI</b><span>CRITIQUE</span><strong>Show the work and receive a specific correction.</strong><em>REVIEW ROOM</em></article>
-            <article><b>+1</b><span>REVISION</span><strong>Annotate the change and keep both versions.</strong><em>PORTFOLIO TRACE</em></article>
+          <div className="rhythm-title"><p className="micro">WEEKLY RHYTHM</p><h2>Learn.<br />Apply.<br /><em>Get challenged.</em><br />Revise.</h2></div>
+          <div className="rhythm-list">
+            <article><b>MON</b><span>CONTEXT</span><p>Learn the idea needed for the week’s task.</p></article>
+            <article><b>WED</b><span>PRACTICE</span><p>Apply it to your question, data or draft.</p></article>
+            <article><b>FRI</b><span>CRITIQUE</span><p>Show the work and receive a specific correction.</p></article>
+            <article><b>+1</b><span>REVISION</span><p>Keep the earlier version. Annotate what changed.</p></article>
           </div>
         </section>
 
-        <section className="program-admission">
-          <div>
-            <span>04 / WHO SHOULD APPLY</span>
-            <h2>Curiosity is required.<br />Prestige is not.</h2>
-          </div>
-          <div className="program-admission-grid">
-            <article><b>YOU DO NOT NEED</b><p>A publication record, a prestigious affiliation or a polished project proposal.</p></article>
-            <article><b>YOU DO NEED</b><p>Time for weekly project work, consistent attendance and the willingness to revise after critique.</p></article>
-          </div>
-          <Link className="studio-primary studio-primary--dark" href="/apply/">Submit an application <span>↗</span></Link>
+        <section className="program-photo-run">
+          <figure><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students reading research material" loading="lazy" /><figcaption>READ / COMPARE / MARK</figcaption></figure>
+          <figure><img src="/assets/images/pexels-9243385-w1600.avif" alt="Researcher at a microscope" loading="lazy" /><figcaption>OBSERVE / RECORD / QUESTION</figcaption></figure>
+          <figure><img src="/assets/images/pexels-5940830-w1600.avif" alt="Students presenting findings" loading="lazy" /><figcaption>EXPLAIN / DEFEND / LIMIT</figcaption></figure>
         </section>
+
+        <section className="eligibility-new">
+          <div><p className="micro">WHO SHOULD APPLY</p><h2>You need curiosity, time and a willingness to show unfinished work.</h2></div>
+          <div className="eligibility-cells"><span>UNDERGRADUATES</span><span>RECENT GRADUATES</span><span>EARLY GRAD STUDENTS</span><span>CAREER SWITCHERS</span></div>
+          <aside><b>YOU DO NOT NEED</b><p>A publication record, a prestigious affiliation or a polished proposal.</p><b>YOU DO NEED</b><p>Consistent attendance, weekly project time and the willingness to revise after critique.</p></aside>
+        </section>
+
+        <section className="inner-cta acid"><p className="micro">ADMISSIONS / NEXT COHORT</p><h2>Apply with the question<br />you cannot leave alone.</h2><Link className="signal-button dark" href="/apply/">Submit an application <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>

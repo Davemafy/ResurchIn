@@ -1,35 +1,45 @@
 import Link from "next/link";
 
-type FooterVariant = "home" | "inner";
-
-export function SiteFooter({ variant = "inner" }: { variant?: FooterVariant }) {
-  const home = variant === "home";
-
+export function SiteFooter({ variant = "inner" }: { variant?: "home" | "inner" }) {
   return (
-    <footer className="site-footer">
-      <div className="footer-statement">
-        <span>RESURCHIN / FIELD OFFICE / 2026</span>
-        <p>Find the question.<br /><em>Earn the claim.</em></p>
-        <small>Research apprenticeship · free · volunteer-led · open worldwide</small>
+    <footer className={`instrument-footer ${variant}`}>
+      <div className="footer-topline">
+        <span>RESURCHIN / RESEARCH APPRENTICESHIP</span>
+        <span>US-BASED / OPEN WORLDWIDE</span>
+        <span>2026 / COHORT 01</span>
       </div>
 
-      <div className="footer-main">
-        <Link className="wordmark" href="/">
-          <i aria-hidden="true">r</i>resurchIn
+      <div className="footer-signal" aria-label="ResurchIn — Find the question. Earn the claim.">
+        <span>FIND THE</span>
+        <em>QUESTION.</em>
+        <span>EARN THE</span>
+        <em>CLAIM.</em>
+      </div>
+
+      <div className="footer-grid">
+        <Link className="instrument-wordmark footer-mark" href="/">
+          <span className="mark-dot" aria-hidden="true" />
+          resurchIn
         </Link>
-        <p>US-based.<br />Open to emerging researchers everywhere.</p>
+        <p>Research is learned by doing it, showing it, revising it and defending what the evidence can actually hold.</p>
         <div>
-          <Link href="/program/">{home ? "Program dossier" : "Program"}</Link>
+          <Link href="/program/">Program</Link>
+          <Link href="/curriculum/">Curriculum</Link>
+          <Link href="/mentors/">Mentors</Link>
           <Link href="/community/">Community</Link>
-          <Link href="/resources/">{home ? "Research notes" : "Resources"}</Link>
-          <Link href="/apply/">{home ? "Admissions" : "Apply"}</Link>
+        </div>
+        <div>
+          <Link href="/resources/">Field notes</Link>
+          <Link href="/about/">About</Link>
+          <Link href="/apply/">Apply</Link>
+          <a href="https://www.instagram.com/resurchinhub/" target="_blank" rel="noreferrer">Instagram ↗</a>
         </div>
       </div>
 
       <div className="footer-base">
-        <span>R—01 / PRACTICE → EVIDENCE → CLAIM</span>
+        <span>FREE / VOLUNTEER-LED / SIX MONTHS</span>
         <span>© 2026 RESURCHIN</span>
-        <span>{home ? "Editorial photography: Pexels contributors" : "Photography: Pexels contributors"}</span>
+        <span>Photography: Pexels contributors</span>
       </div>
     </footer>
   );

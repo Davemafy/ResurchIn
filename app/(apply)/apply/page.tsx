@@ -6,32 +6,22 @@ export default function Page() {
   return (
     <>
       <SiteHeader />
-      <main className="studio-apply">
-        <section className="apply-intro">
-          <div className="studio-page-meta"><span>ADMISSIONS / APPLICATION FILE</span><span>COHORT 01 / 2026</span></div>
-          <div className="apply-intro-copy">
-            <p className="studio-eyebrow"><span>01</span> YOUR QUESTION STARTS HERE</p>
-            <h1>Apply with the question<br /><em>you cannot leave alone.</em></h1>
-            <p>We are not looking for a polished proposal. We are looking for curiosity, time and a willingness to show unfinished work.</p>
+      <main className="instrument-inner apply-page-new">
+        <section className="apply-opening">
+          <div className="apply-copy">
+            <p className="micro">ADMISSIONS / NEXT COHORT</p>
+            <h1>Do not pitch<br />yourself.<br /><em>Show us the question.</em></h1>
+            <p>We are looking for readiness to do the work: curiosity, consistency and the willingness to revise after critique.</p>
           </div>
-          <dl className="apply-fact-ledger">
-            <div><dt>TIME</dt><dd>6 months</dd></div>
-            <div><dt>RHYTHM</dt><dd>2–3 live sessions / week</dd></div>
-            <div><dt>COST</dt><dd>Free</dd></div>
-            <div><dt>FORMAT</dt><dd>Project + review</dd></div>
-          </dl>
-          <figure className="apply-intro-photo"><img src="/assets/images/pexels-8197503-w1800.avif" alt="Students in a university learning session" /><figcaption>THE ROOM / OPEN WORLDWIDE</figcaption></figure>
-          <aside className="apply-margin-note">NO POLISHED<br /><strong>PROPOSAL REQUIRED.</strong></aside>
-        </section>
-
-        <section className="application-file">
-          <aside className="application-file-index">
-            <span>02 / APPLICATION</span>
-            <p>Take your time. The useful answer is usually more specific than the impressive one.</p>
-            <div><b>01</b><span>WHO YOU ARE</span></div>
-            <div><b>02</b><span>WHAT PULLS AT YOU</span></div>
-            <div><b>03</b><span>WHY NOW</span></div>
+          <aside className="apply-brief">
+            <span>APPLICATION FILE / R—01</span>
+            <dl><div><dt>FORMAT</dt><dd>Six months</dd></div><div><dt>SESSIONS</dt><dd>2–3 / week</dd></div><div><dt>TUITION</dt><dd>$0</dd></div><div><dt>ACCESS</dt><dd>Worldwide</dd></div></dl>
+            <p>No publication record required. No prestigious affiliation required. No polished project proposal required.</p>
           </aside>
+        </section>
+        <section className="application-shell-new">
+          <div className="form-rail"><span>01</span><i /><span>IDENTITY</span><i /><span>QUESTION</span><i /><span>COMMITMENT</span></div>
+          <div className="form-heading"><p className="micro">APPLICATION / WORKING COPY</p><h2>Give us enough to understand what is pulling you toward research.</h2></div>
           <ApplicationForm />
         </section>
       </main>

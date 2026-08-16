@@ -6,14 +6,13 @@ export default function Page() {
   return (
     <>
       <SiteHeader />
-      <main className="studio-success">
-        <section>
-          <div className="studio-page-meta"><span>APPLICATION / RECEIVED</span><span>STATUS / FILED</span></div>
-          <div className="success-stamp" aria-hidden="true">RECEIVED<br />R—01</div>
-          <p className="studio-eyebrow"><span>✓</span> YOUR FILE IS IN</p>
-          <h1>Your first step<br /><em>is already evidence.</em></h1>
-          <p>Thanks for applying. Your response has been received. ResurchIn will contact you using the email you provided.</p>
-          <Link className="studio-primary studio-primary--dark" href="/resources/">Read a field guide <span>↗</span></Link>
+      <main className="instrument-inner success-page-new">
+        <section className="success-signal">
+          <span className="success-code">APPLICATION / RECEIVED / R—01</span>
+          <div className="success-mark" aria-hidden="true">✓</div>
+          <h1>Your question<br /><em>is in the room.</em></h1>
+          <p>Your application has been recorded. Keep the question close—we care more about how you think through it than how polished it sounds today.</p>
+          <Link className="signal-button dark" href="/">Return home <span>↗</span></Link>
         </section>
       </main>
       <SiteFooter />

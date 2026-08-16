@@ -6,49 +6,35 @@ export default function Page() {
   return (
     <>
       <SiteHeader active="about" />
-      <main className="studio-about">
-        <section className="about-hero">
-          <div className="studio-page-meta"><span>ABOUT / PROVENANCE FILE</span><span>WHY RESURCHIN EXISTS</span></div>
-          <div className="about-hero-copy">
-            <p className="studio-eyebrow"><span>01</span> THE PREMISE</p>
-            <h1>Research should not be inherited through access.</h1>
-            <p>ResurchIn exists for people with the curiosity to investigate, but without an insider teaching them how research decisions are actually made.</p>
-          </div>
-          <figure className="about-hero-photo"><img src="/assets/images/pexels-5940830-w1800.avif" alt="A group learning together in a classroom" /><figcaption>THE OPEN ROOM / LEARN + SHARE</figcaption></figure>
-          <div className="about-hero-word" aria-hidden="true">ACCESS</div>
+      <main className="instrument-inner about-page-new">
+        <section className="about-opening">
+          <p className="micro">ABOUT / THE REASON FOR THE ROOM</p>
+          <h1>Research should not be<br /><em>inherited through access.</em></h1>
+          <div className="about-bridge"><span>NO INSIDER?</span><i /><span>STILL START.</span></div>
         </section>
 
-        <section className="about-founder-file">
-          <aside><span>02 / FOUNDER</span><b>WORKING RESEARCHER</b></aside>
-          <div className="about-founder-statement"><blockquote>Learn the work<br /><em>by doing the work.</em></blockquote></div>
-          <article>
-            <div className="founder-mark">HEA</div>
-            <p>Happiness supports Alzheimer’s biomarker research at the UPMC Karikari Biofluid Biomarker Laboratory, University of Pittsburgh. ResurchIn extends that working-researcher perspective into a free, volunteer-led training community.</p>
-            <strong>HAPPINESS ERIC AIGBOGUN / CREATOR + LEAD</strong>
-          </article>
+        <section className="founder-block-new">
+          <div className="founder-letter" aria-hidden="true">H</div>
+          <article><p className="micro">FOUNDER / WORKING RESEARCHER</p><h2>Happiness Eric Aigbogun</h2><p>Happiness supports Alzheimer’s biomarker research at the UPMC Karikari Biofluid Biomarker Laboratory, University of Pittsburgh. She created ResurchIn to make the invisible parts of research practice easier to access: how questions are framed, why methods are chosen, how drafts are reviewed and how uncertainty is communicated.</p><blockquote>“Learn the work by doing the work.”</blockquote></article>
+          <figure><img src="/assets/images/pexels-9243385-w1600.avif" alt="Researcher working at a microscope" /><figcaption>ACTIVE RESEARCH PRACTICE / FIELD REFERENCE</figcaption></figure>
         </section>
 
-        <section className="about-principles">
-          <header><span>03 / WHAT THE PROGRAM PROTECTS</span><h2>Three things stay non-negotiable.</h2></header>
-          <div>
-            <article><b>01</b><h3>Practice before polish.</h3><p>Real data, real drafts and visible changes—not exercises that disappear after grading.</p></article>
-            <article><b>02</b><h3>Guidance that is usable.</h3><p>Feedback should tell you what to inspect, question or revise next.</p></article>
-            <article><b>03</b><h3>Access without tuition.</h3><p>The programme remains free and volunteer-driven for emerging researchers worldwide.</p></article>
-          </div>
+        <section className="principles-new">
+          <div><p className="micro">WHAT THE PROGRAM PROTECTS</p><h2>Three things we refuse to trade away.</h2></div>
+          <ol>
+            <li><b>01</b><h3>Practice before polish.</h3><p>Participants keep the drafts that show how their decisions changed.</p></li>
+            <li><b>02</b><h3>Guidance that is usable.</h3><p>Feedback should tell you what to inspect, question or revise next.</p></li>
+            <li><b>03</b><h3>Access without tuition.</h3><p>The program remains free and volunteer-led for emerging researchers worldwide.</p></li>
+          </ol>
         </section>
 
-        <section className="about-field-wall">
-          <figure className="about-field-a"><img src="/assets/images/pexels-9243385-w1600.avif" alt="A researcher working at a microscope" /><figcaption>RESEARCH PRACTICE / LAB</figcaption></figure>
-          <div className="about-field-copy"><span>04 / IN PRACTICE</span><h2>Access changes when the room opens.</h2><p>People read, test, ask, revise and explain together. The room is the infrastructure.</p></div>
-          <figure className="about-field-b"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students working through research material" /><figcaption>READ / MARK / COMPARE</figcaption></figure>
-          <figure className="about-field-c"><img src="/assets/images/pexels-5940715-w1600.avif" alt="A mentor and students revising together" /><figcaption>REVIEW / REVISE</figcaption></figure>
+        <section className="proof-strip-new">
+          <a href="https://higherlogicdownload.s3.amazonaws.com/SRAINTERNATIONAL/85ddee13-3958-46a6-85e6-1ba5c50bb93e/UploadedImages/Catalyst_Quarterly_July_2026.pdf" target="_blank" rel="noreferrer"><span>PUBLIC RECORD / 01</span><strong>SRA International / Catalyst Quarterly</strong><em>Open ↗</em></a>
+          <a href="https://scholar.google.com/citations?hl=en&user=f8rh6SIAAAAJ" target="_blank" rel="noreferrer"><span>PUBLIC RECORD / 02</span><strong>Google Scholar profile</strong><em>Open ↗</em></a>
+          <a href="https://www.instagram.com/resurchinhub/" target="_blank" rel="noreferrer"><span>OPEN CHANNEL / 03</span><strong>ResurchIn field notes</strong><em>Open ↗</em></a>
         </section>
 
-        <section className="studio-cta-band">
-          <span>ADMISSIONS / NEXT COHORT</span>
-          <h2>Learn research<br />by doing it.</h2>
-          <Link className="studio-primary studio-primary--dark" href="/apply/">Submit an application <span>↗</span></Link>
-        </section>
+        <section className="inner-cta acid"><p className="micro">ADMISSIONS / NEXT COHORT</p><h2>Curiosity is enough<br />to begin.</h2><Link className="signal-button dark" href="/apply/">Submit an application <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>

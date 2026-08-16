@@ -2,60 +2,32 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
-const archive = [
-  ["02", "WORKSHEET / SOON", "Turn an interest into a researchable question."],
-  ["03", "FIELD NOTE / SOON", "Write a limitation that improves your argument."],
-  ["04", "CHECKLIST / SOON", "Prepare a draft for useful feedback."],
-] as const;
-
 export default function Page() {
   return (
     <>
       <SiteHeader active="resources" />
-      <main className="studio-resources">
-        <section className="resources-hero">
-          <div className="studio-page-meta"><span>OPEN RESOURCES / FIELD LIBRARY</span><span>ISSUE 01 / 2026</span></div>
-          <div className="resources-hero-copy">
-            <p className="studio-eyebrow"><span>01</span> START HERE</p>
-            <h1>Use these when<br /><em>the work stops moving.</em></h1>
-            <p>Field guides for the exact moments a paper becomes confusing, a question stays vague or a draft stops improving.</p>
-          </div>
-          <figure className="resources-hero-photo"><img src="/assets/images/pexels-5940711-w1800.avif" alt="Students studying with laptops and research papers" /><figcaption>READING DESK / FIELD GUIDE 01</figcaption></figure>
-          <div className="resources-issue" aria-hidden="true">01</div>
+      <main className="instrument-inner resources-page-new">
+        <section className="resources-opening">
+          <div><p className="micro">FIELD NOTES / OPEN ACCESS</p><h1>Read when the work<br /><em>stops moving.</em></h1></div>
+          <p>Not generic research advice. Short field guides for the moment a paper becomes confusing, a question refuses to narrow or a draft keeps making the same mistake.</p>
+          <div className="issue-mark" aria-hidden="true">R/<br />01</div>
         </section>
 
-        <section className="resources-feature">
-          <div className="resources-feature-meta"><span>FIELD GUIDE / 01</span><b>8 MIN READ</b></div>
-          <div className="resources-feature-copy">
-            <h2>How to read a research paper <em>without getting lost.</em></h2>
-            <p>A six-pass method for finding the question, following the evidence and deciding what the paper can claim.</p>
-            <Link href="/resources/how-to-read-a-research-paper-without-getting-lost/">Read the guide <span>↗</span></Link>
-          </div>
-          <div className="resources-feature-sheet" aria-hidden="true">
-            <span>01 / CLAIM</span><span>02 / QUESTION</span><span>03 / EVIDENCE</span><span>04 / METHOD</span><span>05 / LIMIT</span><span>06 / NOTE</span>
-          </div>
+        <section className="featured-note">
+          <div className="note-cover"><span>FIELD GUIDE / 01</span><b>READ<br />THE<br />PAPER.</b><small>WITHOUT GETTING LOST</small></div>
+          <article><p className="micro">FEATURED / 8 MIN READ</p><h2>How to read a research paper without getting lost.</h2><p>A six-pass method for finding the question, following the evidence and deciding what the paper can actually claim.</p><Link className="text-arrow" href="/resources/how-to-read-a-research-paper-without-getting-lost/">Open the field guide →</Link></article>
+          <figure><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students reading research material together" /><figcaption>READING DESK / SOURCE AUDIT</figcaption></figure>
         </section>
 
-        <section className="resources-archive">
-          <header><span>ARCHIVE / OPEN NOTES</span><h2>The library grows around recurring research problems.</h2></header>
-          <div>
-            {archive.map(([index, meta, title]) => (
-              <article key={index}><b>{index}</b><span>{meta}</span><h3>{title}</h3><em>COMING SOON</em></article>
-            ))}
-          </div>
+        <section className="resource-ledger-new">
+          <header><span>ARCHIVE / ISSUE 01</span><span>FILTER: ALL MATERIAL</span></header>
+          <article><b>01</b><span>FIELD GUIDE</span><h2>How to read a research paper without getting lost.</h2><small>AVAILABLE</small></article>
+          <article className="muted"><b>02</b><span>WORKSHEET</span><h2>Turn an interest into a researchable question.</h2><small>IN EDIT</small></article>
+          <article className="muted"><b>03</b><span>FIELD NOTE</span><h2>Write a limitation that improves your argument.</h2><small>IN EDIT</small></article>
+          <article className="muted"><b>04</b><span>CHECKLIST</span><h2>Prepare a draft for useful feedback.</h2><small>IN EDIT</small></article>
         </section>
 
-        <section className="resources-field-grid">
-          <figure className="resources-field-a"><img src="/assets/images/pexels-8197503-w1600.avif" alt="Students working through research material in class" /><figcaption>WORKING SESSION / NOTES OPEN</figcaption></figure>
-          <div className="resources-field-copy"><span>FIELD NOTES / OPEN</span><h2>Read the paper. Mark the claim. Keep the note that changed your mind.</h2></div>
-          <figure className="resources-field-b"><img src="/assets/images/pexels-9243385-w1600.avif" alt="Researcher observing through a microscope" /><figcaption>OBSERVATION / METHOD</figcaption></figure>
-        </section>
-
-        <section className="studio-cta-band">
-          <span>ADMISSIONS / NEXT COHORT</span>
-          <h2>Start with the guide.<br />Stay for the work.</h2>
-          <Link className="studio-primary studio-primary--dark" href="/apply/">Submit an application <span>↗</span></Link>
-        </section>
+        <section className="inner-cta black"><p className="micro">FIELD NOTES / OPEN</p><h2>Start with the guide.<br />Stay for the work.</h2><Link className="signal-button" href="/apply/">Apply for the cohort <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>

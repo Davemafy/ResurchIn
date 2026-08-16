@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CurriculumExperience } from "@/components/curriculum/CurriculumExperience";
+import { QuestionEngine } from "@/components/direction/QuestionEngine";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
@@ -7,30 +7,28 @@ export default function Page() {
   return (
     <>
       <SiteHeader active="curriculum" />
-      <main className="studio-curriculum">
-        <CurriculumExperience />
-
-        <section className="curriculum-photo-sequence" aria-label="The curriculum in practice">
-          <div className="curriculum-photo-copy"><span>02 / THE PRACTICE</span><h2>Every idea has to survive contact with the work.</h2><p>Read. Mark. Compare. Test. Rewrite. The curriculum is a sequence of visible decisions, not a list of topics.</p></div>
-          <figure className="curriculum-photo-a"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students comparing research material around a table" /><figcaption>FRAME + READ / 01—02</figcaption></figure>
-          <figure className="curriculum-photo-b"><img src="/assets/images/pexels-9243385-w1600.avif" alt="A researcher working carefully with a microscope" /><figcaption>DESIGN + TEST / 03</figcaption></figure>
-          <figure className="curriculum-photo-c"><img src="/assets/images/pexels-5940839-w1600.avif" alt="Researchers comparing findings together" /><figcaption>ANALYSE + WRITE / 04—05</figcaption></figure>
+      <main className="instrument-inner curriculum-page-new">
+        <section className="curriculum-opening">
+          <div className="curriculum-count" aria-hidden="true">06</div>
+          <div><p className="micro">CURRICULUM / ONE PROJECT IN SIX STATES</p><h1>You do not learn research in chapters.<br /><em>You learn it in decisions.</em></h1></div>
+          <p className="curriculum-lead">The curriculum follows the same question from its vague first sentence to a claim you can defend. Every stage produces a working artifact and a reason for the next revision.</p>
         </section>
 
-        <section className="curriculum-artifacts">
-          <div><span>03 / THE TRACE</span><h2>The finished work matters.<br /><em>The versions prove how you got there.</em></h2></div>
-          <figure><img src="/assets/images/process-illustration.webp" alt="Editorial illustration of layered research documents" /><figcaption>ONE QUESTION / MANY DOCUMENTS</figcaption></figure>
-          <figure><img src="/assets/images/revision-illustration.webp" alt="Editorial illustration showing drafts changing through revision" /><figcaption>REVISION TRACE / V1 → V6</figcaption></figure>
-          <div className="artifact-index">
-            <span>QUESTION / V1</span><span>LITERATURE MAP / V2</span><span>METHOD / REVIEWED</span><span>ANALYSIS / V4</span><span>FINAL / DEFENDED</span>
-          </div>
+        <QuestionEngine compact />
+
+        <section className="artifact-index">
+          <div className="artifact-title"><p className="micro">WHAT YOU LEAVE WITH</p><h2>Not six certificates.<br /><em>Six pieces of evidence.</em></h2></div>
+          <ol>
+            <li><b>01</b><span>QUESTION MEMO</span><small>The boundary of the problem.</small></li>
+            <li><b>02</b><span>EVIDENCE MATRIX</span><small>What each source actually supports.</small></li>
+            <li><b>03</b><span>METHOD NOTE</span><small>Why this design fits this question.</small></li>
+            <li><b>04</b><span>ANALYSIS LOG</span><small>The choices behind the result.</small></li>
+            <li><b>05</b><span>REVISED DRAFT</span><small>Claims cut down to the evidence.</small></li>
+            <li><b>06</b><span>DEFENCE DECK</span><small>Result, uncertainty and next question.</small></li>
+          </ol>
         </section>
 
-        <section className="studio-cta-band">
-          <span>ADMISSIONS / NEXT COHORT</span>
-          <h2>Bring one question.<br />Expect it to change.</h2>
-          <Link className="studio-primary studio-primary--dark" href="/apply/">Submit an application <span>↗</span></Link>
-        </section>
+        <section className="inner-cta black"><p className="micro">READINESS / NEXT COHORT</p><h2>The work gets stronger<br />when the claim gets smaller.</h2><Link className="signal-button" href="/apply/">Apply to practice it <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>

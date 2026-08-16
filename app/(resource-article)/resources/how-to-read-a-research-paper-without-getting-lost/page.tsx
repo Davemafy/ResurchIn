@@ -3,49 +3,38 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
 const passes = [
-  ["01", "START WITH THE CLAIM", "Read the title, abstract and conclusion. Write one sentence: ‘The authors argue that…’", "What is the paper asking me to believe?"],
-  ["02", "FIND THE QUESTION", "Look near the end of the introduction. What exact problem are the authors resolving?", "What would count as an answer?"],
-  ["03", "TRACE THE EVIDENCE", "Scan figures, tables and results. Ask what each one shows and supports.", "Which result carries the claim?"],
-  ["04", "INTERROGATE THE METHOD", "Who or what was studied? How was it measured? Method is where limits begin.", "What can this design not tell me?"],
-  ["05", "LOOK FOR RESTRAINT", "Strong papers say what they cannot conclude. Find the limitations.", "Where does the certainty stop?"],
-  ["06", "WRITE YOUR OWN NOTE", "Record the question, evidence, claim, limitation and one new question.", "What changed in my understanding?"],
-] as const;
+  ["01", "Find the question", "Before you chase details, write down the problem the paper is trying to answer. If you cannot say it in one sentence, you are not ready for the methods section."],
+  ["02", "Read the result before the machinery", "Look at the headline finding, figures and conclusion. You are building a map, not proving you understand every line yet."],
+  ["03", "Interrogate the method", "Ask who was studied, what was measured, what was compared and which choices could change the result."],
+  ["04", "Follow one claim to its evidence", "Pick a sentence that sounds important. Trace it back to the table, figure or analysis that is supposed to support it."],
+  ["05", "Mark the limit", "What does this study not establish? Population, duration, measurement and design usually tell you where the claim has to stop."],
+  ["06", "Write your own two-line record", "One line for what the paper supports. One line for what remains uncertain. That is the note you will actually use later."],
+];
 
 export default function Page() {
   return (
     <>
       <SiteHeader active="resources" />
-      <main className="studio-article">
-        <article>
-          <header className="article-cover">
-            <div className="studio-page-meta"><span>FIELD GUIDE / 01</span><span>8 MIN READ / OPEN RESOURCE</span></div>
-            <Link href="/resources/" className="article-back">← FIELD LIBRARY</Link>
-            <p className="studio-eyebrow"><span>01</span> READING METHOD</p>
+      <main className="instrument-inner article-page-new">
+        <article className="field-article">
+          <header className="article-cover-new">
+            <div className="article-meta"><span>FIELD GUIDE / 01</span><span>8 MIN READ</span><span>OPEN ACCESS</span></div>
             <h1>How to read a research paper<br /><em>without getting lost.</em></h1>
-            <p>Read it in layers, with a different question each time.</p>
-            <div className="article-cover-sheet" aria-hidden="true">
-              <span>CLAIM</span><span>QUESTION</span><span>EVIDENCE</span><span>METHOD</span><span>LIMIT</span><span>NOTE</span>
-            </div>
+            <p>A six-pass method for finding the question, following the evidence and deciding what the paper can actually claim.</p>
+            <div className="article-cover-mark" aria-hidden="true">01</div>
           </header>
 
-          <div className="article-reading-grid">
-            <aside className="article-rail"><span>THE SIX-PASS METHOD</span><b>01 → 06</b><i /></aside>
-            <div className="article-passes">
-              {passes.map(([index, title, body, prompt]) => (
-                <section key={index}>
-                  <b>{index}</b>
-                  <div><span>PASS {index}</span><h2>{title}</h2><p>{body}</p></div>
-                  <aside><small>ASK YOURSELF</small><p>{prompt}</p></aside>
-                </section>
-              ))}
-            </div>
-          </div>
+          <figure className="article-lead-image"><img src="/assets/images/pexels-5940711-w1800.avif" alt="Students reading and comparing research material" /><figcaption>READING DESK / SOURCE AUDIT / FIELD GUIDE 01</figcaption></figure>
 
-          <footer className="article-endnote">
-            <span>END NOTE / KEEP THIS</span>
-            <blockquote>A paper is easier to read when you stop asking it to explain everything at once.</blockquote>
-            <Link href="/resources/">Back to the field library ↗</Link>
-          </footer>
+          <section className="article-intro-new"><span className="micro">BEFORE YOU START</span><blockquote>You do not need to understand every sentence on the first pass. You need a map of the argument.</blockquote><p>The most common reading mistake is treating a paper like a novel: first line to last line, equal attention everywhere. Research papers are built to be interrogated. Read them in passes.</p></section>
+
+          <section className="passes-new">
+            {passes.map(([n, title, copy]) => <section key={n}><b>{n}</b><h2>{title}</h2><p>{copy}</p></section>)}
+          </section>
+
+          <aside className="article-note-new"><span>KEEP THIS / TWO-LINE NOTE</span><p><strong>SUPPORTS:</strong> What does the evidence justify saying?</p><p><strong>UNCERTAIN:</strong> What would require more data, a different design or a narrower claim?</p></aside>
+
+          <footer className="article-end-new"><span>END / FIELD GUIDE 01</span><h2>Now read one paper<br />with a pencil.</h2><Link className="text-arrow" href="/resources/">Return to field notes →</Link></footer>
         </article>
       </main>
       <SiteFooter />

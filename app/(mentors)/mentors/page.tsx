@@ -6,54 +6,38 @@ export default function Page() {
   return (
     <>
       <SiteHeader active="mentors" />
-      <main className="studio-mentors">
-        <section className="mentor-hero">
-          <div className="studio-page-meta"><span>MENTORSHIP / CLOSE READING</span><span>REVIEW ROOM / R—04</span></div>
-          <div className="mentor-hero-copy">
-            <p className="studio-eyebrow"><span>01</span> THE REVIEW</p>
-            <h1>Good feedback does not say<br /><em>“make it better.”</em></h1>
-            <p>It points to the exact decision that failed, then gives you somewhere useful to look next.</p>
-            <Link className="studio-primary" href="/apply/">Bring your work <span>↗</span></Link>
-          </div>
-          <figure className="mentor-hero-photo">
-            <img src="/assets/images/pexels-5940715-w1800.avif" alt="Students and a mentor reviewing work together" />
-            <figcaption>ONE-TO-ONE REVIEW / DRAFT V4</figcaption>
-          </figure>
-          <aside className="mentor-hero-note">MENTOR NOTE 04<br /><strong>NAME THE LIMIT.</strong></aside>
-          <div className="mentor-hero-index" aria-hidden="true">04</div>
+      <main className="instrument-inner mentors-page-new">
+        <section className="mentor-opening">
+          <p className="micro">MENTORSHIP / CLOSE READING</p>
+          <h1>“Proves?”<br /><em>“Or suggests?”</em></h1>
+          <p>Good feedback does not say “make it better.” It points to the exact sentence, method choice or assumption that cannot survive another question.</p>
+          <div className="mentor-arrow" aria-hidden="true">↘</div>
         </section>
 
-        <section className="mentor-dialogue" aria-labelledby="mentor-dialogue-title">
-          <div className="mentor-dialogue-intro"><span>02 / A REVIEW, IN FOUR LINES</span><h2 id="mentor-dialogue-title">The useful moment is often one word.</h2></div>
-          <div className="mentor-transcript">
-            <article><b>YOU</b><p>I think the data <mark>proves</mark> the intervention worked.</p></article>
-            <article className="mentor-reply"><b>MENTOR</b><p>Proves?<br /><em>Or suggests?</em></p><span>↳ CHECK THE VERB</span></article>
-            <article><b>YOU</b><p>Suggests. The sample is too small to claim more.</p></article>
-            <article className="mentor-reply"><b>MENTOR</b><p>Good. Put the limitation <em>before</em> the conclusion.</p><span>↳ REVISE ORDER</span></article>
-          </div>
+        <section className="review-room-new">
+          <figure><img src="/assets/images/pexels-5940715-w1800.avif" alt="Mentor and students reviewing work together" /><figcaption>REVIEW ROOM / DRAFT V04</figcaption></figure>
+          <article className="review-transcript">
+            <div><b>YOU</b><p>I think the data proves the intervention worked.</p></div>
+            <div><b>MENTOR</b><p>Proves? Or suggests?</p></div>
+            <div><b>YOU</b><p>Suggests. The sample is too small to claim more.</p></div>
+            <div><b>MENTOR</b><p>Good. Put the limitation before the conclusion.</p></div>
+          </article>
+          <aside><span>REVIEW PRINCIPLE / 01</span><strong>NAME THE DECISION THAT FAILED.</strong></aside>
         </section>
 
-        <section className="mentor-review-desk">
-          <div className="mentor-review-copy"><span>03 / WHAT MENTORS DO</span><h2>They read the decisions behind the document.</h2><p>Question, method, evidence, wording, confidence. The review stays attached to the work.</p></div>
-          <ol>
-            <li><b>01</b><div><span>QUESTION</span><h3>Push vague ideas toward answerable questions.</h3></div></li>
-            <li><b>02</b><div><span>CHALLENGE</span><h3>Test assumptions and overconfident claims.</h3></div></li>
-            <li><b>03</b><div><span>DIRECT</span><h3>Point toward the next useful move.</h3></div></li>
-            <li><b>04</b><div><span>REVIEW</span><h3>Follow the work across drafts.</h3></div></li>
-          </ol>
+        <section className="mentor-actions">
+          <article><b>01</b><h2>Interrogate the question.</h2><p>Push vague interests toward answerable problems.</p></article>
+          <article><b>02</b><h2>Stress-test the claim.</h2><p>Separate what the data shows from what the writer hopes it means.</p></article>
+          <article><b>03</b><h2>Point to the next move.</h2><p>Feedback ends with something concrete to inspect, change or rerun.</p></article>
+          <article><b>04</b><h2>Follow the revision.</h2><p>The earlier version stays visible so progress can be explained.</p></article>
         </section>
 
-        <section className="mentor-photo-ledger" aria-label="Mentorship in practice">
-          <figure className="mentor-photo-a"><img src="/assets/images/pexels-5940839-w1600.avif" alt="Students discussing a research question" /><figcaption>QUESTION CLINIC / CLAIM + LIMIT</figcaption></figure>
-          <figure className="mentor-photo-b"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students reading research materials" /><figcaption>CLOSE READING / SOURCE + NOTE</figcaption></figure>
-          <figure className="mentor-photo-c"><img src="/assets/images/pexels-8197503-w1600.avif" alt="Research group in a learning session" /><figcaption>GROUP CRITIQUE / ROOM 04</figcaption></figure>
+        <section className="mentor-photo-pair">
+          <figure><img src="/assets/images/pexels-5940839-w1600.avif" alt="Research group in discussion" loading="lazy" /><figcaption>QUESTION CLINIC / OPEN FLOOR</figcaption></figure>
+          <figure><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students reading research papers" loading="lazy" /><figcaption>CLOSE READING / SOURCE AUDIT</figcaption></figure>
         </section>
 
-        <section className="studio-cta-band studio-cta-band--dark">
-          <span>ADMISSIONS / NEXT COHORT</span>
-          <h2>Bring the draft you are<br />least certain about.</h2>
-          <Link className="studio-primary" href="/apply/">Submit an application <span>↗</span></Link>
-        </section>
+        <section className="inner-cta acid"><p className="micro">MENTOR REVIEW / NEXT COHORT</p><h2>Bring the draft you are<br />least certain about.</h2><Link className="signal-button dark" href="/apply/">Submit an application <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>
