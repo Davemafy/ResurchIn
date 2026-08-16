@@ -2,7 +2,9 @@
 
 Current ResurchIn site built with Next.js and TypeScript.
 
-The interactive parts are React components now. There is no old global `site.js` runtime.
+<img width="1349" height="651" alt="resurchln vercel app_" src="https://github.com/user-attachments/assets/79fc00a7-67ec-41b0-95af-4b19fe4e6bba" />
+
+
 
 ## Run locally
 
