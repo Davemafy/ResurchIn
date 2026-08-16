@@ -1,6 +1,7 @@
 (() => {
 
-  requestAnimationFrame(() => document.body.classList.add('v16-ready'));
+  const pageRoot = document.querySelector('[data-page-root]') || document.body;
+  requestAnimationFrame(() => pageRoot.classList.add('v16-ready'));
   const header = document.querySelector('.site-head');
   const menuButton = document.querySelector('.menu');
   if (header && menuButton) {

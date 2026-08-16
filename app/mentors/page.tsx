@@ -1,6 +1,5 @@
 import "../inner.css";
 import type { Metadata } from "next";
-import { PageClass } from "@/components/PageClass";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
@@ -12,8 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <PageClass className={"inner-page mentors-page"} />
+    <div className="inner-page mentors-page" data-page-root>
       <SiteHeader active={"mentors"} />
     <main>
       <section className={"page-hero split reverse"}>
@@ -125,6 +123,6 @@ export default function Page() {
       </section>
     </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

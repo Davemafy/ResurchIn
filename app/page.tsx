@@ -1,6 +1,5 @@
 import "./home.css";
 import type { Metadata } from "next";
-import { PageClass } from "@/components/PageClass";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
@@ -12,8 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <PageClass className={"home-v16 home-v17"} />
+    <div className="home-v16 home-v17" data-page-root>
       <SiteHeader />
     <aside className={"experience-rail"} aria-label={"Homepage sections"}>
       <span data-experience-count={""}>01</span>
@@ -519,6 +517,6 @@ export default function Page() {
       </div>
     </section>
       <SiteFooter editorial />
-    </>
+    </div>
   );
 }

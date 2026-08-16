@@ -1,6 +1,5 @@
 import "../inner.css";
 import type { Metadata } from "next";
-import { PageClass } from "@/components/PageClass";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ResponsiveImage } from "@/components/ResponsiveImage";
@@ -12,8 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <PageClass className={"inner-page program-page"} />
+    <div className="inner-page program-page" data-page-root>
       <SiteHeader active={"program"} />
     <main className={"program-dossier"}>
       <section className={"dossier-cover"}>
@@ -196,6 +194,6 @@ export default function Page() {
       </section>
     </main>
       <SiteFooter editorial />
-    </>
+    </div>
   );
 }

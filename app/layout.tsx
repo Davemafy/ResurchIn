@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./base.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://resurchin.osemu.chatgpt.site"),
+  metadataBase: new URL("https://resurchin.vercel.app"),
   title: "ResurchIn",
   description: "A free six-month research apprenticeship for early-career researchers.",
   icons: { icon: "/favicon.svg" },
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body suppressHydrationWarning>
         {children}
-        <script src="/assets/site-v2.js" defer />
+        <Script src="/assets/site-v2.js" strategy="afterInteractive" />
       </body>
     </html>
   );
