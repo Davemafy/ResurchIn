@@ -1,14 +1,8 @@
 # ResurchIn
 
-Production site for ResurchIn, a free six-month research apprenticeship.
+Website for ResurchIn, a free six-month research apprenticeship built around one project, close review, and visible revision.
 
-This build combines the strongest parts of the previous versions on purpose:
-
-- the dark research-desk identity and working-paper atmosphere from the earlier ResurchIn build
-- the clearer version-history writing: V01 → V06, visible revision, sentence-level review
-- the working interactions: revision comparison, six version states, curriculum selector, responsive navigation, form states and scroll progress
-
-The main idea is simple: research skill becomes visible in what changes between the first version and the defensible one.
+The site’s main interaction is the revision seam: the same research question is shown at V01 and V06 so the programme’s value is visible before it is explained. That version-history idea carries through the programme, curriculum, mentor review, resources, community, and application pages.
 
 ## Stack
 
@@ -17,16 +11,16 @@ The main idea is simple: research skill becomes visible in what changes between 
 - TypeScript
 - CSS
 
-No UI framework or animation library.
+No UI framework or animation library is required.
 
-## Run
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Production check:
+For a production check:
 
 ```bash
 npm run check
@@ -36,10 +30,8 @@ npm run check
 
 `/` · `/program/` · `/curriculum/` · `/mentors/` · `/community/` · `/resources/` · `/resources/how-to-read-a-research-paper-without-getting-lost/` · `/about/` · `/apply/` · `/apply/success/`
 
-## Design system
+## Design notes
 
-The site uses one active stylesheet: `public/assets/v24-versioned.css`.
+The visual system is deliberately narrow: chalk, paper, graphite, oxide correction marks, and cool evidence blue. DM Sans carries most of the interface, DM Mono handles research metadata, and Instrument Serif is reserved for a small number of revision moments.
 
-The visual language is intentionally narrow: near-black research grids, warm paper, grayscale field photography, Instrument Serif, small mono research metadata, and ResurchIn yellow used as a review signal rather than a general background color.
-
-The signature interaction is the V01 ↔ V06 revision seam in the working-paper hero. The same version logic continues through the curriculum and mentor-review experiences.
+The final implementation frames live in the project Figma under **FINAL · VERSIONED PROOF · IMPLEMENTATION**.

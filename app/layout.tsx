@@ -4,33 +4,33 @@ import { SiteProgress } from "@/components/site/SiteProgress";
 
 export const metadata: Metadata = {
   title: {
-    default: "ResurchIn · Research is what changes between V01 and V06",
+    default: "ResurchIn · Learn research by revising the work",
     template: "%s · ResurchIn",
   },
   description:
     "A free six-month research apprenticeship where one project is framed, tested, reviewed, revised and defended.",
   openGraph: {
-    title: "ResurchIn · Research is what changes between V01 and V06",
+    title: "ResurchIn · Learn research by revising the work",
     description:
-      "One project. Six months. Close review. Make the change between V01 and V06 visible.",
+      "One project. Six versions. Close review. A free six-month research apprenticeship.",
     siteName: "ResurchIn",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "ResurchIn research apprenticeship" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ResurchIn · Research is what changes between V01 and V06",
-    description: "One project. Six months. Close review. Visible revision.",
+    title: "ResurchIn · Learn research by revising the work",
+    description: "One project. Six versions. Close review.",
     images: ["/og.jpg"],
   },
-  icons: { icon: "/favicon.svg?v=v24-versioned" },
+  icons: { icon: "/favicon.svg?v=revision-ledger" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0b0a",
-  colorScheme: "dark light",
+  themeColor: "#f4f5f1",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <link rel="stylesheet" href="/assets/fonts.css" />
-        <link rel="stylesheet" href="/assets/v24-versioned.css" />
+        <link rel="stylesheet" href="/assets/revision-ledger.css" />
       </head>
       <body className="rv-page">
         <SiteProgress />

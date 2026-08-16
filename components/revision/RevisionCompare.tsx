@@ -6,23 +6,11 @@ const before = "How does social media affect students?";
 const after = "Among first-year students, does late-night social media use predict next-day lecture attendance?";
 
 export function RevisionCompare() {
-  const [position, setPosition] = useState(53);
+  const [position, setPosition] = useState(52);
 
   return (
     <section className="rv-compare" aria-label="Compare the first and sixth version of a research question">
-      <div className="rv-compare-orbit" aria-hidden="true">
-        <span className="rv-compare-dots" />
-        <span className="rv-compare-index">R—01<br />WORKING<br />DOCUMENT</span>
-        <span className="rv-compare-stamp">REVIEWED<br />NOT FINAL</span>
-      </div>
-
       <div className="rv-compare-stage" style={{ "--rv-split": `${position}%` } as React.CSSProperties}>
-        <div className="rv-paper-rules" aria-hidden="true" />
-        <header className="rv-paper-header" aria-hidden="true">
-          <span>RESURCHIN / WORKING PAPER</span><span>REVISION 06</span>
-        </header>
-        <p className="rv-paper-field" aria-hidden="true">PUBLIC HEALTH / QUESTION MEMO 01</p>
-
         <article className="rv-version rv-version-before">
           <header><span>V01 / BROAD</span><span>QUESTION MEMO</span></header>
           <p>{before}</p>
@@ -33,17 +21,14 @@ export function RevisionCompare() {
           <p>{after}</p>
           <footer><span>Population · behaviour · outcome</span><b>06</b></footer>
         </article>
-
-        <aside className="rv-compare-note" aria-hidden="true">MENTOR NOTE 04<br /><strong>NARROW THE CLAIM.</strong></aside>
         <div className="rv-compare-seam" aria-hidden="true"><i /><span>↔</span></div>
-        <div className="rv-paper-footer" aria-hidden="true"><span>QUESTION</span><i /><span>EVIDENCE</span><i /><span>LIMIT</span></div>
       </div>
       <label className="rv-compare-control">
         <span>V01</span>
         <input
           type="range"
-          min="20"
-          max="80"
+          min="12"
+          max="88"
           value={position}
           onChange={(event) => setPosition(Number(event.target.value))}
           aria-label="Move the revision seam"

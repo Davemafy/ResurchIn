@@ -29,9 +29,7 @@ export function SiteHeader({ active }: { active?: NavSection }) {
   return (
     <header className="rv-header">
       <Link className="rv-brand" href="/" onClick={() => setOpen(false)} aria-label="ResurchIn home">
-        <span className="rv-brand-mark" aria-hidden="true"><i /></span>
-        <b>resurchIn</b>
-        <small>RESEARCH<br />APPRENTICESHIP / 2026</small>
+        <span aria-hidden="true">R/06</span><b>resurchIn</b>
       </Link>
       <nav className="rv-nav" aria-label="Primary navigation">
         {links.map((link, index) => (
@@ -40,7 +38,6 @@ export function SiteHeader({ active }: { active?: NavSection }) {
           </Link>
         ))}
       </nav>
-      <span className="rv-nav-office" aria-hidden="true">FIELD OFFICE / OPEN WORLDWIDE</span>
       <Link className="rv-nav-apply" href="/apply/">Bring V01 <span>↗</span></Link>
       <button className="rv-menu-button" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(v => !v)}>
         <span /><span />
