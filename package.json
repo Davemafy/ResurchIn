@@ -1,6 +1,6 @@
 {
-  "name": "resurchin-next-tsx-optimized",
-  "version": "2.0.0",
+  "name": "resurchin",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
