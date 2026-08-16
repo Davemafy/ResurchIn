@@ -3,76 +3,60 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export type NavSection = "program" | "curriculum" | "mentors" | "community" | "resources" | "about";
+export type NavSection = "program" | "curriculum" | "mentors" | "resources" | "about";
 
-const links: Array<{ href: string; label: string; section: NavSection; index: string }> = [
-  { href: "/program/", label: "Program", section: "program", index: "01" },
-  { href: "/curriculum/", label: "Curriculum", section: "curriculum", index: "02" },
-  { href: "/mentors/", label: "Mentors", section: "mentors", index: "03" },
-  { href: "/community/", label: "Community", section: "community", index: "04" },
-  { href: "/resources/", label: "Field notes", section: "resources", index: "05" },
-  { href: "/about/", label: "About", section: "about", index: "06" },
+const links: Array<{ href: string; label: string; section: NavSection }> = [
+  { href: "/program/", label: "Program", section: "program" },
+  { href: "/curriculum/", label: "Curriculum", section: "curriculum" },
+  { href: "/mentors/", label: "Mentors", section: "mentors" },
+  { href: "/resources/", label: "Resources", section: "resources" },
+  { href: "/about/", label: "About", section: "about" },
 ];
 
 export function SiteHeader({ active }: { active?: NavSection }) {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 18);
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("keydown", onKey);
+    const close = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", close);
+    document.body.dataset.menuOpen = open ? "true" : "false";
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("keydown", close);
+      delete document.body.dataset.menuOpen;
     };
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("menu-lock", open);
-    return () => document.documentElement.classList.remove("menu-lock");
   }, [open]);
 
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className={`pf-nav${open ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}>
-        <Link className="pf-wordmark" href="/" onClick={() => setOpen(false)} aria-label="ResurchIn home">
-          <span className="pf-wordmark-mark" aria-hidden="true"><i /></span>
-          <span>resurchIn</span>
-        </Link>
-
-        <div className="pf-nav-status" aria-hidden="true"><span>RESEARCH APPRENTICESHIP</span><span>OPEN WORLDWIDE / 2026</span></div>
-
-        <nav className="pf-nav-links" aria-label="Primary navigation">
-          {links.map((link) => (
-            <Link key={link.href} className={active === link.section ? "active" : undefined} aria-current={active === link.section ? "page" : undefined} href={link.href} onClick={() => setOpen(false)}>
-              <small>{link.index}</small><span>{link.label}</span>
-            </Link>
-          ))}
-        </nav>
-
-        <Link className="pf-nav-apply" href="/apply/" onClick={() => setOpen(false)}>Apply <span>↗</span></Link>
-
-        <button className="pf-menu" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-          <span /><span />
-        </button>
-      </header>
-
-      <div className={`pf-mobile-nav${open ? " is-open" : ""}`} aria-hidden={!open}>
-        <div className="pf-mobile-meta"><span>RESURCHIN / NAVIGATION</span><span>R—01 / 2026</span></div>
+    <header className="rv-header">
+      <Link className="rv-brand" href="/" onClick={() => setOpen(false)} aria-label="ResurchIn home">
+        <span aria-hidden="true">R/06</span><b>resurchIn</b>
+      </Link>
+      <nav className="rv-nav" aria-label="Primary navigation">
+        {links.map((link, index) => (
+          <Link key={link.href} href={link.href} className={active === link.section ? "is-active" : undefined}>
+            <small>0{index + 1}</small>{link.label}
+          </Link>
+        ))}
+      </nav>
+      <Link className="rv-nav-apply" href="/apply/">Bring V01 <span>↗</span></Link>
+      <button className="rv-menu-button" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(v => !v)}>
+        <span /><span />
+      </button>
+      <div className={`rv-mobile-menu${open ? " is-open" : ""}`} aria-hidden={!open}>
+        <p>RESURCHIN / NAVIGATION</p>
         <nav aria-label="Mobile navigation">
-          {links.map((link) => (
-            <Link key={link.href} className={active === link.section ? "active" : undefined} aria-current={active === link.section ? "page" : undefined} href={link.href} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
-              <small>{link.index}</small><span>{link.label}</span><b>↗</b>
+          {links.map((link, index) => (
+            <Link key={link.href} href={link.href} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+              <small>0{index + 1}</small><span>{link.label}</span><b>↗</b>
             </Link>
           ))}
+          <Link href="/community/" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+            <small>06</small><span>Community</span><b>↗</b>
+          </Link>
         </nav>
-        <Link className="pf-mobile-apply" href="/apply/" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>Bring the question <span>↗</span></Link>
-        <p>FREE / VOLUNTEER-LED / SIX MONTHS</p>
+        <Link className="rv-mobile-apply" href="/apply/" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>Bring V01 <span>↗</span></Link>
+        <span>FREE / SIX MONTHS / OPEN WORLDWIDE</span>
       </div>
-    </>
+    </header>
   );
 }

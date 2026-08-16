@@ -1,42 +1,38 @@
 import Link from "next/link";
-import { ResourceIndex } from "@/components/experience/ResourceIndex";
+import { Reveal } from "@/components/revision/Reveal";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+
+const notes = [
+  ["01", "FIELD GUIDE", "How to read a research paper without getting lost.", "8 min", "/resources/how-to-read-a-research-paper-without-getting-lost/"],
+  ["02", "WORKSHEET", "Turn an interest into a researchable question.", "SOON", "#"],
+  ["03", "FIELD NOTE", "Write a limitation that improves the argument.", "SOON", "#"],
+  ["04", "CHECKLIST", "Prepare a draft for useful feedback.", "SOON", "#"],
+];
 
 export default function Page() {
   return (
     <>
+      <Reveal />
       <SiteHeader active="resources" />
-      <main id="main-content" className="pf-inner pf2-resources">
-        <section className="pf2-resources-hero">
-          <div className="pf2-grid" aria-hidden="true" />
-          <div className="pf-inner-meta"><span>FIELD NOTES / 05</span><span>OPEN ACCESS</span><span>ISSUE 01</span></div>
-          <div className="pf2-resources-title" data-reveal><p className="pf-kicker">TOOLS FOR THE STUCK BIT</p><h1>READ<br />WITH A<br /><em>PENCIL.</em></h1></div>
-          <p>These are not motivational articles. They are field guides for the moment a paper becomes confusing, a question refuses to narrow or a draft keeps making the same mistake.</p>
-          <div className="pf2-resource-issue" aria-hidden="true">R/01</div>
-          <figure data-parallax="0.025"><img src="/assets/images/pexels-5940711-w1800.avif" srcSet="/assets/images/pexels-5940711-w1200.avif 1200w, /assets/images/pexels-5940711-w1600.avif 1600w, /assets/images/pexels-5940711-w1800.avif 1800w" sizes="(max-width: 820px) 100vw, 55vw" alt="Students reading research material together" /><figcaption>READING DESK / SOURCE AUDIT / ISSUE 01</figcaption></figure>
+      <main className="rv-inner rv-resources">
+        <section className="rv-resource-hero">
+          <div data-rv-reveal><p className="rv-eyebrow">OPEN FIELD NOTES / VERSION 01</p><h1>Resources for the moment the work stops moving.</h1><p className="rv-lead">Not a giant library. Short guides for reading, framing, revising and asking for better feedback.</p></div>
+          <figure data-rv-reveal><img src="/assets/images/pexels-5940711-w1800.avif" alt="Students reading and comparing research papers"/><figcaption><span>FIELD NOTE / READING DESK</span><b>Mark the claim before you mark the paper.</b></figcaption></figure>
         </section>
-
-        <section className="pf2-feature-note">
-          <Link className="pf2-feature-cover" href="/resources/how-to-read-a-research-paper-without-getting-lost/" data-cursor="READ" aria-label="Read How to read a research paper without getting lost">
-            <span>FIELD GUIDE / 01</span><b>READ<br />THE<br />PAPER.</b><small>WITHOUT GETTING LOST</small><i>↗</i>
-          </Link>
-          <article data-reveal><p className="pf-kicker">FEATURED / 8 MIN READ</p><h2>How to read a research paper without getting lost.</h2><p>A six-pass method for finding the question, following the evidence and deciding what the paper can actually claim.</p><Link className="pf-link" href="/resources/how-to-read-a-research-paper-without-getting-lost/">Open field guide <span>→</span></Link></article>
-          <aside><span>READING RULE / 01</span><blockquote>Do not read every sentence with equal attention. <em>Interrogate the argument.</em></blockquote></aside>
+        <section className="rv-resource-list" aria-label="Research resources">
+          {notes.map(([number,type,title,time,href]) => (
+            <article key={number} data-rv-reveal className={number === "01" ? "is-featured" : undefined}>
+              <span>V{number}</span><small>{type}</small><h2>{title}</h2><b>{time}</b>
+              {href !== "#" ? <Link href={href}>Open note <i>↗</i></Link> : <em>IN PROGRESS</em>}
+            </article>
+          ))}
         </section>
-
-        <ResourceIndex />
-
-        <section className="pf2-resource-break">
-          <div aria-hidden="true">?</div>
-          <p className="pf-kicker">WHEN THE WORK STOPS MOVING</p>
-          <h2 data-reveal>Find the decision<br />you are actually<br /><em>stuck on.</em></h2>
-          <p>Then choose the smallest tool that helps you make the next move.</p>
+        <section className="rv-resource-method">
+          <header data-rv-reveal><p className="rv-eyebrow">HOW TO USE THE LIBRARY</p><h2>Use the smallest guide that gets the project moving again.</h2></header>
+          <div data-rv-reveal><span>01 / FIND THE STALL</span><span>02 / USE THE GUIDE</span><span>03 / CHANGE THE WORK</span><span>04 / KEEP THE NOTE</span></div>
         </section>
-
-        <section className="pf2-closing pf2-closing-blue">
-          <p className="pf-kicker">FIELD NOTES / OPEN</p><h2 data-reveal>START WITH<br />THE GUIDE.<br /><em>STAY FOR THE WORK.</em></h2><Link className="pf-cta pf-cta-light" data-cursor="APPLY" href="/apply/">Apply for the cohort <span>↗</span></Link><small>OPEN ACCESS / ISSUE 01 / RESURCHIN 2026</small>
-        </section>
+        <section className="rv-final rv-final-compact"><p className="rv-eyebrow">NEXT COHORT</p><h2>Ready for sustained review?</h2><Link className="rv-button rv-button-ink" href="/apply/">Bring V01 <span>↗</span></Link></section>
       </main>
       <SiteFooter />
     </>

@@ -1,53 +1,78 @@
 import Link from "next/link";
-import { ProgramTimeline } from "@/components/experience/ProgramTimeline";
+import { Reveal } from "@/components/revision/Reveal";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+
+const weeks = [
+  ["01–04", "FRAME", "Question memo", "Turn an area of interest into a question with a boundary."],
+  ["05–08", "READ", "Evidence matrix", "Locate the conversation, disagreement and gap."],
+  ["09–12", "DESIGN", "Method note", "Match the evidence to the question and name the trade-off."],
+  ["13–16", "ANALYSE", "Analysis log", "Separate what happened from what you hoped it meant."],
+  ["17–20", "REVISE", "Research draft", "Narrow every claim until the evidence can hold it."],
+  ["21–24", "DEFEND", "Portfolio + defence", "Explain the result, the limit and the next question."],
+];
 
 export default function Page() {
   return (
     <>
+      <Reveal />
       <SiteHeader active="program" />
-      <main id="main-content" className="pf-inner pf-program pf2-program">
-        <section className="pf2-program-hero">
-          <div className="pf2-grid dark" aria-hidden="true" />
-          <div className="pf-inner-meta"><span>PROGRAM / 01</span><span>24 WEEKS / ONE PROJECT</span><span>2–3 LIVE SESSIONS / WEEK</span></div>
-          <div className="pf2-program-num" aria-hidden="true">24</div>
-          <div className="pf2-program-title" data-reveal><p className="pf-kicker">THE SIX-MONTH APPRENTICESHIP</p><h1>One question.<br /><em>Twenty-four weeks<br />under review.</em></h1></div>
-          <p className="pf2-program-lead" data-reveal>Not a course you finish by watching it. You move one project through six decisions, keep the earlier versions and learn to explain why the work changed.</p>
-          <Link className="pf-cta pf-cta-light" data-cursor="APPLY" href="/apply/">Apply for the next cohort <span>↗</span></Link>
-          <figure className="pf2-program-photo" data-parallax="0.05"><img src="/assets/images/pexels-5940715-w1800.avif" srcSet="/assets/images/pexels-5940715-w1200.avif 1200w, /assets/images/pexels-5940715-w1600.avif 1600w, /assets/images/pexels-5940715-w1800.avif 1800w" sizes="(max-width: 820px) 100vw, 55vw" alt="Mentor and students reviewing research work" /><figcaption>REVIEW ROOM / WORK IN PROGRESS / 2026</figcaption></figure>
-          <div className="pf2-program-rule">NOTHING MOVES FORWARD JUST BECAUSE THE CALENDAR SAYS SO.</div>
+      <main className="rv-inner rv-program">
+        <section className="rv-inner-hero rv-program-hero">
+          <div data-rv-reveal>
+            <p className="rv-eyebrow">PROGRAM / 24-WEEK REVISION SYSTEM</p>
+            <h1>Twenty-four weeks.<br />One question under review.</h1>
+            <p className="rv-lead">Nothing moves forward just because the calendar says so. Each phase leaves behind a version, a correction and a decision you can explain.</p>
+            <Link className="rv-button rv-button-ink" href="/apply/">Apply for the next cohort <span>↗</span></Link>
+          </div>
+          <figure className="rv-program-photo" data-rv-reveal>
+            <img src="/assets/images/pexels-5940715-w1800.avif" alt="Mentor and students reviewing research work together" />
+            <figcaption><span>REVIEW SESSION / DRAFT 04</span><b>One project stays visible for the full six months.</b></figcaption>
+          </figure>
         </section>
 
-        <section className="pf2-program-intro" data-reveal><p className="pf-kicker">THE OPERATING SYSTEM</p><h2>Six phases.<br /><em>One question getting harder to fake.</em></h2><p>Every phase ends with a working artifact. Earlier versions stay visible because revision is part of the evidence.</p></section>
+        <section className="rv-program-spec" aria-label="Program facts">
+          <article><small>TIME</small><b>24 weeks</b><p>Long enough to revisit the same decision.</p></article>
+          <article><small>RHYTHM</small><b>2–3 live sessions / week</b><p>Teaching, project work and critique.</p></article>
+          <article><small>REVIEW</small><b>Document-specific</b><p>Feedback attached to the sentence or choice.</p></article>
+          <article><small>COST</small><b>$0 tuition</b><p>Free and volunteer-led.</p></article>
+        </section>
 
-        <ProgramTimeline />
-
-        <section className="pf2-weekly">
-          <header data-reveal><p className="pf-kicker">THE WEEKLY RHYTHM</p><h2>Learn.<br />Apply.<br /><em>Get challenged.</em><br />Revise.</h2></header>
+        <section className="rv-program-runway">
+          <header data-rv-reveal>
+            <p className="rv-eyebrow">THE OPERATING SEQUENCE</p>
+            <h2>Six phases. Six records.<br />One continuous piece of work.</h2>
+          </header>
           <ol>
-            <li data-reveal><b>MON</b><span>CONTEXT</span><p>Learn the idea needed for the week’s decision.</p><i>01</i></li>
-            <li data-reveal><b>WED</b><span>PRACTICE</span><p>Apply it to your question, data or draft.</p><i>02</i></li>
-            <li data-reveal><b>FRI</b><span>CRITIQUE</span><p>Show the work and receive a specific correction.</p><i>03</i></li>
-            <li data-reveal><b>+1</b><span>REVISION</span><p>Keep the earlier version. Annotate what changed.</p><i>04</i></li>
+            {weeks.map(([range, label, output, copy], index) => (
+              <li key={label} data-rv-reveal>
+                <div><i>0{index + 1}</i><small>W{range}</small></div>
+                <h3>{label}</h3><p>{copy}</p><span>{output}</span>
+              </li>
+            ))}
           </ol>
         </section>
 
-        <section className="pf2-program-field">
-          <div className="pf2-program-field-word" aria-hidden="true">PRACTICE</div>
-          <figure className="one" data-parallax="0.09"><img src="/assets/images/pexels-5940711-w1600.avif" srcSet="/assets/images/pexels-5940711-w1200.avif 1200w, /assets/images/pexels-5940711-w1600.avif 1600w, /assets/images/pexels-5940711-w1800.avif 1800w" sizes="(max-width: 820px) 100vw, 55vw" alt="Students reading research material" loading="lazy" /><figcaption>READ / COMPARE / MARK</figcaption></figure>
-          <figure className="two" data-parallax="-0.06"><img src="/assets/images/pexels-9243385-w1600.avif" srcSet="/assets/images/pexels-9243385-w1200.avif 1200w, /assets/images/pexels-9243385-w1600.avif 1600w, /assets/images/pexels-9243385-w1800.avif 1800w" sizes="(max-width: 820px) 100vw, 55vw" alt="Researcher at a microscope" loading="lazy" /><figcaption>OBSERVE / RECORD / QUESTION</figcaption></figure>
-          <figure className="three" data-parallax="0.05"><img src="/assets/images/pexels-5940830-w1600.avif" srcSet="/assets/images/pexels-5940830-w1200.avif 1200w, /assets/images/pexels-5940830-w1600.avif 1600w, /assets/images/pexels-5940830-w1800.avif 1800w" sizes="(max-width: 820px) 100vw, 55vw" alt="Students presenting findings" loading="lazy" /><figcaption>EXPLAIN / DEFEND / LIMIT</figcaption></figure>
-          <blockquote data-reveal>“The calendar creates time. <em>Revision creates the researcher.</em>”</blockquote>
+        <section className="rv-week-cycle">
+          <div data-rv-reveal><p className="rv-eyebrow">REPEAT × 24</p><h2>A week ends with a version, not a checkbox.</h2></div>
+          <div className="rv-cycle-list" data-rv-reveal>
+            <article><b>MON</b><span>CONTEXT</span><p>Learn the idea needed for the week’s decision.</p></article>
+            <article><b>WED</b><span>PRACTICE</span><p>Apply it to your own question, evidence or draft.</p></article>
+            <article><b>FRI</b><span>CRITIQUE</span><p>Show the work. Receive one specific correction.</p></article>
+            <article><b>+1</b><span>REVISION</span><p>Keep the old version. Explain what changed.</p></article>
+          </div>
         </section>
 
-        <section className="pf2-eligibility">
-          <header data-reveal><p className="pf-kicker">WHO SHOULD APPLY</p><h2>You need curiosity, time and a willingness to show unfinished work.</h2></header>
-          <div className="pf2-eligibility-grid"><span>UNDERGRADUATES</span><span>RECENT GRADUATES</span><span>EARLY GRAD STUDENTS</span><span>CAREER SWITCHERS</span></div>
-          <div className="pf2-eligibility-note"><div><b>YOU DO NOT NEED</b><p>A publication record, a prestigious affiliation or a polished proposal.</p></div><div><b>YOU DO NEED</b><p>Consistent attendance, weekly project time and the willingness to revise after critique.</p></div></div>
+        <section className="rv-program-output">
+          <div data-rv-reveal><p className="rv-eyebrow">WHAT LEAVES WITH YOU</p><h2>A portfolio that shows the reasoning, not only the ending.</h2></div>
+          <div data-rv-reveal>
+            <p>Question memo</p><p>Evidence matrix</p><p>Method + data plan</p><p>Analysis log</p><p>Research draft</p><p>Defence + revision history</p>
+          </div>
         </section>
 
-        <section className="pf2-closing"><div className="pf2-grid dark" aria-hidden="true" /><p className="pf-kicker">ADMISSIONS / NEXT COHORT</p><h2 data-reveal>BRING THE<br /><em>QUESTION.</em><br />STAY FOR<br />THE <em>WORK.</em></h2><Link className="pf-cta pf-cta-light" href="/apply/">Submit an application <span>↗</span></Link><div className="pf2-closing-orbit" aria-hidden="true">24</div></section>
+        <section className="rv-final rv-final-compact">
+          <p className="rv-eyebrow">NEXT COHORT</p><h2>Bring V01.</h2><p>The rest of the programme is built around what happens next.</p><Link className="rv-button rv-button-ink" href="/apply/">Start an application <span>↗</span></Link>
+        </section>
       </main>
       <SiteFooter />
     </>
