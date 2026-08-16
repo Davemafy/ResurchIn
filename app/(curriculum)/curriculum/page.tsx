@@ -1,26 +1,38 @@
+import Link from "next/link";
 import { CurriculumExperience } from "@/components/curriculum/CurriculumExperience";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+
 export default function Page() {
   return (
     <>
       <SiteHeader active="curriculum" />
-<main>
-<CurriculumExperience />
-<section className={"photo-ledger"} aria-label={"The curriculum in practice"}>
-<figure><img src={"/assets/images/pexels-5940711-w1200.avif"} alt={"Students comparing research material around a table"} loading={"lazy"} /><figcaption><span>FRAME + READ</span><b>01—02</b></figcaption></figure>
-<figure><img src={"/assets/images/pexels-9243385-w1200.avif"} alt={"A researcher working carefully with a microscope"} loading={"lazy"} /><figcaption><span>DESIGN</span><b>03</b></figcaption></figure>
-<figure><img src={"/assets/images/pexels-5940839-w1200.avif"} alt={"Researchers comparing findings together"} loading={"lazy"} /><figcaption><span>ANALYSE</span><b>04</b></figcaption></figure>
-<figure><img src={"/assets/images/pexels-5940715-w1200.avif"} alt={"A mentor reviewing a draft with students"} loading={"lazy"} /><figcaption><span>WRITE + PRESENT</span><b>05—06</b></figcaption></figure>
-</section>
-<section className={"artifact-spread"} aria-label={"Illustrated research documents"}>
-<figure><img src={"/assets/images/process-illustration.webp"} alt={"Editorial illustration of hands working across layered research documents"} loading={"lazy"} /><figcaption><span>ONE QUESTION / MANY DOCUMENTS</span><b>WORKING PROCESS</b></figcaption></figure>
-<figure><img src={"/assets/images/revision-illustration.webp"} alt={"Editorial illustration showing drafts changing through revision"} loading={"lazy"} /><figcaption><span>THE VERSIONS STAY VISIBLE</span><b>REVISION TRACE</b></figcaption></figure>
-</section>
-<section className={"evidence-wall"}><div><p className={"kicker"}>WHAT PROGRESS LOOKS LIKE</p><h2>The finished work matters. The versions prove how you got there.</h2><p>Keep the questions, plans, drafts and corrections that show your judgment changing.</p></div><div className={"draft-stack"}><span>QUESTION / V1</span><span>LITERATURE MAP / V2</span><span>METHOD / REVIEWED</span><span>ANALYSIS / V3</span><span>FINAL / DEFENDED</span></div></section>
-<section className={"closing"}><p className={"kicker"}>ADMISSIONS / NEXT COHORT</p><h2>Bring one question.<br />Expect it to change.</h2><a className={"button light"} href={"/apply/"}>Submit an application ↗</a></section>
-</main>
+      <main className="studio-curriculum">
+        <CurriculumExperience />
+
+        <section className="curriculum-photo-sequence" aria-label="The curriculum in practice">
+          <div className="curriculum-photo-copy"><span>02 / THE PRACTICE</span><h2>Every idea has to survive contact with the work.</h2><p>Read. Mark. Compare. Test. Rewrite. The curriculum is a sequence of visible decisions, not a list of topics.</p></div>
+          <figure className="curriculum-photo-a"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students comparing research material around a table" /><figcaption>FRAME + READ / 01—02</figcaption></figure>
+          <figure className="curriculum-photo-b"><img src="/assets/images/pexels-9243385-w1600.avif" alt="A researcher working carefully with a microscope" /><figcaption>DESIGN + TEST / 03</figcaption></figure>
+          <figure className="curriculum-photo-c"><img src="/assets/images/pexels-5940839-w1600.avif" alt="Researchers comparing findings together" /><figcaption>ANALYSE + WRITE / 04—05</figcaption></figure>
+        </section>
+
+        <section className="curriculum-artifacts">
+          <div><span>03 / THE TRACE</span><h2>The finished work matters.<br /><em>The versions prove how you got there.</em></h2></div>
+          <figure><img src="/assets/images/process-illustration.webp" alt="Editorial illustration of layered research documents" /><figcaption>ONE QUESTION / MANY DOCUMENTS</figcaption></figure>
+          <figure><img src="/assets/images/revision-illustration.webp" alt="Editorial illustration showing drafts changing through revision" /><figcaption>REVISION TRACE / V1 → V6</figcaption></figure>
+          <div className="artifact-index">
+            <span>QUESTION / V1</span><span>LITERATURE MAP / V2</span><span>METHOD / REVIEWED</span><span>ANALYSIS / V4</span><span>FINAL / DEFENDED</span>
+          </div>
+        </section>
+
+        <section className="studio-cta-band">
+          <span>ADMISSIONS / NEXT COHORT</span>
+          <h2>Bring one question.<br />Expect it to change.</h2>
+          <Link className="studio-primary studio-primary--dark" href="/apply/">Submit an application <span>↗</span></Link>
+        </section>
+      </main>
       <SiteFooter />
-</>
+    </>
   );
 }

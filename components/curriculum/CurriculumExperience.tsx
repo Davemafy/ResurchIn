@@ -3,21 +3,12 @@
 import { useRef, useState, type CSSProperties } from "react";
 
 const curriculum = [
-  ["01 / FRAME", "Give the question a boundary.", "Turn a broad interest into something evidence could actually answer.", "Question memo / V3", "Could evidence answer this?"],
-  ["02 / READ", "Arrange the field by disagreement.", "Compare claims, methods and limits instead of collecting disconnected summaries.", "Evidence matrix / 18 sources", "Where do these authors disagree?"],
-  ["03 / DESIGN", "Choose the evidence before collecting it.", "Match the method to the question, then name the strength, cost and limit.", "Method + data plan", "Why this method for this question?"],
-  ["04 / ANALYSE", "Keep the result smaller than the ambition.", "Separate the pattern in the data from the explanation you want to believe.", "Analysis log / V4", "Is that claim inside the data?"],
-  ["05 / WRITE", "Make every claim earn its confidence.", "Connect question, evidence, limitation and conclusion in one traceable argument.", "Research draft / V6", "Has this sentence earned its certainty?"],
-  ["06 / PRESENT", "Defend the decision, not the performance.", "Explain what the work found, where it stops and what you would change next.", "Defence / portfolio", "What would you do differently next?"],
-] as const;
-
-const rows = [
-  ["Frame", "Make the question specific enough to investigate.", "QUESTION MEMO / REVIEWED"],
-  ["Read", "Compare the field by claims, methods and disagreement.", "EVIDENCE MATRIX / 18 SOURCES"],
-  ["Design", "Choose evidence that fits the question and name the trade-off.", "METHOD + DATA PLAN"],
-  ["Analyse", "Separate the result from what you hope it means.", "ANALYSIS LOG / V4"],
-  ["Write", "Build an argument in which every claim earns its confidence.", "RESEARCH DRAFT / V6"],
-  ["Present", "Defend the work, the limit and the next question.", "DEFENCE / PORTFOLIO READY"],
+  ["01 / FRAME", "Give the question a boundary.", "Turn a broad interest into something evidence could actually answer.", "Question memo / V3", "Could evidence answer this?", "INTEREST → QUESTION"],
+  ["02 / READ", "Arrange the field by disagreement.", "Compare claims, methods and limits instead of collecting disconnected summaries.", "Evidence matrix / 18 sources", "Where do these authors disagree?", "QUESTION → FIELD"],
+  ["03 / DESIGN", "Choose the evidence before collecting it.", "Match the method to the question, then name the strength, cost and limit.", "Method + data plan", "Why this method for this question?", "FIELD → METHOD"],
+  ["04 / ANALYSE", "Keep the result smaller than the ambition.", "Separate the pattern in the data from the explanation you want to believe.", "Analysis log / V4", "Is that claim inside the data?", "DATA → PATTERN"],
+  ["05 / WRITE", "Make every claim earn its confidence.", "Connect question, evidence, limitation and conclusion in one traceable argument.", "Research draft / V6", "Has this sentence earned its certainty?", "PATTERN → CLAIM"],
+  ["06 / PRESENT", "Defend the decision, not the performance.", "Explain what the work found, where it stops and what you would change next.", "Defence / portfolio", "What would you do differently next?", "CLAIM → CONTRIBUTION"],
 ] as const;
 
 export function CurriculumExperience() {
@@ -34,47 +25,52 @@ export function CurriculumExperience() {
   };
 
   return (
-    <>
-      <section ref={heroRef} className="curriculum-hero">
-        <div className="curriculum-hero-copy">
-          <p className="kicker">SIX PHASES / ONE CONTINUOUS PIECE OF WORK</p>
-          <h1>You will not study research in chapters. <em>You will move one question.</em></h1>
-          <p>Every phase leaves behind a document, a mentor correction and a decision you should be able to defend.</p>
-        </div>
-        <div className="curriculum-console">
-          <div className="curriculum-tabs" aria-label="Curriculum phases">
-            {curriculum.map((_, index) => (
-              <button key={index} className={active === index ? "active" : undefined} aria-pressed={active === index} onClick={() => choose(index)}>
-                {String(index + 1).padStart(2, "0")}
-              </button>
-            ))}
-          </div>
-          <div className="curriculum-sheet" style={{ "--curriculum-progress": `${((active + 1) / curriculum.length) * 100}%` } as CSSProperties}>
-            <div><small>{data[0]}</small><h2>{data[1]}</h2><p>{data[2]}</p></div>
-            <dl><div><dt>YOU LEAVE WITH</dt><dd>{data[3]}</dd></div><div><dt>MENTOR ASKS</dt><dd>{data[4]}</dd></div></dl>
-            <span className="curriculum-progress" aria-hidden="true"><i /></span>
-          </div>
-        </div>
-      </section>
-      <section className="curriculum-list">
-        {rows.map(([title, body, output], index) => (
-          <article
-            key={title}
-            className={active === index ? "is-active" : undefined}
-            role="button"
-            tabIndex={0}
-            onClick={() => choose(index, true)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                choose(index, true);
-              }
-            }}
-          >
-            <b>{String(index + 1).padStart(2, "0")}</b><h2>{title}</h2><p>{body}</p><small>{output}</small>
+    <section ref={heroRef} className="curriculum-studio" aria-labelledby="curriculum-title">
+      <div className="curriculum-studio-intro">
+        <div className="studio-page-meta"><span>CURRICULUM / WORKING NOTEBOOK</span><span>06 PHASES / 24 WEEKS</span></div>
+        <p className="studio-eyebrow"><span>01</span> ONE CONTINUOUS PIECE OF WORK</p>
+        <h1 id="curriculum-title">You do not study research in chapters.<br /><em>You move one question.</em></h1>
+        <p>Every phase leaves behind a document, a mentor correction and a decision you should be able to defend.</p>
+      </div>
+
+      <div className="curriculum-workbench">
+        <nav className="curriculum-chapters" aria-label="Curriculum phases">
+          {curriculum.map((item, index) => (
+            <button key={item[0]} className={active === index ? "active" : undefined} aria-pressed={active === index} onClick={() => choose(index)}>
+              <b>{String(index + 1).padStart(2, "0")}</b>
+              <span>{item[0].split(" / ")[1]}</span>
+              <i aria-hidden="true" />
+            </button>
+          ))}
+        </nav>
+
+        <div className="curriculum-desk">
+          <div className="curriculum-grid" aria-hidden="true" />
+          <article className="curriculum-document" style={{ "--curriculum-progress": `${((active + 1) / curriculum.length) * 100}%` } as CSSProperties}>
+            <header><span>{data[0]}</span><span>RESURCHIN / COHORT 01</span></header>
+            <div className="curriculum-document-rule" />
+            <small>THE DECISION</small>
+            <h2>{data[1]}</h2>
+            <p>{data[2]}</p>
+            <dl>
+              <div><dt>YOU LEAVE WITH</dt><dd>{data[3]}</dd></div>
+              <div><dt>MENTOR ASKS</dt><dd>{data[4]}</dd></div>
+            </dl>
+            <footer><span>{data[5]}</span><b>{String(active + 1).padStart(2, "0")} / 06</b></footer>
           </article>
+          <aside className="curriculum-margin-note">KEEP THE<br /><strong>VERSION.</strong></aside>
+          <div className="curriculum-progress-line" aria-hidden="true"><i style={{ height: `${((active + 1) / curriculum.length) * 100}%` }} /></div>
+        </div>
+      </div>
+
+      <div className="curriculum-output-index">
+        {curriculum.map((item, index) => (
+          <button key={item[3]} className={active === index ? "active" : undefined} onClick={() => choose(index, true)}>
+            <b>{String(index + 1).padStart(2, "0")}</b>
+            <span>{item[3]}</span>
+          </button>
         ))}
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

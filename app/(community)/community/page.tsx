@@ -1,12 +1,46 @@
-import { TiltPhoto } from "@/components/site/TiltPhoto";
+import Link from "next/link";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+
 export default function Page() {
   return (
     <>
       <SiteHeader />
-<main><section className={"page-hero split reverse"}><div><p className={"kicker"}>COMMUNITY / LEARN TOGETHER</p><h1>Unfinished work is the price of entry.</h1><p className={"lead"}>Bring the question that is still vague, the analysis that will not settle or the paragraph you keep rewriting. The room helps you find the next move.</p></div><TiltPhoto className="photo mint" src="/assets/images/pexels-5940839-w1800.avif" alt="Students collaborating around a laptop" caption="Students collaborating around a laptop" /></section><section className={"community-scenes"}><p className={"kicker"}>INSIDE THE ROOM</p><div><article><span>01</span><h2>Work-in-progress sessions</h2><p>Bring the unresolved bit, not just the polished ending.</p></article><article><span>02</span><h2>Peer review circles</h2><p>Learn to give critique that is specific, useful and kind.</p></article><article><span>03</span><h2>Research conversations</h2><p>See how people in different fields solve problems.</p></article></div></section><section className={"visual-evidence light"}><header><span>INSIDE THE ROOM / UNPOLISHED</span><h2>The useful moment usually happens before the final slide.</h2><p>A question gets sharper across a table. A limitation appears in the margin. Someone else sees what you missed.</p></header><div className={"evidence-grid"}><figure data-index={"01"}><img src={"/assets/images/pexels-5940839-w1600.avif"} alt={"Students collaborating around a laptop"} loading={"lazy"} /><figcaption><span>PEER TABLE</span><span>WORK IN PROGRESS</span></figcaption></figure><figure data-index={"02"}><img src={"/assets/images/pexels-8197503-w1600.avif"} alt={"Students in a collaborative learning session"} loading={"lazy"} /><figcaption><span>GROUP SESSION</span><span>QUESTION / ROOM</span></figcaption></figure><figure data-index={"03"}><img src={"/assets/images/pexels-5940711-w1200.avif"} alt={"Students comparing notes together"} loading={"lazy"} /><figcaption><span>PEER READING</span><span>SOURCE / NOTE</span></figcaption></figure><figure data-index={"04"}><img src={"/assets/images/pexels-5940830-w1200.avif"} alt={"A group sharing research findings"} loading={"lazy"} /><figcaption><span>OPEN FLOOR</span><span>PRESENT / ASK</span></figcaption></figure></div></section><section className={"community-quote"}><p>Questions and drafts do not need to be polished before they are shared.</p></section><section className={"closing"}><p className={"kicker"}>ADMISSIONS / NEXT COHORT</p><h2>Bring the unresolved bit.</h2><a className={"button light"} href={"/apply/"}>Submit an application ↗</a></section></main>
+      <main className="studio-community">
+        <section className="community-hero">
+          <div className="studio-page-meta"><span>COMMUNITY / OPEN ROOM</span><span>WORK IN PROGRESS / WELCOME</span></div>
+          <div className="community-hero-copy">
+            <p className="studio-eyebrow"><span>01</span> LEARN TOGETHER</p>
+            <h1>Unfinished work is<br /><em>the price of entry.</em></h1>
+            <p>Bring the question that is still vague, the analysis that will not settle or the paragraph you keep rewriting.</p>
+          </div>
+          <figure className="community-hero-photo"><img src="/assets/images/pexels-5940839-w1800.avif" alt="Students collaborating around a laptop" /><figcaption>PEER TABLE / WORK IN PROGRESS</figcaption></figure>
+          <div className="community-hero-note">BRING THE<br /><strong>UNRESOLVED BIT.</strong></div>
+        </section>
+
+        <section className="community-room">
+          <header><span>02 / INSIDE THE ROOM</span><h2>The useful moment usually happens before the final slide.</h2></header>
+          <div>
+            <article><b>01</b><span>WORK-IN-PROGRESS</span><h3>Bring the unresolved bit, not just the polished ending.</h3></article>
+            <article><b>02</b><span>PEER REVIEW</span><h3>Learn to give critique that is specific, useful and kind.</h3></article>
+            <article><b>03</b><span>RESEARCH CONVERSATION</span><h3>See how people in different fields solve problems.</h3></article>
+          </div>
+        </section>
+
+        <section className="community-photo-wall">
+          <figure className="community-photo-a"><img src="/assets/images/pexels-5940839-w1600.avif" alt="Students collaborating around a laptop" /><figcaption>PEER TABLE / 01</figcaption></figure>
+          <figure className="community-photo-b"><img src="/assets/images/pexels-8197503-w1600.avif" alt="Students in a collaborative learning session" /><figcaption>GROUP SESSION / 02</figcaption></figure>
+          <div className="community-photo-quote"><span>THE ROOM</span><blockquote>Questions and drafts do not need to be polished before they are shared.</blockquote></div>
+          <figure className="community-photo-c"><img src="/assets/images/pexels-5940711-w1600.avif" alt="Students comparing notes together" /><figcaption>PEER READING / 03</figcaption></figure>
+        </section>
+
+        <section className="studio-cta-band studio-cta-band--dark">
+          <span>ADMISSIONS / NEXT COHORT</span>
+          <h2>Bring the unresolved bit.</h2>
+          <Link className="studio-primary" href="/apply/">Enter the room <span>↗</span></Link>
+        </section>
+      </main>
       <SiteFooter />
-</>
+    </>
   );
 }

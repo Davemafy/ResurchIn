@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/styles.css" />
           <link rel="stylesheet" href="/assets/brand-v13.css" />
           <link rel="stylesheet" href="/assets/inner-pages-v23.css" />
-          <link rel="stylesheet" href="/assets/studio-v1.css" />
+          <link rel="stylesheet" href="/assets/studio-v2.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="inner-page program-page">
