@@ -1,6 +1,5 @@
 /* V17 — exhibition-grade interaction layer and document viewer. */
 .home-v17{--bone:#eeeae0;--graphite:#191815;--quiet:#746f66}.home-v17:before{display:none}
-.home-v17 .site-head{backdrop-filter:blur(18px);background:rgba(11,11,11,.92)}
 .home-v17 .site-head:after{display:none}
 .home-v17 .v14-hero{height:575px;min-height:575px;max-height:575px;padding:20px max(24px,3vw);background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),radial-gradient(circle at 70% 38%,rgba(255,216,0,.065),transparent 25%),linear-gradient(115deg,#0b0b0b 0 64%,#11110f 64% 100%);background-size:44px 44px,44px 44px,auto,auto}
 .home-v17 .v14-hero:after{content:"01";position:absolute;left:2.7vw;bottom:-.14em;font:400 280px/.8 var(--serif);color:rgba(255,255,255,.022);pointer-events:none}

@@ -104,6 +104,8 @@ export function DossierViewer() {
 
   const page = pages[active];
 
+  if (!dossierOpen) return null;
+
   return (
     <section
       ref={viewerRef}

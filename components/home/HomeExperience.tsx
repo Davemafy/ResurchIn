@@ -152,6 +152,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
       scrollToSection,
       sectionNodes,
       showCursor: (label: string) => {
+        if (typeof window !== "undefined" && window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
         setCursorLabel(label);
         setCursorVisible(true);
       },

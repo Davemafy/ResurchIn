@@ -27,9 +27,10 @@ export function HeroExperience() {
         <span>US-BASED / OPEN WORLDWIDE</span>
         <span>2026 PROGRAM DOSSIER</span>
       </div>
+      <p className="mobile-hero-meta">RESEARCH APPRENTICESHIP / 2026</p>
       <div className="v14-headline">
         <p className="kicker">SIX MONTHS / GUIDED SUPPORT / HANDS-ON PROJECTS</p>
-        <h1><span className="hero-title-main">Research is a skill.</span><em>Practice it here.</em></h1>
+        <h1>Research is a skill.<em>Practice it here.</em></h1>
       </div>
       <div className="v14-hero-bottom">
         <p>Structured training, real data and guidance from experienced researchers. Free, volunteer-driven and open worldwide.</p>

@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="theme-color" content="#ffd800" />
         <meta name="description" content="A free six-month research apprenticeship for early-career researchers." />
-        <title>ResurchIn | Research Apprenticeship</title>
+        <title>ResurchIn · Find the question. Earn the claim.</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link rel="stylesheet" href="/assets/fonts.css" />
@@ -21,10 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/studio-v1.css" />
           <link rel="stylesheet" href="/assets/responsive-fixes.css" />
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
-          <link rel="stylesheet" href="/assets/qa-final.css" />
-          <link rel="stylesheet" href="/assets/mobile-immersion.css" />
-          <link rel="stylesheet" href="/assets/home-desktop-immersion.css" />
-          <link rel="stylesheet" href="/assets/send-ready-tune.css" />
+          <link rel="stylesheet" href="/assets/mobile-final-v2.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="home-v16 home-v17">

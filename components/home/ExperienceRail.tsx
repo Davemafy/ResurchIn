@@ -8,8 +8,19 @@ const labels = ["Opening", "Process", "Revisions", "Review", "Apply"];
 export function ExperienceRail() {
   const { scrollToSection, sectionNodes } = useHomeExperience();
   const [active, setActive] = useState(0);
+  const [isCompactViewport, setIsCompactViewport] = useState(false);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 820px)");
+    const update = () => setIsCompactViewport(media.matches);
+    update();
+    media.addEventListener?.("change", update);
+    return () => media.removeEventListener?.("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (isCompactViewport) return;
+
     const nodes = sectionNodes.current.filter(Boolean) as HTMLElement[];
     if (!nodes.length || !("IntersectionObserver" in window)) return;
 
@@ -27,18 +38,9 @@ export function ExperienceRail() {
 
     nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, [sectionNodes]);
+  }, [isCompactViewport, sectionNodes]);
 
-  const goNext = () => {
-    if (active < labels.length - 1) {
-      scrollToSection(active + 1);
-      return;
-    }
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    });
-  };
+  if (isCompactViewport) return null;
 
   return (
     <aside className="experience-rail" aria-label="Homepage sections">
@@ -49,14 +51,6 @@ export function ExperienceRail() {
           {label}
         </button>
       ))}
-      <button
-        className="experience-next"
-        type="button"
-        onClick={goNext}
-        aria-label={active < labels.length - 1 ? `Next chapter: ${labels[active + 1]}` : "Continue to the footer"}
-      >
-        <span>{active < labels.length - 1 ? labels[active + 1] : "Finish"}</span><b aria-hidden="true">↓</b>
-      </button>
     </aside>
   );
 }
