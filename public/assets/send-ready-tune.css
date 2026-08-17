@@ -242,3 +242,74 @@
     transform: none !important;
   }
 }
+
+/* FINAL CURRICULUM COMPOSITION TUNE
+   1) remove the detached desktop chapter card
+   2) let the photo read as part of the hero, not wallpaper behind the console
+   3) pull the whole composition into the first viewport */
+@media (min-width: 1001px) {
+  .curriculum-page .route-rail {
+    display: none !important;
+  }
+
+  .curriculum-page .curriculum-hero-copy,
+  .curriculum-page .curriculum-visual {
+    transform: translateY(-44px);
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    top: -4px;
+    right: 0;
+    width: 72%;
+    height: 82%;
+  }
+
+  .curriculum-page .curriculum-hero-photo img {
+    object-position: 50% 42%;
+  }
+
+  .curriculum-page .curriculum-console {
+    left: 7%;
+    right: 0;
+    bottom: -22px;
+    min-height: 304px !important;
+  }
+
+  .curriculum-page .curriculum-tabs button {
+    min-height: 44px !important;
+  }
+
+  .curriculum-page .curriculum-sheet {
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1000px) {
+  .curriculum-page .route-rail {
+    display: none !important;
+  }
+
+  .curriculum-page .curriculum-hero-copy,
+  .curriculum-page .curriculum-visual {
+    transform: none;
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    width: 68%;
+    height: 70%;
+  }
+
+  .curriculum-page .curriculum-console {
+    left: 5%;
+    right: 0;
+    bottom: -12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .curriculum-page .curriculum-hero-copy,
+  .curriculum-page .curriculum-visual {
+    transform: none;
+  }
+}
