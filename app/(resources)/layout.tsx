@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/studio-v1.css" />
           <link rel="stylesheet" href="/assets/responsive-fixes.css" />
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
+          <link rel="stylesheet" href="/assets/qa-final.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="inner-page resources-page">

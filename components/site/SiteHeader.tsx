@@ -110,7 +110,7 @@ export function SiteHeader({ active }: { active?: NavSection }) {
       <span className="nav-edition" aria-hidden="true">FIELD OFFICE / OPEN WORLDWIDE</span>
 
       <Link className="nav-apply" href="/apply/" onClick={() => setOpen(false)}>
-        Apply <span aria-hidden="true">↗</span>
+        <span className="nav-apply-label">Apply</span><span aria-hidden="true">↗</span>
       </Link>
 
       <button

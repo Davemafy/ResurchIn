@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReveal } from "@/components/site/useReveal";
 import { useHomeExperience } from "./HomeExperience";
 
@@ -22,6 +22,10 @@ export function CritiqueLab() {
   const timer = useRef<number | null>(null);
 
   const setRef = useCallback((node: HTMLElement | null) => registerSection(3, node), [registerSection]);
+
+  useEffect(() => () => {
+    if (timer.current) window.clearTimeout(timer.current);
+  }, []);
 
   const reviewState = review < 34
     ? "The claim still sounds more certain than the evidence."
