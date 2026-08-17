@@ -27,7 +27,7 @@ const pages = [
     body: "The first draft said the sessions “improved student writing.” The revised claim names the sample, describes the observed behaviour and stops before claiming causation.",
     side: "The course was small, participation was not randomly assigned and the study did not measure whether the changes persisted after twelve weeks.",
     note: "“The result did not get weaker. The sentence became more honest.”", cite: "MENTOR NOTE / FINAL REVIEW",
-    caption: "The final sentence is smaller than the ambition—and stronger because every word can be defended.",
+    caption: "The final sentence is smaller than the ambition. It is stronger because every word can be defended.",
   },
 ];
 

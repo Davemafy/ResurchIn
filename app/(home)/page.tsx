@@ -23,7 +23,7 @@ export default function HomePage() {
         <section className="origin-ledger" aria-labelledby="origin-ledger-title">
           <header>
             <p className="kicker">WHY RESURCHIN EXISTS</p>
-            <h2 id="origin-ledger-title">Research is learned by doing it—not by waiting until you feel qualified.</h2>
+            <h2 id="origin-ledger-title">Research is learned by doing it, not by waiting until you feel qualified.</h2>
           </header>
           <article className="founder-proof">
             <div className="founder-monogram" aria-hidden="true"><span>HEA</span></div>

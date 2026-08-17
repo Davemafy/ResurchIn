@@ -31,7 +31,7 @@ const views = [
     caption: "RESEARCH DRAFT / VERSION 06",
     credit: "DEFENDING THE CLAIM",
     title: "The finding stayed. The certainty did not.",
-    body: "“Proved” became “was associated with.” The sample moved into the claim. The limitation arrived before the conclusion—not after it.",
+    body: "“Proved” became “was associated with.” The sample moved into the claim. The limitation arrived before the conclusion, not after it.",
     mark: "Is every word inside the evidence?",
     document: "Research draft / v03 → v06",
   },

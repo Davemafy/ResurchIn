@@ -9,7 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="theme-color" content="#ffd800" />
         <meta name="description" content="Inside the six-month ResurchIn research apprenticeship." />
-        <title>Program dossier — ResurchIn</title>
+        <title>Program dossier · ResurchIn</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link rel="stylesheet" href="/assets/fonts.css" />
