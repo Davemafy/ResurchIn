@@ -1,0 +1,244 @@
+/* Final handoff tune: alignment + curriculum hero composition only. */
+
+/* HOME / PHONE
+   Keep the working paper as a deliberate object, but centre it physically.
+   The chapter HUD also sits on the viewport axis rather than hovering in one corner. */
+@media (max-width: 720px) {
+  .home-v17 .document-orbit {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    margin-inline: 0 !important;
+  }
+
+  .home-v17 .document-orbit:hover {
+    transform: translateX(-50%) !important;
+  }
+
+  .home-v17 .experience-rail {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    min-width: 164px !important;
+  }
+}
+
+/* CURRICULUM / DESKTOP
+   The opening should fit as one screen-length composition, not a tall empty stage.
+   Photography is part of the working instrument rather than a separate gallery below. */
+.curriculum-page .curriculum-hero {
+  min-height: 590px !important;
+  height: min(640px, calc(100svh - 68px)) !important;
+  max-height: 640px !important;
+  padding-top: 50px !important;
+  padding-bottom: 34px !important;
+  grid-template-columns: minmax(390px, .88fr) minmax(540px, 1.12fr) !important;
+  gap: clamp(36px, 5vw, 78px) !important;
+  align-items: center !important;
+}
+
+.curriculum-page .curriculum-hero:before {
+  top: 16px !important;
+}
+
+.curriculum-page .curriculum-hero-copy {
+  justify-content: center !important;
+  padding-top: 20px !important;
+  align-self: center !important;
+}
+
+.curriculum-page .curriculum-hero-copy h1 {
+  font-size: clamp(52px, 5vw, 76px) !important;
+  margin: 20px 0 22px !important;
+}
+
+.curriculum-page .curriculum-visual {
+  position: relative;
+  min-width: 0;
+  height: 500px;
+  align-self: center;
+}
+
+.curriculum-page .curriculum-hero-photo {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 64%;
+  height: 70%;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #4b4943;
+  background: #1a1a18;
+}
+
+.curriculum-page .curriculum-hero-photo:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,9,8,.02) 58%, rgba(8,9,8,.72));
+  pointer-events: none;
+}
+
+.curriculum-page .curriculum-hero-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.12);
+}
+
+.curriculum-page .curriculum-hero-photo figcaption {
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #f4f0e7;
+  font: 500 7px/1.3 var(--mono);
+  letter-spacing: .1em;
+}
+
+.curriculum-page .curriculum-hero-photo figcaption b {
+  color: #ffd800;
+  font-weight: 500;
+}
+
+.curriculum-page .curriculum-console {
+  position: absolute !important;
+  z-index: 2 !important;
+  left: 0;
+  right: 8%;
+  bottom: 0;
+  width: auto;
+  min-height: 330px !important;
+  align-self: auto !important;
+  transform: rotate(.2deg) !important;
+  box-shadow: 11px 12px 0 #ffd800, 0 25px 60px rgba(0,0,0,.24) !important;
+}
+
+.curriculum-page .curriculum-console:hover {
+  transform: rotate(0deg) translateY(-2px) !important;
+}
+
+.curriculum-page .curriculum-tabs button {
+  min-height: 48px !important;
+}
+
+.curriculum-page .curriculum-sheet {
+  padding: 24px 28px 24px !important;
+}
+
+.curriculum-page .curriculum-sheet h2 {
+  margin: 20px 0 14px !important;
+  font-size: clamp(32px, 2.7vw, 43px) !important;
+}
+
+/* TABLET: one coherent visual block, still shorter than the old hero. */
+@media (max-width: 1000px) {
+  .curriculum-page .curriculum-hero {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    padding-top: 64px !important;
+    padding-bottom: 42px !important;
+  }
+
+  .curriculum-page .curriculum-visual {
+    width: min(760px, 100%);
+    height: 520px;
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    width: 62%;
+    height: 64%;
+  }
+
+  .curriculum-page .curriculum-console {
+    right: 5%;
+  }
+}
+
+/* PHONE: image first, working instrument immediately over it. No huge empty hero. */
+@media (max-width: 720px) {
+  .curriculum-page .curriculum-hero {
+    padding: 58px 18px 30px !important;
+    gap: 24px !important;
+  }
+
+  .curriculum-page .curriculum-hero-copy h1 {
+    font-size: clamp(42px, 12.4vw, 50px) !important;
+    margin: 16px 0 18px !important;
+  }
+
+  .curriculum-page .curriculum-hero-copy > p:last-child {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  .curriculum-page .curriculum-visual {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: 154px;
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    top: 0;
+    left: 0;
+    right: auto;
+    width: 100%;
+    height: 205px;
+  }
+
+  .curriculum-page .curriculum-console {
+    position: relative !important;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: calc(100% - 12px);
+    margin-left: 12px;
+    min-height: 390px !important;
+    transform: none !important;
+    box-shadow: -10px 10px 0 #ffd800 !important;
+  }
+
+  .curriculum-page .curriculum-console:hover {
+    transform: none !important;
+  }
+
+  .curriculum-page .curriculum-sheet {
+    padding: 22px 20px 38px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-v17 .experience-rail {
+    min-width: 150px !important;
+  }
+
+  .curriculum-page .curriculum-visual {
+    padding-top: 138px;
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    height: 185px;
+  }
+
+  .curriculum-page .curriculum-console {
+    min-height: 372px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curriculum-page .curriculum-console,
+  .curriculum-page .curriculum-hero-photo img {
+    transition: none !important;
+    transform: none !important;
+  }
+}

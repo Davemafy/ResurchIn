@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
           <link rel="stylesheet" href="/assets/qa-final.css" />
           <link rel="stylesheet" href="/assets/route-immersion.css" />
+          <link rel="stylesheet" href="/assets/send-ready-tune.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="inner-page curriculum-page">

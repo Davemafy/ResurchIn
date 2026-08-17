@@ -41,18 +41,29 @@ export function CurriculumExperience() {
           <h1>You will not study research in chapters. <em>You will move one question.</em></h1>
           <p>Every phase leaves behind a document, a mentor correction and a decision you should be able to defend.</p>
         </div>
-        <div className="curriculum-console">
-          <div className="curriculum-tabs" aria-label="Curriculum phases">
-            {curriculum.map((_, index) => (
-              <button key={index} className={active === index ? "active" : undefined} aria-pressed={active === index} onClick={() => choose(index)}>
-                {String(index + 1).padStart(2, "0")}
-              </button>
-            ))}
-          </div>
-          <div className="curriculum-sheet" style={{ "--curriculum-progress": `${((active + 1) / curriculum.length) * 100}%` } as CSSProperties}>
-            <div><small>{data[0]}</small><h2>{data[1]}</h2><p>{data[2]}</p></div>
-            <dl><div><dt>YOU LEAVE WITH</dt><dd>{data[3]}</dd></div><div><dt>MENTOR ASKS</dt><dd>{data[4]}</dd></div></dl>
-            <span className="curriculum-progress" aria-hidden="true"><i /></span>
+
+        <div className="curriculum-visual">
+          <figure className="curriculum-hero-photo">
+            <img
+              src="/assets/images/pexels-5940711-w1600.avif"
+              alt="Students comparing research material together"
+            />
+            <figcaption><span>READING + REVIEW</span><b>WORK IN PROGRESS / 02</b></figcaption>
+          </figure>
+
+          <div className="curriculum-console">
+            <div className="curriculum-tabs" aria-label="Curriculum phases">
+              {curriculum.map((_, index) => (
+                <button key={index} className={active === index ? "active" : undefined} aria-pressed={active === index} onClick={() => choose(index)}>
+                  {String(index + 1).padStart(2, "0")}
+                </button>
+              ))}
+            </div>
+            <div className="curriculum-sheet" style={{ "--curriculum-progress": `${((active + 1) / curriculum.length) * 100}%` } as CSSProperties}>
+              <div><small>{data[0]}</small><h2>{data[1]}</h2><p>{data[2]}</p></div>
+              <dl><div><dt>YOU LEAVE WITH</dt><dd>{data[3]}</dd></div><div><dt>MENTOR ASKS</dt><dd>{data[4]}</dd></div></dl>
+              <span className="curriculum-progress" aria-hidden="true"><i /></span>
+            </div>
           </div>
         </div>
       </section>
