@@ -6,8 +6,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="theme-color" content="#263f46" />
-        <meta name="description" content="A free six-month research apprenticeship built around one project, repeated review and visible revision." />
+        <meta name="theme-color" content="#171918" />
+        <meta name="description" content="A free six-month research apprenticeship built around one project, close mentor review and visible revision." />
         <title>ResurchIn · Bring the question you keep reopening</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

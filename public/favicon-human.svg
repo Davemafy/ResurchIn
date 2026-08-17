@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="4" fill="#263f46"/>
-  <path d="M15 14h22c8 0 13 4 13 11 0 6-4 10-10 11l10 14H38L29 37h-3v13H15V14Zm11 9v7h10c3 0 4-1 4-4s-2-3-4-3H26Z" fill="#f1ece2"/>
-  <path d="M46 13 56 23 46 33" fill="none" stroke="#c96f55" stroke-width="4" stroke-linecap="square"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ResurchIn mark">
+  <rect width="64" height="64" rx="4" fill="#C99A2E"/>
+  <g fill="#171918">
+    <circle cx="18" cy="14" r="2.2"/><circle cx="18" cy="22" r="2.2"/><circle cx="18" cy="30" r="2.2"/><circle cx="18" cy="38" r="2.2"/><circle cx="18" cy="46" r="2.2"/>
+    <circle cx="26" cy="14" r="2.2"/><circle cx="34" cy="14" r="2.2"/><circle cx="42" cy="14" r="2.2"/>
+    <circle cx="26" cy="22" r="2.2"/><circle cx="42" cy="22" r="2.2"/>
+    <circle cx="26" cy="30" r="2.2"/><circle cx="34" cy="30" r="2.2"/>
+    <circle cx="34" cy="38" r="2.2"/><circle cx="42" cy="46" r="2.2"/>
+  </g>
 </svg>
