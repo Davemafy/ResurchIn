@@ -1,0 +1,502 @@
+/*
+  ResurchIn — immersion + rough-edge polish pass
+  Purpose: keep the existing dark dossier identity, add depth without hijacking scroll,
+  and resolve the abrupt citation / chapter transition visible in QA.
+*/
+
+:root{
+  --immersive-ease:cubic-bezier(.22,.78,.2,1);
+  --page-progress:0;
+}
+
+/* Continuous motion is progressive enhancement. No custom scroll physics. */
+.home-v17 main{position:relative}
+.home-v17 main:before{
+  content:"";
+  position:fixed;
+  z-index:1;
+  pointer-events:none;
+  inset:76px 0 auto 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,216,0,.38),transparent);
+  transform:scaleX(calc(.12 + (var(--page-progress) * .88)));
+  transform-origin:left;
+  opacity:.34;
+}
+.home-v17 main>section{position:relative;z-index:2}
+
+/* HERO: depth follows the page, but the paper remains the dominant object. */
+.home-v17 .v14-headline{
+  transform:translate3d(0,calc(var(--section-progress,0) * -16px),0);
+  will-change:transform;
+}
+.home-v17 .document-orbit{
+  translate:0 calc(var(--section-progress,0) * -20px);
+  will-change:translate;
+}
+.home-v17 .orbit-dots{
+  transform:translate3d(0,calc(var(--section-progress,0) * -18px),0) rotate(calc(var(--section-progress,0) * 4deg));
+  transform-origin:center;
+}
+.home-v17 .orbit-stamp{
+  translate:0 calc(var(--section-progress,0) * 11px);
+}
+
+/* ORIGIN: remove the "stacked brochure" feeling and give the proof objects a reading rhythm. */
+.home-v17 .origin-ledger>header,
+.home-v17 .founder-proof,
+.home-v17 .origin-facts{
+  transition:transform .7s var(--immersive-ease),opacity .55s ease;
+}
+.home-v17 .origin-ledger:not(.is-inview)>header{transform:translateY(18px);opacity:.72}
+.home-v17 .origin-ledger:not(.is-inview) .founder-proof{transform:translateY(24px);opacity:.7}
+.home-v17 .origin-ledger:not(.is-inview) .origin-facts{transform:translateY(30px);opacity:.65}
+
+/* PUBLIC RECORD: fix the rough, empty citation landing visible in QA. */
+.home-v17 .public-record{
+  padding-bottom:0!important;
+  overflow:hidden;
+}
+.home-v17 .public-record>header,
+.home-v17 .record-ledger{
+  padding-bottom:24px;
+}
+.home-v17 .public-record aside{
+  position:relative;
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:190px minmax(0,1fr) 220px;
+  gap:42px;
+  align-items:start;
+  margin:36px calc(var(--studio-pad) * -1) 0;
+  padding:54px var(--studio-pad) 58px;
+  border-top:1px solid #111!important;
+  border-bottom:1px solid #111;
+  background:#ebe7dd;
+  box-shadow:none!important;
+  overflow:hidden;
+}
+.home-v17 .public-record aside:before{
+  content:"“";
+  position:absolute;
+  right:1.5vw;
+  top:-.23em;
+  font:400 clamp(160px,19vw,290px)/1 var(--serif);
+  color:rgba(10,10,9,.045);
+  pointer-events:none;
+}
+.home-v17 .public-record aside:after{
+  content:"NEXT / BUILD THE DOCUMENT";
+  position:absolute;
+  left:var(--studio-pad);
+  bottom:13px;
+  font:500 6px var(--mono);
+  letter-spacing:.18em;
+  color:#787268;
+}
+.home-v17 .public-record aside>span{
+  padding-top:8px;
+  color:#5f5a52;
+}
+.home-v17 .public-record blockquote{
+  position:relative;
+  z-index:1;
+  max-width:860px;
+  font-size:clamp(38px,3.7vw,58px)!important;
+  line-height:.94!important;
+  letter-spacing:-.035em;
+}
+.home-v17 .public-record cite{
+  grid-column:3!important;
+  align-self:end;
+  padding-bottom:8px;
+  max-width:190px;
+  line-height:1.65;
+}
+.home-v17 .public-record.is-inview aside{
+  animation:citation-settle .85s var(--immersive-ease) both;
+}
+@keyframes citation-settle{
+  from{clip-path:inset(0 0 18% 0);transform:translateY(18px)}
+  to{clip-path:inset(0 0 0 0);transform:none}
+}
+
+/* Chapter bridge: make the move into the live research document feel intentional. */
+.home-v17 .living-research{
+  background:
+    linear-gradient(rgba(0,0,0,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.032) 1px,transparent 1px),
+    #e8e5dd!important;
+  background-size:44px 44px,44px 44px,auto!important;
+}
+.home-v17 .living-research:before{
+  content:"LIVE BUILD / 01—06";
+  position:absolute;
+  z-index:3;
+  top:18px;
+  left:var(--studio-pad);
+  font:500 6px var(--mono);
+  letter-spacing:.18em;
+  color:#7b756b;
+}
+.home-v17 .story-workbench{
+  transform:scale(calc(.982 + (var(--section-progress,0) * .018)));
+  transform-origin:center;
+  transition:box-shadow .45s ease;
+}
+.home-v17 .living-research.is-inview .story-workbench{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 20px 80px rgba(0,0,0,.10);
+}
+.home-v17 .story-header,
+.home-v17 .story-copy{
+  opacity:calc(.72 + (var(--section-progress,0) * .28));
+}
+
+/* Revision reel: the image feels like a moving field record, not a static card. */
+.home-v17 .field-reel-stage figure{
+  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * 22px),0);
+  transition:transform .65s var(--immersive-ease);
+}
+.home-v17 .field-reel-stage>article{
+  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * -14px),0);
+  transition:transform .65s var(--immersive-ease);
+}
+.home-v17 .field-reel.is-inview .field-reel-stage{
+  box-shadow:0 28px 90px rgba(0,0,0,.22);
+}
+
+/* Review desk enters as an object on the table instead of snapping into place. */
+.home-v17 .critique-lab .review-desk{
+  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * 18px),0);
+  transition:transform .7s var(--immersive-ease),box-shadow .45s ease;
+}
+.home-v17 .critique-lab.is-inview .review-desk{
+  box-shadow:0 32px 90px rgba(0,0,0,.16);
+}
+
+/* Closing: enough motion to feel conclusive, never theatrical. */
+.home-v17 .v14-closing .closing-dots{
+  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * -28px),0) rotate(calc(var(--section-progress,0) * 8deg));
+  transform-origin:center;
+}
+.home-v17 .v14-closing h2{
+  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * 16px),0);
+}
+
+/* Experience rail becomes a useful chapter cue, not a detached ornament. */
+.experience-rail button{
+  transition:opacity .24s,color .24s,transform .32s var(--immersive-ease)!important;
+}
+.experience-rail button.active{
+  transform:translateX(-5px);
+}
+.experience-rail button.active:after{
+  content:"";
+  display:inline-block;
+  width:18px;
+  height:1px;
+  margin-left:8px;
+  vertical-align:middle;
+  background:var(--studio-yellow);
+}
+
+/* Inner pages: subtle view transitions via native viewport animation only. */
+.inner-page .page-hero>div:first-child,
+.inner-page .resource-hero>div:first-child{
+  animation:inner-copy-in .8s var(--immersive-ease) both;
+}
+.inner-page .page-hero .photo,
+.inner-page .resource-hero .photo{
+  animation:inner-photo-in .95s var(--immersive-ease) .08s both;
+}
+@keyframes inner-copy-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes inner-photo-in{from{opacity:0;transform:translateY(18px) rotate(.45deg)}to{opacity:1;transform:none}}
+
+@media(max-width:1100px){
+  .home-v17 .public-record aside{grid-template-columns:150px minmax(0,1fr);gap:28px}
+  .home-v17 .public-record cite{grid-column:2!important;max-width:none;margin-top:16px}
+}
+
+@media(max-width:900px){
+  .home-v17 main:before{top:64px}
+  .home-v17 .public-record aside{
+    grid-template-columns:1fr;
+    margin-inline:calc(var(--studio-pad) * -1);
+    padding-top:42px;
+    padding-bottom:52px;
+  }
+  .home-v17 .public-record cite{grid-column:1!important;margin-top:8px}
+  .home-v17 .public-record aside:before{font-size:180px;right:-5px}
+}
+
+@media(max-width:720px){
+  .home-v17 main:before{display:none}
+  .home-v17 .v14-headline,
+  .home-v17 .document-orbit,
+  .home-v17 .orbit-dots,
+  .home-v17 .orbit-stamp,
+  .home-v17 .story-workbench,
+  .home-v17 .field-reel-stage figure,
+  .home-v17 .field-reel-stage>article,
+  .home-v17 .critique-lab .review-desk,
+  .home-v17 .v14-closing .closing-dots,
+  .home-v17 .v14-closing h2{
+    transform:none!important;
+    translate:none!important;
+  }
+  .home-v17 .public-record>header,.home-v17 .record-ledger{padding-bottom:8px}
+  .home-v17 .public-record aside{margin-top:18px;padding:34px 20px 48px}
+  .home-v17 .public-record blockquote{font-size:35px!important;line-height:.98!important}
+  .home-v17 .public-record aside:after{left:20px}
+  .home-v17 .living-research:before{left:20px;top:12px}
+  .home-v17 .living-research{background-size:34px 34px,34px 34px,auto!important}
+}
+
+@media(max-width:380px){
+  .home-v17 .public-record blockquote{font-size:31px!important}
+  .home-v17 .public-record aside:before{font-size:135px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .home-v17 main:before{display:none}
+  .home-v17 .v14-headline,
+  .home-v17 .document-orbit,
+  .home-v17 .orbit-dots,
+  .home-v17 .orbit-stamp,
+  .home-v17 .story-workbench,
+  .home-v17 .field-reel-stage figure,
+  .home-v17 .field-reel-stage>article,
+  .home-v17 .critique-lab .review-desk,
+  .home-v17 .v14-closing .closing-dots,
+  .home-v17 .v14-closing h2{
+    transform:none!important;
+    translate:none!important;
+    animation:none!important;
+    transition:none!important;
+  }
+  .home-v17 .public-record.is-inview aside{animation:none!important}
+}
+
+/* ========================================================================
+   SEND-READY MOBILE PASS — Aug 17
+   Fixes found on a physical Android viewport: founder proof collision,
+   oversized citation landing, and the dead transition into the live document.
+   This is deliberately a composition fix, not a redesign.
+   ======================================================================== */
+
+@media (max-width: 720px){
+  /* The yellow provenance chapter should read as one composed spread. */
+  .home-v17 .origin-ledger{
+    padding-top:58px!important;
+  }
+  .home-v17 .origin-ledger>header{
+    gap:14px!important;
+  }
+  .home-v17 .origin-ledger>header .kicker{
+    margin-top:0!important;
+  }
+  .home-v17 .origin-ledger>header h2{
+    max-width:12.5ch;
+    font-size:clamp(40px,11.8vw,48px)!important;
+    line-height:.92!important;
+    letter-spacing:-.032em!important;
+  }
+
+  /* The old 90px grid column contained a 130px monogram, so the badge
+     physically invaded the founder name. Keep the badge + bio relationship,
+     but make the geometry truthful. */
+  .home-v17 .founder-proof{
+    grid-template-columns:82px minmax(0,1fr)!important;
+    gap:16px!important;
+    align-items:start!important;
+    margin:42px 0 48px!important;
+    padding-top:18px!important;
+  }
+  .home-v17 .founder-monogram{
+    width:82px!important;
+    height:104px!important;
+    min-width:0!important;
+    padding:10px!important;
+  }
+  .home-v17 .founder-monogram span{
+    font-size:26px!important;
+    line-height:1!important;
+  }
+  .home-v17 .founder-proof>div:last-child{
+    min-width:0!important;
+    padding-top:1px;
+  }
+  .home-v17 .founder-proof>div:last-child>span{
+    display:block;
+    max-width:100%;
+    line-height:1.4;
+  }
+  .home-v17 .founder-proof h3{
+    max-width:9.5ch;
+    margin:8px 0 12px!important;
+    font-size:clamp(27px,8vw,31px)!important;
+    line-height:.95!important;
+    letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  .home-v17 .founder-proof p{
+    margin:0;
+    max-width:none!important;
+    font-size:12.5px!important;
+    line-height:1.58!important;
+    text-wrap:pretty;
+  }
+  .home-v17 .founder-proof .text-link{
+    display:inline-flex;
+    width:auto;
+    max-width:100%;
+    margin-top:18px!important;
+    padding-bottom:5px;
+    white-space:normal;
+  }
+  .home-v17 .origin-facts article{
+    min-height:116px!important;
+    padding-top:20px!important;
+    padding-bottom:22px!important;
+  }
+  .home-v17 .origin-facts p{
+    font-size:22px!important;
+    line-height:1.02!important;
+  }
+
+  /* Public proof: turn the quote into a deliberate citation card rather than
+     a giant content block followed by an empty beige landing. */
+  .home-v17 .public-record{
+    gap:36px!important;
+    padding-top:64px!important;
+    padding-bottom:0!important;
+  }
+  .home-v17 .record-ledger a{
+    padding-top:22px!important;
+    padding-bottom:22px!important;
+  }
+  .home-v17 .public-record aside{
+    gap:20px!important;
+    margin:16px 0 0!important;
+    padding:28px 18px 34px!important;
+    border:1px solid rgba(17,17,15,.14)!important;
+    background:#ebe7dd!important;
+    box-shadow:10px 10px 0 #dedad0!important;
+    overflow:visible!important;
+  }
+  .home-v17 .public-record aside>span{
+    padding-top:0!important;
+  }
+  .home-v17 .public-record aside:before{
+    right:8px!important;
+    top:-.13em!important;
+    font-size:120px!important;
+    opacity:.72;
+  }
+  .home-v17 .public-record blockquote{
+    max-width:100%!important;
+    margin:30px 0 4px!important;
+    font-size:clamp(29px,8.9vw,35px)!important;
+    line-height:.96!important;
+    letter-spacing:-.032em!important;
+    text-wrap:balance;
+  }
+  .home-v17 .public-record cite{
+    margin-top:14px!important;
+    padding-bottom:0!important;
+    max-width:none!important;
+    font-size:6.5px!important;
+    line-height:1.45!important;
+  }
+  .home-v17 .public-record aside:after{
+    display:none;
+  }
+
+  /* Chapter handoff: remove the anonymous empty slab between proof and work.
+     The next section begins immediately with a visible research-desk threshold. */
+  .home-v17 .living-research{
+    border-top:1px solid #111!important;
+  }
+  .home-v17 .living-research:before{
+    content:"NEXT / BUILD THE DOCUMENT   ·   LIVE BUILD / 01—06"!important;
+    left:20px!important;
+    top:18px!important;
+    color:#5e5951!important;
+  }
+  .home-v17 .story-sticky{
+    padding-top:48px!important;
+    padding-bottom:68px!important;
+  }
+  .home-v17 .story-header h2{
+    margin-top:18px!important;
+  }
+
+  /* Mobile immersion is staged, not parallax. This keeps touch scrolling
+     native while making each chapter settle into place. */
+  .home-v17 .origin-ledger>header,
+  .home-v17 .founder-proof,
+  .home-v17 .origin-facts,
+  .home-v17 .public-record aside,
+  .home-v17 .living-research .story-header,
+  .home-v17 .living-research .story-nav,
+  .home-v17 .living-research .story-workbench,
+  .home-v17 .living-research .story-copy{
+    transition:opacity .52s ease,transform .66s var(--immersive-ease)!important;
+  }
+  .home-v17 .origin-ledger:not(.is-inview)>header,
+  .home-v17 .origin-ledger:not(.is-inview) .founder-proof,
+  .home-v17 .origin-ledger:not(.is-inview) .origin-facts,
+  .home-v17 .public-record:not(.is-inview) aside,
+  .home-v17 .living-research:not(.is-inview) .story-header,
+  .home-v17 .living-research:not(.is-inview) .story-nav,
+  .home-v17 .living-research:not(.is-inview) .story-workbench,
+  .home-v17 .living-research:not(.is-inview) .story-copy{
+    opacity:.74;
+    transform:translateY(14px)!important;
+  }
+  .home-v17 .origin-ledger.is-inview>header,
+  .home-v17 .origin-ledger.is-inview .founder-proof,
+  .home-v17 .origin-ledger.is-inview .origin-facts,
+  .home-v17 .public-record.is-inview aside,
+  .home-v17 .living-research.is-inview .story-header,
+  .home-v17 .living-research.is-inview .story-nav,
+  .home-v17 .living-research.is-inview .story-workbench,
+  .home-v17 .living-research.is-inview .story-copy{
+    opacity:1;
+    transform:none!important;
+  }
+}
+
+@media (max-width: 360px){
+  /* At 320–360px a side-by-side bio becomes needlessly cramped. Stack it. */
+  .home-v17 .founder-proof{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+  }
+  .home-v17 .founder-monogram{
+    width:92px!important;
+    height:92px!important;
+  }
+  .home-v17 .founder-proof h3{
+    max-width:11ch;
+    font-size:29px!important;
+  }
+  .home-v17 .public-record blockquote{
+    font-size:29px!important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .home-v17 .origin-ledger>header,
+  .home-v17 .founder-proof,
+  .home-v17 .origin-facts,
+  .home-v17 .public-record aside,
+  .home-v17 .living-research .story-header,
+  .home-v17 .living-research .story-nav,
+  .home-v17 .living-research .story-workbench,
+  .home-v17 .living-research .story-copy{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}

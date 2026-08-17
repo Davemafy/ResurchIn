@@ -35,6 +35,60 @@ export function HomeExperience({ children }: { children: ReactNode }) {
   const reducedMotion = useRef(false);
 
   useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) return;
+
+    const root = document.documentElement;
+    const selectors = [
+      ".v14-hero",
+      ".origin-ledger",
+      ".public-record",
+      ".living-research",
+      ".field-reel",
+      ".critique-lab",
+      ".v14-closing",
+    ];
+    let frame = 0;
+
+    const paint = () => {
+      frame = 0;
+      const viewport = Math.max(window.innerHeight, 1);
+      const scrollable = Math.max(document.documentElement.scrollHeight - viewport, 1);
+      const pageProgress = Math.max(0, Math.min(1, window.scrollY / scrollable));
+      root.style.setProperty("--page-progress", pageProgress.toFixed(4));
+
+      selectors.forEach((selector) => {
+        const node = document.querySelector<HTMLElement>(selector);
+        if (!node) return;
+        const rect = node.getBoundingClientRect();
+        const travel = viewport + rect.height;
+        const progress = Math.max(0, Math.min(1, (viewport - rect.top) / Math.max(travel, 1)));
+        node.style.setProperty("--section-progress", progress.toFixed(4));
+        node.classList.toggle("is-inview", rect.bottom > viewport * 0.12 && rect.top < viewport * 0.88);
+      });
+    };
+
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(paint);
+    };
+
+    paint();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+      root.style.removeProperty("--page-progress");
+      selectors.forEach((selector) => {
+        const node = document.querySelector<HTMLElement>(selector);
+        node?.style.removeProperty("--section-progress");
+        node?.classList.remove("is-inview");
+      });
+    };
+  }, []);
+
+  useEffect(() => {
     reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = window.matchMedia("(pointer:fine)").matches;
     if (!finePointer || reducedMotion.current) return;
