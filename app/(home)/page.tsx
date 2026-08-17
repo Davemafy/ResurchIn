@@ -1,5 +1,5 @@
-import { HumanStudioLanding } from "@/components/home/HumanStudioLanding";
+import { DeliberateLanding } from "@/components/home/DeliberateLanding";
 
 export default function HomePage() {
-  return <HumanStudioLanding />;
+  return <DeliberateLanding />;
 }
