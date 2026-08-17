@@ -23,6 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
           <link rel="stylesheet" href="/assets/qa-final.css" />
           <link rel="stylesheet" href="/assets/mobile-immersion.css" />
+          <link rel="stylesheet" href="/assets/home-desktop-immersion.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="home-v16 home-v17">

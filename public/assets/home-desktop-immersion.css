@@ -1,0 +1,132 @@
+/*
+  ResurchIn — desktop + tablet immersion extension
+  The homepage already has the strongest visual identity. This layer makes the
+  movement feel like one research record instead of independent showcase blocks.
+*/
+
+@media (min-width:1181px) and (min-height:680px){
+  /* THREE VERSIONS: scroll now advances the same field record through its
+     revisions. The image and copy stay pinned while the user moves the story. */
+  .home-v17 .field-reel{
+    min-height:300vh!important;
+    padding:0 max(24px,3vw)!important;
+    display:grid!important;
+    grid-template-columns:210px minmax(0,1fr)!important;
+    gap:44px!important;
+    align-items:start!important;
+  }
+  .home-v17 .field-reel>header{
+    grid-column:1!important;
+    position:sticky!important;
+    top:92px!important;
+    min-height:calc(100vh - 122px)!important;
+    margin:0!important;
+    padding:76px 0 48px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+  }
+  .home-v17 .field-reel>header .kicker{margin:0 0 34px!important}
+  .home-v17 .field-reel>header h2{
+    font-size:clamp(46px,4.1vw,66px)!important;
+    line-height:.88!important;
+    max-width:7.6ch!important;
+  }
+  .home-v17 .field-reel-stage{
+    grid-column:2!important;
+    position:sticky!important;
+    top:88px!important;
+    height:calc(100vh - 118px)!important;
+    min-height:620px!important;
+    margin:70px 0!important;
+    align-self:start!important;
+  }
+  .home-v17 .field-reel-stage figure{min-height:0!important}
+  .home-v17 .field-reel-stage>article{min-height:0!important;overflow:hidden}
+  .home-v17 .field-reel-stage h3{margin-top:38px!important}
+  .home-v17 .field-reel-stage dl{margin-bottom:14px}
+
+  /* The review desk follows as the next physical object. Keep the prompt in view
+     long enough that the slider feels like a task, not decoration. */
+  .home-v17 .critique-lab{
+    min-height:118vh!important;
+    align-items:start!important;
+  }
+  .home-v17 .critique-intro{
+    position:sticky!important;
+    top:92px!important;
+    min-height:calc(100vh - 122px)!important;
+    padding-bottom:42px!important;
+  }
+  .home-v17 .review-desk{align-self:center!important}
+}
+
+/* 821–1180 gets continuity without forcing a full pinned composition. */
+@media (min-width:821px) and (max-width:1180px){
+  .home-v17 .field-reel-stage{
+    transition:box-shadow .45s ease,translate .08s linear!important;
+    translate:0 calc((.5 - var(--section-progress,0)) * 18px);
+  }
+  .home-v17 .field-reel-stage.is-changing{translate:0 4px}
+  .home-v17 .critique-lab .review-desk{
+    translate:0 calc((.5 - var(--section-progress,0)) * 12px);
+  }
+}
+
+/* Tablet had a dead zone where the desktop chapter rail disappeared but the
+   mobile HUD had not started yet. Keep one compact orientation control. */
+@media (min-width:721px) and (max-width:820px){
+  .home-v17 .experience-rail{
+    display:grid!important;
+    position:fixed!important;
+    z-index:70!important;
+    right:10px!important;
+    left:auto!important;
+    top:50%!important;
+    bottom:auto!important;
+    transform:translateY(-50%)!important;
+    width:50px!important;
+    height:auto!important;
+    min-width:0!important;
+    padding:9px 7px!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    place-items:center!important;
+    color:#f7f2e8!important;
+    background:rgba(10,10,9,.86)!important;
+    border:1px solid rgba(255,255,255,.18)!important;
+    border-radius:0!important;
+    box-shadow:0 12px 30px rgba(0,0,0,.18)!important;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+  .home-v17 .experience-rail>span{
+    font:600 7px var(--mono)!important;
+    color:var(--brand-yellow,#ffd800)!important;
+  }
+  .home-v17 .experience-rail>i{
+    display:block!important;
+    width:1px!important;
+    height:34px!important;
+    background:rgba(255,255,255,.24)!important;
+  }
+  .home-v17 .experience-rail>button:not(.active){display:none!important}
+  .home-v17 .experience-rail>button.active{
+    display:block!important;
+    width:auto!important;
+    padding:0!important;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg)!important;
+    color:#fff!important;
+    font:500 6px var(--mono)!important;
+    letter-spacing:.08em;
+    background:transparent!important;
+  }
+  .home-v17 .experience-rail>button.active:after{display:none!important}
+  .home-v17 .experience-rail .experience-next{display:none!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .home-v17 .field-reel-stage,
+  .home-v17 .critique-lab .review-desk{translate:none!important}
+}

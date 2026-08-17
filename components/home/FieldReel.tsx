@@ -48,6 +48,8 @@ export function FieldReel() {
   const timer = useRef<number | null>(null);
   const reducedMotion = useRef(false);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const lockUntil = useRef(0);
 
   useEffect(() => {
     reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -56,16 +58,63 @@ export function FieldReel() {
     };
   }, []);
 
-  const setRef = useCallback((node: HTMLElement | null) => registerSection(2, node), [registerSection]);
+  const setRef = useCallback((node: HTMLElement | null) => {
+    sectionRef.current = node;
+    registerSection(2, node);
+  }, [registerSection]);
+
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      if (performance.now() < lockUntil.current || !sectionRef.current || window.innerWidth <= 720) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewport = Math.max(window.innerHeight, 1);
+      if (rect.bottom <= viewport * 0.08 || rect.top >= viewport * 0.92) return;
+
+      const travel = Math.max(sectionRef.current.offsetHeight - viewport, 1);
+      const ratio = sectionRef.current.offsetHeight > viewport * 1.5
+        ? Math.max(0, Math.min(0.999999, -rect.top / travel))
+        : Math.max(0, Math.min(0.999999, (viewport - rect.top) / Math.max(viewport + rect.height, 1)));
+      const next = Math.min(views.length - 1, Math.floor(ratio * views.length));
+      setActive((current) => current === next ? current : next);
+    };
+
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const choose = (index: number) => {
     if (index === active && !changing) return;
     setChanging(true);
+    lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 650);
     if (timer.current) window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => {
       setActive(index);
       setChanging(false);
     }, reducedMotion.current ? 0 : 220);
+
+    if (sectionRef.current && window.innerWidth > 1180 && sectionRef.current.offsetHeight > window.innerHeight * 1.5) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionTop = window.scrollY + rect.top;
+      const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
+      window.scrollTo({
+        top: sectionTop + travel * ((index + 0.5) / views.length),
+        behavior: reducedMotion.current ? "auto" : "smooth",
+      });
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {

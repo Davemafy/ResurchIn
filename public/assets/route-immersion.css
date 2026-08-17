@@ -1,0 +1,390 @@
+/*
+  ResurchIn — cross-route immersion system
+  Purpose: make desktop, tablet and inner pages feel like one research record,
+  not a stack of independently designed sections. Native scrolling remains intact.
+*/
+
+:root{
+  --route-page-progress:0;
+  --route-ease:cubic-bezier(.22,.78,.2,1);
+}
+
+.route-rail{display:none}
+
+.route-immersive-ready main{position:relative}
+.route-immersive-ready main>section,
+.route-immersive-ready .reading-body>div>section,
+.route-immersive-ready .apply-side,
+.route-immersive-ready .application{
+  --route-progress:.5;
+  --route-depth:0;
+  position:relative;
+}
+
+/* A shared research line makes separate chapters feel like one file. */
+.route-immersive-ready.inner-page main:before{
+  content:"";
+  position:fixed;
+  z-index:4;
+  pointer-events:none;
+  left:0;
+  top:0;
+  width:100%;
+  height:2px;
+  transform:scaleX(var(--route-page-progress));
+  transform-origin:left;
+  background:var(--studio-yellow,#ffd800);
+}
+
+@media (min-width:721px){
+  .route-rail{
+    position:fixed;
+    z-index:42;
+    right:12px;
+    top:50%;
+    translate:0 -50%;
+    width:150px;
+    display:grid;
+    grid-template-columns:30px 1px minmax(0,1fr);
+    gap:10px;
+    align-items:center;
+    pointer-events:none;
+    color:#11110f;
+  }
+  .route-rail-count{
+    align-self:start;
+    padding-top:2px;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font:600 6px/1 var(--mono);
+    letter-spacing:.13em;
+    opacity:.68;
+  }
+  .route-rail-track{
+    position:relative;
+    width:1px;
+    height:132px;
+    background:rgba(17,17,15,.22);
+    overflow:hidden;
+  }
+  .route-rail-track b{
+    position:absolute;
+    inset:0;
+    display:block;
+    transform:scaleY(var(--rail-progress,0));
+    transform-origin:top;
+    background:var(--studio-yellow,#ffd800);
+    transition:transform .35s var(--route-ease);
+  }
+  .route-rail-labels{
+    display:grid;
+    gap:3px;
+    pointer-events:auto;
+  }
+  .route-rail button{
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:currentColor;
+    min-height:20px;
+    padding:2px 4px;
+    display:grid;
+    grid-template-columns:18px minmax(0,1fr);
+    align-items:center;
+    gap:5px;
+    text-align:left;
+    cursor:pointer;
+    opacity:.28;
+    transition:opacity .22s ease,translate .28s var(--route-ease),color .22s ease;
+  }
+  .route-rail button b{
+    font:600 6px var(--mono);
+    color:var(--studio-yellow,#ffd800);
+  }
+  .route-rail button span{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font:500 6px var(--mono);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .route-rail button:hover,.route-rail button:focus-visible{opacity:.78}
+  .route-rail button.active{opacity:1;translate:-5px 0}
+  .route-rail button.active span{font-weight:700}
+
+  /* On dark sections the rail automatically gains a readable backing plate. */
+  .route-rail:before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    inset:-12px -8px;
+    background:rgba(244,240,231,.78);
+    border:1px solid rgba(17,17,15,.08);
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px);
+  }
+
+  /* HERO CONTINUITY: copy and image occupy slightly different depth planes. */
+  .inner-page .page-hero>div:first-child,
+  .inner-page .resource-hero>div:first-child,
+  .program-page .dossier-cover>div:nth-child(2),
+  .curriculum-page .curriculum-hero-copy{
+    translate:0 calc(var(--route-depth) * -22px);
+    transition:translate .08s linear;
+    will-change:translate;
+  }
+  .inner-page .page-hero .photo,
+  .inner-page .resource-hero .photo,
+  .program-page .dossier-cover figure,
+  .curriculum-page .curriculum-console{
+    translate:0 calc(var(--route-depth) * 30px);
+    transition:translate .08s linear,box-shadow .4s var(--route-ease);
+    will-change:translate;
+  }
+
+  /* Section content settles into place instead of snapping in as another block. */
+  .route-immersive-ready main>section:not(.closing):not(.page-hero):not(.resource-hero):not(.dossier-cover):not(.curriculum-hero) > *{
+    opacity:calc(.76 + (var(--route-progress) * .24));
+  }
+  .route-immersive-ready main>section.route-scene-visible > *{
+    transition:opacity .5s ease,translate .7s var(--route-ease);
+  }
+
+  /* Photography reads as evidence moving behind the document plane. */
+  .inner-page .visual-evidence .evidence-grid figure,
+  .program-page .visual-evidence .evidence-grid figure{
+    overflow:hidden;
+  }
+  .inner-page .visual-evidence .evidence-grid figure img,
+  .program-page .visual-evidence .evidence-grid figure img{
+    scale:1.055;
+    translate:0 calc(var(--route-depth) * -26px);
+  }
+  .inner-page .visual-evidence.route-scene-visible .evidence-grid figure:nth-child(2) img,
+  .program-page .visual-evidence.route-scene-visible .evidence-grid figure:nth-child(2) img{
+    translate:0 calc(var(--route-depth) * 20px);
+  }
+  .inner-page .visual-evidence.route-scene-visible .evidence-grid figure:nth-child(3) img,
+  .program-page .visual-evidence.route-scene-visible .evidence-grid figure:nth-child(3) img{
+    translate:0 calc(var(--route-depth) * -14px);
+  }
+
+  /* PROGRAM: the operating rhythm behaves like a live sequence. */
+  .program-page .program-calendar .calendar-row{
+    opacity:.42;
+    translate:-10px 0;
+    transition:opacity .35s ease,translate .5s var(--route-ease),background .35s ease;
+  }
+  .program-page .program-calendar.route-scene-visible .calendar-row{opacity:.78;translate:0 0}
+  .program-page .program-calendar.route-scene-visible .calendar-row:nth-child(1){transition-delay:.03s}
+  .program-page .program-calendar.route-scene-visible .calendar-row:nth-child(2){transition-delay:.10s}
+  .program-page .program-calendar.route-scene-visible .calendar-row:nth-child(3){transition-delay:.17s}
+  .program-page .program-calendar.route-scene-visible .calendar-row:nth-child(4){transition-delay:.24s}
+  .program-page .program-contract.route-scene-visible .contract-grid article:nth-child(1),
+  .program-page .program-contract.route-scene-visible .contract-grid article:nth-child(3){translate:0 -5px}
+  .program-page .program-contract.route-scene-visible .contract-grid article:nth-child(2),
+  .program-page .program-contract.route-scene-visible .contract-grid article:nth-child(4){translate:0 5px}
+
+  /* CURRICULUM: keep the phase console visually present as the core object. */
+  .curriculum-page .curriculum-console{transform-origin:50% 60%}
+  .curriculum-page .photo-ledger figure img,
+  .curriculum-page .artifact-spread figure img{
+    scale:1.04;
+    translate:0 calc(var(--route-depth) * -22px);
+  }
+  .curriculum-page .artifact-spread figure:nth-child(2) img{translate:0 calc(var(--route-depth) * 18px)}
+
+  /* MENTORSHIP: dialogue feels like an exchange unfolding, not four static rows. */
+  .mentors-page .dialogue dl dd{
+    transition:opacity .35s ease,translate .45s var(--route-ease);
+    opacity:.52;
+  }
+  .mentors-page .dialogue.route-scene-visible dl dd{opacity:1;translate:0 0}
+  .mentors-page .dialogue dl dd:nth-of-type(1){translate:-10px 0}
+  .mentors-page .dialogue dl dd:nth-of-type(2){translate:10px 0;transition-delay:.06s}
+  .mentors-page .dialogue dl dd:nth-of-type(3){translate:-10px 0;transition-delay:.12s}
+  .mentors-page .dialogue dl dd:nth-of-type(4){translate:10px 0;transition-delay:.18s}
+
+  /* ABOUT + COMMUNITY: the logic emerges in sequence while preserving editorial calm. */
+  .about-page .principles article,
+  .community-page .community-scenes article,
+  .mentors-page .mentor-work li{
+    opacity:.5;
+    translate:0 12px;
+    transition:opacity .4s ease,translate .55s var(--route-ease);
+  }
+  .about-page .principles.route-scene-visible article,
+  .community-page .community-scenes.route-scene-visible article,
+  .mentors-page .mentor-work.route-scene-visible li{opacity:1;translate:0 0}
+  .about-page .principles.route-scene-visible article:nth-child(2),
+  .community-page .community-scenes.route-scene-visible article:nth-child(2),
+  .mentors-page .mentor-work.route-scene-visible li:nth-child(2){transition-delay:.08s}
+  .about-page .principles.route-scene-visible article:nth-child(3),
+  .community-page .community-scenes.route-scene-visible article:nth-child(3),
+  .mentors-page .mentor-work.route-scene-visible li:nth-child(3){transition-delay:.16s}
+  .mentors-page .mentor-work.route-scene-visible li:nth-child(4){transition-delay:.24s}
+
+  /* RESOURCES: the index behaves like a shelf being brought into focus. */
+  .resources-page .resource-index article{
+    opacity:.56;
+    translate:0 14px;
+    transition:opacity .38s ease,translate .55s var(--route-ease),background .32s,color .32s;
+  }
+  .resources-page .resource-index.route-scene-visible article{opacity:1;translate:0 0}
+  .resources-page .resource-index.route-scene-visible article:nth-child(2){transition-delay:.07s}
+  .resources-page .resource-index.route-scene-visible article:nth-child(3){transition-delay:.14s}
+  .resources-page .resource-index.route-scene-visible article:nth-child(4){transition-delay:.21s}
+
+  /* ARTICLE: the six-pass method gains one continuous reading spine. */
+  .article-page .reading-body{position:relative}
+  .article-page .reading-body:after{
+    content:"";
+    position:absolute;
+    right:var(--studio-pad,4vw);
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(#ffd800 0 calc(var(--route-page-progress) * 100%),rgba(17,17,15,.13) calc(var(--route-page-progress) * 100%));
+    pointer-events:none;
+  }
+  .article-page .reading-body section{
+    opacity:.44;
+    translate:0 16px;
+    transition:opacity .42s ease,translate .55s var(--route-ease),background .35s ease;
+  }
+  .article-page .reading-body section.route-scene-visible{opacity:1;translate:0 0}
+
+  /* APPLICATION: the brief remains present while the applicant works. */
+  .apply-route .apply-page{align-items:start}
+  .apply-route .apply-side{
+    position:sticky!important;
+    top:58px;
+    height:calc(100vh - 58px);
+    min-height:620px!important;
+    overflow:hidden;
+  }
+  .apply-route .application{
+    min-height:calc(100vh - 58px);
+  }
+}
+
+@media (min-width:721px) and (max-width:1100px){
+  .route-rail{right:8px;width:52px;grid-template-columns:18px 1px 20px;gap:6px}
+  .route-rail-labels button{grid-template-columns:1fr;padding:2px;justify-items:center}
+  .route-rail-labels button span{display:none}
+  .route-rail-track{height:112px}
+  .route-rail:before{inset:-10px -5px}
+  .inner-page .page-hero>div:first-child,
+  .inner-page .resource-hero>div:first-child,
+  .program-page .dossier-cover>div:nth-child(2),
+  .curriculum-page .curriculum-hero-copy{translate:0 calc(var(--route-depth) * -12px)}
+  .inner-page .page-hero .photo,
+  .inner-page .resource-hero .photo,
+  .program-page .dossier-cover figure,
+  .curriculum-page .curriculum-console{translate:0 calc(var(--route-depth) * 16px)}
+}
+
+@media (max-width:720px){
+  /* Inner pages get the same orientation benefit as the homepage without
+     turning the phone into a floating-dashboard UI. */
+  .route-rail{
+    position:fixed;
+    z-index:72;
+    left:12px;
+    right:auto;
+    bottom:12px;
+    min-width:122px;
+    height:34px;
+    padding:0 10px;
+    display:grid;
+    grid-template-columns:auto 32px 1fr;
+    align-items:center;
+    gap:8px;
+    color:#f7f2e8;
+    background:rgba(10,10,9,.88);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+  }
+  .route-rail-count{font:600 6px var(--mono);color:#ffd800;letter-spacing:.06em}
+  .route-rail-track{height:1px;background:rgba(255,255,255,.26);position:relative;overflow:hidden}
+  .route-rail-track b{display:block;width:100%;height:100%;background:#ffd800;transform:scaleX(var(--rail-progress,0))!important;transform-origin:left!important}
+  .route-rail-labels{display:block;min-width:0}
+  .route-rail button{display:none}
+  .route-rail button.active{
+    display:block;
+    border:0;
+    background:transparent;
+    color:#fff;
+    padding:0;
+    text-align:left;
+  }
+  .route-rail button.active b{display:none}
+  .route-rail button.active span{display:block;max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 6px var(--mono);letter-spacing:.05em;text-transform:uppercase}
+
+  /* Turn image chapters into thumb-friendly evidence reels. */
+  .inner-page .visual-evidence .evidence-grid,
+  .program-page .visual-evidence .evidence-grid{
+    display:flex!important;
+    grid-template-columns:none!important;
+    grid-template-rows:none!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-inline:contain;
+    padding:0 20px 14px 0;
+    margin-right:-20px;
+    scrollbar-width:none;
+  }
+  .inner-page .visual-evidence .evidence-grid::-webkit-scrollbar,
+  .program-page .visual-evidence .evidence-grid::-webkit-scrollbar{display:none}
+  .inner-page .visual-evidence .evidence-grid figure,
+  .program-page .visual-evidence .evidence-grid figure{
+    flex:0 0 min(82vw,360px)!important;
+    height:360px!important;
+    min-height:0!important;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  .inner-page .visual-evidence .evidence-grid figure img,
+  .program-page .visual-evidence .evidence-grid figure img{height:100%!important}
+
+  .curriculum-page .photo-ledger{
+    display:flex!important;
+    overflow-x:auto!important;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .curriculum-page .photo-ledger::-webkit-scrollbar{display:none}
+  .curriculum-page .photo-ledger figure{
+    flex:0 0 82vw!important;
+    min-height:310px!important;
+    scroll-snap-align:start;
+    border-right:1px solid #191815!important;
+  }
+
+  /* The applicant should never fight a sticky desktop brief on a phone. */
+  .apply-route .apply-side{position:relative!important;height:auto!important;min-height:0!important;top:auto!important}
+}
+
+@media (max-width:380px){
+  .route-rail{left:8px;bottom:8px;min-width:108px;padding-inline:8px}
+  .route-rail button.active span{max-width:78px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .route-immersive-ready main:before{transition:none!important}
+  .route-immersive-ready [style*="--route-progress"] *,
+  .route-immersive-ready main>section > *{
+    translate:none!important;
+    scale:none!important;
+    transition:none!important;
+    animation:none!important;
+  }
+  .route-rail-track b{transition:none!important}
+}

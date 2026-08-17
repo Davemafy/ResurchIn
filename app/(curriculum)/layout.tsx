@@ -1,4 +1,5 @@
 import { SiteProgress } from "@/components/site/SiteProgress";
+import { RouteImmersion } from "@/components/site/RouteImmersion";
 import type { ReactNode } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -20,10 +21,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/responsive-fixes.css" />
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
           <link rel="stylesheet" href="/assets/qa-final.css" />
+          <link rel="stylesheet" href="/assets/route-immersion.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="inner-page curriculum-page">
         <SiteProgress />
+        <RouteImmersion />
         {children}
       </body>
     </html>
