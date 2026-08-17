@@ -27,6 +27,24 @@ export function ResearchStory() {
   const [active, setActive] = useState(0);
   const [phaseChanging, setPhaseChanging] = useState(false);
   const reducedMotion = useRef(false);
+  const activeRef = useRef(0);
+
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  const activate = useCallback((index: number) => {
+    if (index === activeRef.current) return;
+    activeRef.current = index;
+    setActive(index);
+    setPhaseChanging(true);
+    if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
+    phaseTimer.current = window.setTimeout(() => {
+      setPhaseChanging(false);
+      phaseTimer.current = null;
+    }, reducedMotion.current ? 0 : 380);
+  }, []);
 
   const setRef = useCallback((node: HTMLElement | null) => {
     sectionRef.current = node;
@@ -44,7 +62,7 @@ export function ResearchStory() {
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
       const ratio = Math.max(0, Math.min(0.999999, -rect.top / travel));
       const next = Math.min(storyData.length - 1, Math.floor(ratio * storyData.length));
-      setActive((current) => current === next ? current : next);
+      activate(next);
     };
 
     const onScroll = () => {
@@ -59,22 +77,15 @@ export function ResearchStory() {
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [activate]);
 
   useEffect(() => () => {
     if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
   }, []);
 
   const choose = (index: number) => {
-    if (index === active && !phaseChanging) return;
-    setPhaseChanging(true);
-    if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
-    const delay = reducedMotion.current ? 0 : 170;
-    phaseTimer.current = window.setTimeout(() => {
-      setActive(index);
-      setPhaseChanging(false);
-      phaseTimer.current = null;
-    }, delay);
+    if (index === activeRef.current && !phaseChanging) return;
+    activate(index);
 
     if (window.innerWidth > 720 && sectionRef.current) {
       lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 900);
@@ -118,19 +129,17 @@ export function ResearchStory() {
         <div className="story-workbench">
           <div className="bench-grid" />
           <article className={`living-paper${phaseChanging ? " phase-change" : ""}`} aria-live="polite" style={paperStyle}>
-            <div key={active} className="paper-phase-content">
-              <header><span>{data.folio}</span><span>RESURCHIN / COHORT 01</span></header>
-              <div className="paper-rule" />
-              <p className="living-label">{data.label}</p>
-              <h3>{data.question}</h3>
-              <p className="living-body">{data.body}</p>
-              <dl>
-                <div><dt>DOCUMENT</dt><dd>{data.document}</dd></div>
-                <div><dt>MENTOR ASKS</dt><dd>{data.review}</dd></div>
-              </dl>
-              <div className="paper-marks"><i /><i /><i /></div>
-              <aside>{data.note}</aside>
-            </div>
+            <header><span>{data.folio}</span><span>RESURCHIN / COHORT 01</span></header>
+            <div className="paper-rule" />
+            <p className="living-label">{data.label}</p>
+            <h3>{data.question}</h3>
+            <p className="living-body">{data.body}</p>
+            <dl>
+              <div><dt>DOCUMENT</dt><dd>{data.document}</dd></div>
+              <div><dt>MENTOR ASKS</dt><dd>{data.review}</dd></div>
+            </dl>
+            <div className="paper-marks"><i /><i /><i /></div>
+            <aside>{data.note}</aside>
             <footer><span>WORKING PAPER / NOT FINAL</span><b>{String(active + 1).padStart(2, "0")}—06</b></footer>
           </article>
           <div className="bench-side">

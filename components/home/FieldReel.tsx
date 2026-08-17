@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useReveal } from "@/components/site/useReveal";
 import { useHomeExperience } from "./HomeExperience";
 
@@ -38,66 +38,110 @@ const views = [
 ];
 
 const labels = ["Frame", "Test", "Defend"];
-type ReelStyle = CSSProperties & { "--reel-progress"?: string };
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
 export function FieldReel() {
   const { registerSection, showCursor, hideCursor } = useHomeExperience();
-  const sectionRef = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const headerReveal = useReveal<HTMLElement>();
   const stageReveal = useReveal<HTMLDivElement>();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [changing, setChanging] = useState(false);
+  const timer = useRef<number | null>(null);
   const reducedMotion = useRef(false);
-  const lockUntil = useRef(0);
-  const frame = useRef(0);
+  const activeRef = useRef(0);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reducedMotion.current = media.matches;
-
-    const update = () => {
-      frame.current = 0;
-      const section = sectionRef.current;
-      if (!section || window.innerWidth <= 900 || performance.now() < lockUntil.current) return;
-
-      const rect = section.getBoundingClientRect();
-      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const progress = Math.max(0, Math.min(0.999999, -rect.top / travel));
-      section.style.setProperty("--reel-progress", progress.toFixed(4));
-      const next = Math.min(views.length - 1, Math.floor(progress * views.length));
-      setActive((current) => current === next ? current : next);
-    };
-
-    const schedule = () => {
-      if (!frame.current) frame.current = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule, { passive: true });
+    reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    views.forEach(({ image }) => {
+      const preload = new Image();
+      preload.src = image;
+    });
     return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      if (frame.current) window.cancelAnimationFrame(frame.current);
-      sectionRef.current?.style.removeProperty("--reel-progress");
+      if (timer.current) window.clearTimeout(timer.current);
     };
   }, []);
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   const setRef = useCallback((node: HTMLElement | null) => {
     sectionRef.current = node;
     registerSection(2, node);
   }, [registerSection]);
 
-  const choose = (index: number) => {
+  const transitionTo = useCallback((index: number) => {
+    if (index === activeRef.current) return;
+    activeRef.current = index;
     setActive(index);
-    const section = sectionRef.current;
-    if (window.innerWidth <= 900 || !section) return;
+    setChanging(true);
+    if (timer.current) window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => {
+      setChanging(false);
+      timer.current = null;
+    }, reducedMotion.current ? 0 : 430);
+  }, []);
 
-    lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 650);
-    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+  /*
+    On large screens this chapter behaves like a physical revision reel:
+    the viewport stays on the desk while three versions pass through it.
+    Scroll itself remains native. Tablet and mobile retain normal flow.
+  */
+  useEffect(() => {
+    let frame = 0;
+    let visual = 0;
+    let target = 0;
+    let running = true;
+
+    const measure = () => {
+      if (!sectionRef.current || window.innerWidth <= 920) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
+      target = clamp01(-rect.top / travel);
+      const next = Math.min(views.length - 1, Math.floor(Math.min(target, 0.99999) * views.length));
+      if (next !== activeRef.current) transitionTo(next);
+    };
+
+    const animate = () => {
+      if (!running || !sectionRef.current || window.innerWidth <= 920) {
+        frame = 0;
+        return;
+      }
+      visual += (target - visual) * 0.13;
+      if (Math.abs(target - visual) < 0.0007) visual = target;
+      sectionRef.current.style.setProperty("--reel-progress", visual.toFixed(4));
+      frame = Math.abs(target - visual) > 0.0007 ? requestAnimationFrame(animate) : 0;
+    };
+
+    const schedule = () => {
+      measure();
+      if (!frame) frame = requestAnimationFrame(animate);
+    };
+
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => {
+      running = false;
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) cancelAnimationFrame(frame);
+      sectionRef.current?.style.removeProperty("--reel-progress");
+    };
+  }, [transitionTo]);
+
+  const choose = (index: number) => {
+    transitionTo(index);
+    if (window.innerWidth <= 920 || !sectionRef.current) return;
+
+    const section = sectionRef.current;
+    const rect = section.getBoundingClientRect();
+    const sectionTop = window.scrollY + rect.top;
     const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-    const progress = (index + 0.5) / views.length;
+    const phaseCenter = (index + 0.5) / views.length;
     window.scrollTo({
-      top: sectionTop + travel * progress,
+      top: sectionTop + travel * phaseCenter,
       behavior: reducedMotion.current ? "auto" : "smooth",
     });
   };
@@ -113,42 +157,30 @@ export function FieldReel() {
     choose(next);
   };
 
-  const reelStyle: ReelStyle = { "--reel-progress": "0" };
+  const view = views[active];
 
   return (
-    <section ref={setRef} className="field-reel field-reel-cinematic" aria-labelledby="field-reel-title" style={reelStyle}>
-      <div className="field-reel-pin">
+    <section ref={setRef} className="field-reel" aria-labelledby="field-reel-title" data-phase={active + 1}>
+      <div className="field-reel-sticky">
         <header ref={headerReveal.ref} className={`quiet-reveal${headerReveal.seen ? " seen" : ""}`}>
           <p className="kicker">ONE PROJECT / THREE VERSIONS</p>
           <h2 id="field-reel-title">The first draft says what you hoped to find.<br /><em>The sixth says what the evidence allows.</em></h2>
-          <span className="reel-folio" aria-hidden="true">0{active + 1} / 03</span>
         </header>
-
-        <div ref={stageReveal.ref} className={`field-reel-stage quiet-reveal${stageReveal.seen ? " seen" : ""}`} data-ready="true" data-active={active}>
-          <div className="field-reel-visuals" aria-live="polite">
-            {views.map((view, index) => (
-              <figure key={view.caption} className={active === index ? "active" : undefined} aria-hidden={active !== index}>
-                <img src={view.image} alt={active === index ? view.alt : ""} />
-                <div className="field-scan" />
-                <figcaption><span>{view.caption}</span><span>{view.credit}</span></figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="field-reel-copy-stack">
-            {views.map((view, index) => (
-              <article key={view.title} className={active === index ? "active" : undefined} aria-hidden={active !== index}>
-                <span>{String(index + 1).padStart(2, "0")} / 03</span>
-                <h3>{view.title}</h3>
-                <p>{view.body}</p>
-                <dl>
-                  <div><dt>MENTOR MARK</dt><dd>{view.mark}</dd></div>
-                  <div><dt>DOCUMENT</dt><dd>{view.document}</dd></div>
-                </dl>
-              </article>
-            ))}
-          </div>
-
+        <div ref={stageReveal.ref} className={`field-reel-stage quiet-reveal${stageReveal.seen ? " seen" : ""}${changing ? " is-changing" : ""}`} data-ready="true">
+          <figure key={`figure-${active}`}>
+            <img src={view.image} alt={view.alt} />
+            <div className="field-scan" />
+            <figcaption><span>{view.caption}</span><span>{view.credit}</span></figcaption>
+          </figure>
+          <article key={`article-${active}`} aria-live="polite">
+            <span>{String(active + 1).padStart(2, "0")} / 03</span>
+            <h3>{view.title}</h3>
+            <p>{view.body}</p>
+            <dl>
+              <div><dt>MENTOR MARK</dt><dd>{view.mark}</dd></div>
+              <div><dt>DOCUMENT</dt><dd>{view.document}</dd></div>
+            </dl>
+          </article>
           <nav aria-label="Project revision views">
             {labels.map((label, index) => (
               <button
@@ -164,8 +196,6 @@ export function FieldReel() {
               </button>
             ))}
           </nav>
-
-          <div className="reel-progress" aria-hidden="true"><i /></div>
         </div>
       </div>
     </section>

@@ -9,7 +9,8 @@ export function SiteFooter({ variant = "inner" }: { variant?: FooterVariant }) {
     <footer className="site-footer">
       <div className="footer-statement">
         <span>RESURCHIN / FIELD OFFICE / 2026</span>
-        <p>Find the question<br /><em>Earn the claim</em></p>
+        <p>Find the question.<br /><em>Earn the claim.</em></p>
+        <small>Research apprenticeship · free · volunteer-led · open worldwide</small>
       </div>
 
       <div className="footer-main">

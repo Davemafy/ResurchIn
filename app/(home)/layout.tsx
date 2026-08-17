@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link rel="stylesheet" href="/assets/studio-v1.css" />
           <link rel="stylesheet" href="/assets/responsive-fixes.css" />
           <link rel="stylesheet" href="/assets/immersive-pass.css" />
-          <link rel="stylesheet" href="/assets/cinematic-v2.css" />
+          <link rel="stylesheet" href="/assets/cinematic-pass.css" />
         <link rel="icon" href="/favicon.svg?v=33" type="image/svg+xml" />
       </head>
       <body className="home-v16 home-v17">

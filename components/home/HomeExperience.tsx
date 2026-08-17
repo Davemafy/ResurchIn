@@ -25,6 +25,8 @@ type HomeExperienceValue = {
 
 const HomeExperienceContext = createContext<HomeExperienceValue | null>(null);
 
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
+
 export function HomeExperience({ children }: { children: ReactNode }) {
   const [dossierOpen, setDossierOpen] = useState(false);
   const [cursorLabel, setCursorLabel] = useState("");
@@ -34,8 +36,14 @@ export function HomeExperience({ children }: { children: ReactNode }) {
   const returnFocus = useRef<HTMLElement | null>(null);
   const reducedMotion = useRef(false);
 
+  /*
+    Native scrolling stays completely untouched. We only ease the visual
+    variables that react to it. This removes the stutter of raw scroll-linked
+    transforms without introducing a smooth-scroll library or scroll-jacking.
+  */
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMotion.current = media.matches;
     if (media.matches) return;
 
     const root = document.documentElement;
@@ -48,42 +56,71 @@ export function HomeExperience({ children }: { children: ReactNode }) {
       ".critique-lab",
       ".v14-closing",
     ];
-    let frame = 0;
 
-    const paint = () => {
-      frame = 0;
+    const entries = selectors
+      .map((selector) => document.querySelector<HTMLElement>(selector))
+      .filter((node): node is HTMLElement => Boolean(node))
+      .map((node) => ({ node, current: 0, target: 0 }));
+
+    let pageCurrent = 0;
+    let pageTarget = 0;
+    let frame = 0;
+    let running = true;
+
+    const measure = () => {
       const viewport = Math.max(window.innerHeight, 1);
       const scrollable = Math.max(document.documentElement.scrollHeight - viewport, 1);
-      const pageProgress = Math.max(0, Math.min(1, window.scrollY / scrollable));
-      root.style.setProperty("--page-progress", pageProgress.toFixed(4));
+      pageTarget = clamp01(window.scrollY / scrollable);
 
-      selectors.forEach((selector) => {
-        const node = document.querySelector<HTMLElement>(selector);
-        if (!node) return;
-        const rect = node.getBoundingClientRect();
-        const travel = viewport + rect.height;
-        const progress = Math.max(0, Math.min(1, (viewport - rect.top) / Math.max(travel, 1)));
-        node.style.setProperty("--section-progress", progress.toFixed(4));
-        node.classList.toggle("is-inview", rect.bottom > viewport * 0.12 && rect.top < viewport * 0.88);
+      entries.forEach((entry) => {
+        const rect = entry.node.getBoundingClientRect();
+        const travel = Math.max(viewport + rect.height, 1);
+        entry.target = clamp01((viewport - rect.top) / travel);
+        entry.node.classList.toggle(
+          "is-inview",
+          rect.bottom > viewport * 0.08 && rect.top < viewport * 0.92,
+        );
       });
     };
 
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(paint);
+    const animate = () => {
+      if (!running) return;
+      const smoothing = window.innerWidth > 920 ? 0.115 : 0.18;
+      let unsettled = false;
+
+      pageCurrent += (pageTarget - pageCurrent) * smoothing;
+      if (Math.abs(pageTarget - pageCurrent) > 0.0006) unsettled = true;
+      else pageCurrent = pageTarget;
+      root.style.setProperty("--page-progress", pageCurrent.toFixed(4));
+
+      entries.forEach((entry) => {
+        entry.current += (entry.target - entry.current) * smoothing;
+        if (Math.abs(entry.target - entry.current) > 0.0007) unsettled = true;
+        else entry.current = entry.target;
+        entry.node.style.setProperty("--section-progress", entry.current.toFixed(4));
+      });
+
+      frame = unsettled ? window.requestAnimationFrame(animate) : 0;
     };
 
-    paint();
+    const schedule = () => {
+      measure();
+      if (!frame) frame = window.requestAnimationFrame(animate);
+    };
+
+    schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
+
     return () => {
+      running = false;
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       if (frame) window.cancelAnimationFrame(frame);
       root.style.removeProperty("--page-progress");
-      selectors.forEach((selector) => {
-        const node = document.querySelector<HTMLElement>(selector);
-        node?.style.removeProperty("--section-progress");
-        node?.classList.remove("is-inview");
+      entries.forEach(({ node }) => {
+        node.style.removeProperty("--section-progress");
+        node.classList.remove("is-inview");
       });
     };
   }, []);

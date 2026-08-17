@@ -29,7 +29,7 @@ export function HeroExperience() {
       </div>
       <div className="v14-headline">
         <p className="kicker">SIX MONTHS / GUIDED SUPPORT / HANDS-ON PROJECTS</p>
-        <h1><span className="hero-title-main">Research is a skill.</span><em>Practice it here.</em></h1>
+        <h1>Research is a skill.<em>Practice it here.</em></h1>
       </div>
       <div className="v14-hero-bottom">
         <p>Structured training, real data and guidance from experienced researchers. Free, volunteer-driven and open worldwide.</p>
