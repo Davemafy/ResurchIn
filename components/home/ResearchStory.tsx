@@ -39,7 +39,7 @@ export function ResearchStory() {
 
     const update = () => {
       frame = 0;
-      if (performance.now() < lockUntil.current || !sectionRef.current) return;
+      if (window.innerWidth <= 720 || performance.now() < lockUntil.current || !sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
       const ratio = Math.max(0, Math.min(0.999999, -rect.top / travel));
@@ -76,8 +76,8 @@ export function ResearchStory() {
       phaseTimer.current = null;
     }, delay);
 
-    if (sectionRef.current) {
-      lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 700);
+    if (window.innerWidth > 720 && sectionRef.current) {
+      lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 900);
       const rect = sectionRef.current.getBoundingClientRect();
       const sectionTop = window.scrollY + rect.top;
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
@@ -118,17 +118,19 @@ export function ResearchStory() {
         <div className="story-workbench">
           <div className="bench-grid" />
           <article className={`living-paper${phaseChanging ? " phase-change" : ""}`} aria-live="polite" style={paperStyle}>
-            <header><span>{data.folio}</span><span>RESURCHIN / COHORT 01</span></header>
-            <div className="paper-rule" />
-            <p className="living-label">{data.label}</p>
-            <h3>{data.question}</h3>
-            <p className="living-body">{data.body}</p>
-            <dl>
-              <div><dt>DOCUMENT</dt><dd>{data.document}</dd></div>
-              <div><dt>MENTOR ASKS</dt><dd>{data.review}</dd></div>
-            </dl>
-            <div className="paper-marks"><i /><i /><i /></div>
-            <aside>{data.note}</aside>
+            <div key={active} className="paper-phase-content">
+              <header><span>{data.folio}</span><span>RESURCHIN / COHORT 01</span></header>
+              <div className="paper-rule" />
+              <p className="living-label">{data.label}</p>
+              <h3>{data.question}</h3>
+              <p className="living-body">{data.body}</p>
+              <dl>
+                <div><dt>DOCUMENT</dt><dd>{data.document}</dd></div>
+                <div><dt>MENTOR ASKS</dt><dd>{data.review}</dd></div>
+              </dl>
+              <div className="paper-marks"><i /><i /><i /></div>
+              <aside>{data.note}</aside>
+            </div>
             <footer><span>WORKING PAPER / NOT FINAL</span><b>{String(active + 1).padStart(2, "0")}—06</b></footer>
           </article>
           <div className="bench-side">
