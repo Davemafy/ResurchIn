@@ -10,7 +10,7 @@ export function ClosingSection() {
   return (
     <section ref={setRef} className="v14-closing">
       <p>ADMISSIONS / NEXT COHORT</p>
-      <h2>Bring the question<br />you cannot leave alone.</h2>
+      <h2>Bring the question<br />you cannot leave alone</h2>
       <Link className="button light" href="/apply/">Submit an application ↗</Link>
       <div className="closing-dots" />
     </section>
