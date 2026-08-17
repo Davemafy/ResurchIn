@@ -313,3 +313,38 @@
     transform: none;
   }
 }
+
+/* CURRICULUM HERO / FINAL MICRO-BALANCE
+   Keep the concept intact. This only corrects photo crop, document weight and vertical balance. */
+@media (min-width: 1001px) {
+  .curriculum-page .curriculum-hero-copy,
+  .curriculum-page .curriculum-visual {
+    transform: translateY(-54px);
+  }
+
+  .curriculum-page .curriculum-hero-photo {
+    top: -8px;
+    width: 72%;
+    height: 74%;
+  }
+
+  .curriculum-page .curriculum-hero-photo img {
+    object-position: 50% 20%;
+  }
+
+  .curriculum-page .curriculum-console {
+    left: 11%;
+    right: 2%;
+    bottom: -6px;
+    min-height: 286px !important;
+  }
+
+  .curriculum-page .curriculum-sheet {
+    padding: 20px 26px 20px !important;
+  }
+
+  .curriculum-page .curriculum-sheet h2 {
+    margin: 17px 0 12px !important;
+    font-size: clamp(30px, 2.45vw, 40px) !important;
+  }
+}
