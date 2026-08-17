@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
 import { useReveal } from "@/components/site/useReveal";
 import { useHomeExperience } from "./HomeExperience";
 
@@ -47,6 +47,7 @@ export function FieldReel() {
   const [changing, setChanging] = useState(false);
   const timer = useRef<number | null>(null);
   const reducedMotion = useRef(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -78,6 +79,23 @@ export function FieldReel() {
     choose(next);
   };
 
+  const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) < 52 || Math.abs(dx) <= Math.abs(dy) * 1.2) return;
+    const next = dx < 0 ? Math.min(active + 1, views.length - 1) : Math.max(active - 1, 0);
+    choose(next);
+  };
+
   const view = views[active];
 
   return (
@@ -86,7 +104,13 @@ export function FieldReel() {
         <p className="kicker">ONE PROJECT / THREE VERSIONS</p>
         <h2 id="field-reel-title">The first draft says what you hoped to find.<br /><em>The sixth says what the evidence allows.</em></h2>
       </header>
-      <div ref={stageReveal.ref} className={`field-reel-stage quiet-reveal${stageReveal.seen ? " seen" : ""}${changing ? " is-changing" : ""}`} data-ready="true">
+      <div
+        ref={stageReveal.ref}
+        className={`field-reel-stage quiet-reveal${stageReveal.seen ? " seen" : ""}${changing ? " is-changing" : ""}`}
+        data-ready="true"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <figure>
           <img src={view.image} alt={view.alt} />
           <div className="field-scan" />

@@ -29,6 +29,17 @@ export function ExperienceRail() {
     return () => observer.disconnect();
   }, [sectionNodes]);
 
+  const goNext = () => {
+    if (active < labels.length - 1) {
+      scrollToSection(active + 1);
+      return;
+    }
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  };
+
   return (
     <aside className="experience-rail" aria-label="Homepage sections">
       <span>{String(active + 1).padStart(2, "0")}</span>
@@ -38,6 +49,14 @@ export function ExperienceRail() {
           {label}
         </button>
       ))}
+      <button
+        className="experience-next"
+        type="button"
+        onClick={goNext}
+        aria-label={active < labels.length - 1 ? `Next chapter: ${labels[active + 1]}` : "Continue to the footer"}
+      >
+        <span>{active < labels.length - 1 ? labels[active + 1] : "Finish"}</span><b aria-hidden="true">↓</b>
+      </button>
     </aside>
   );
 }

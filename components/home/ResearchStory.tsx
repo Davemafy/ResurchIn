@@ -39,7 +39,7 @@ export function ResearchStory() {
 
     const update = () => {
       frame = 0;
-      if (window.innerWidth <= 720 || performance.now() < lockUntil.current || !sectionRef.current) return;
+      if (performance.now() < lockUntil.current || !sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
       const ratio = Math.max(0, Math.min(0.999999, -rect.top / travel));
@@ -76,8 +76,8 @@ export function ResearchStory() {
       phaseTimer.current = null;
     }, delay);
 
-    if (window.innerWidth > 720 && sectionRef.current) {
-      lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 900);
+    if (sectionRef.current) {
+      lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 700);
       const rect = sectionRef.current.getBoundingClientRect();
       const sectionTop = window.scrollY + rect.top;
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);

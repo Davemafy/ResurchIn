@@ -1,0 +1,341 @@
+/*
+  ResurchIn — mobile immersion pass
+  Goal: replace long, passive phone scrolling with a guided research sequence.
+  No scroll-jacking. Native vertical scrolling stays intact.
+*/
+
+.experience-next{display:none!important}
+
+@media (max-width: 720px){
+  :root{--mobile-head:68px}
+
+  /* A compact chapter HUD gives the phone experience orientation and a next move. */
+  .experience-rail{
+    display:grid!important;
+    position:fixed!important;
+    z-index:70!important;
+    right:12px!important;
+    bottom:12px!important;
+    top:auto!important;
+    transform:none!important;
+    width:auto!important;
+    min-width:150px;
+    height:38px;
+    padding:0 8px 0 10px;
+    grid-template-columns:auto 30px minmax(0,1fr);
+    align-items:center;
+    gap:8px!important;
+    color:#f7f2e8!important;
+    background:rgba(10,10,9,.88);
+    border:1px solid rgba(255,255,255,.20);
+    border-radius:999px;
+    box-shadow:0 8px 26px rgba(0,0,0,.20);
+    mix-blend-mode:normal!important;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    pointer-events:auto!important;
+  }
+  .experience-rail>span{
+    font:600 7px var(--mono)!important;
+    letter-spacing:.08em;
+    color:var(--brand-yellow,#ffd800);
+  }
+  .experience-rail>i{
+    display:block!important;
+    width:30px!important;
+    height:1px!important;
+    background:rgba(255,255,255,.32)!important;
+    opacity:1!important;
+  }
+  .experience-rail>button:not(.experience-next){display:none!important}
+  .experience-rail .experience-next{
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    width:auto!important;
+    height:28px!important;
+    min-width:84px;
+    padding:0 8px!important;
+    border:0!important;
+    border-radius:999px!important;
+    background:transparent!important;
+    color:#f7f2e8!important;
+    font:500 7px var(--mono)!important;
+    letter-spacing:.04em;
+    white-space:nowrap;
+    overflow:visible!important;
+  }
+  .experience-rail .experience-next b{
+    color:var(--brand-yellow,#ffd800);
+    font:600 9px var(--mono);
+  }
+
+  /* The research document becomes the phone's signature scroll sequence.
+     Six native-scroll beats update the same physical paper. */
+  .home-v17 .living-research{
+    height:560svh!important;
+    min-height:560svh!important;
+    overflow:visible!important;
+    background-size:34px 34px,34px 34px,auto!important;
+  }
+  .home-v17 .living-research:before{display:none!important}
+  .home-v17 .story-sticky{
+    position:sticky!important;
+    z-index:4;
+    top:var(--mobile-head)!important;
+    height:calc(100svh - var(--mobile-head))!important;
+    min-height:520px;
+    padding:18px 14px 14px!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto!important;
+    gap:10px!important;
+    overflow:hidden!important;
+    background:transparent;
+  }
+  .home-v17 .story-header{
+    margin:0!important;
+    display:grid!important;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:end;
+  }
+  .home-v17 .story-header>span{
+    grid-column:1/-1;
+    font-size:6px!important;
+    opacity:.72;
+  }
+  .home-v17 .story-header h2{
+    margin:3px 0 0!important;
+    max-width:8.5ch;
+    font-size:clamp(27px,8vw,34px)!important;
+    line-height:.88!important;
+  }
+  .home-v17 .story-header p{
+    align-self:end;
+    max-width:17ch;
+    margin:0 0 2px!important;
+    font:500 6px/1.45 var(--mono)!important;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    color:#6b655c!important;
+  }
+  .home-v17 .story-nav{
+    display:grid!important;
+    grid-template-columns:repeat(6,1fr)!important;
+    width:100%;
+    margin:0!important;
+    overflow:visible!important;
+    border-top:1px solid #111!important;
+    border-bottom:1px solid #111!important;
+  }
+  .home-v17 .story-nav button{
+    min-width:0!important;
+    width:100%!important;
+    height:34px;
+    padding:0!important;
+    display:grid!important;
+    place-items:center;
+    border:0!important;
+    border-right:1px solid rgba(17,17,15,.2)!important;
+    background:transparent!important;
+    transition:background .24s ease,color .24s ease!important;
+  }
+  .home-v17 .story-nav button:last-child{border-right:0!important}
+  .home-v17 .story-nav button span{display:none!important}
+  .home-v17 .story-nav button b{
+    font:600 7px var(--mono)!important;
+  }
+  .home-v17 .story-nav button.active{
+    background:var(--brand-yellow,#ffd800)!important;
+    color:#0a0a09!important;
+  }
+  .home-v17 .story-workbench{
+    grid-column:1!important;
+    grid-row:3!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:hidden!important;
+    border-color:#36332e!important;
+  }
+  .home-v17 .living-paper{
+    width:84%!important;
+    min-height:78%!important;
+    max-height:90%;
+    padding:20px 18px 72px!important;
+    box-shadow:8px 9px 0 var(--brand-yellow,#ffd800)!important;
+    overflow:hidden;
+  }
+  .home-v17 .living-paper header,
+  .home-v17 .living-paper footer{font-size:5.5px!important}
+  .home-v17 .paper-rule{margin:11px 0 18px!important}
+  .home-v17 .living-label{font-size:6px!important}
+  .home-v17 .living-paper h3{
+    margin:10px 0 14px!important;
+    max-width:95%;
+    font-size:clamp(24px,7.2vw,31px)!important;
+    line-height:.92!important;
+  }
+  .home-v17 .living-body{
+    max-width:94%;
+    margin:0!important;
+    font-size:10px!important;
+    line-height:1.42!important;
+  }
+  .home-v17 .living-paper dl{
+    grid-template-columns:1fr 1fr!important;
+    gap:12px!important;
+    margin-top:15px!important;
+    padding-top:10px!important;
+  }
+  .home-v17 .living-paper dt{font-size:5.5px!important}
+  .home-v17 .living-paper dd{
+    margin-top:4px!important;
+    font-size:12px!important;
+    line-height:1.05!important;
+  }
+  .home-v17 .living-paper aside{
+    right:-5px!important;
+    bottom:52px!important;
+    width:104px!important;
+    padding:8px!important;
+    font-size:6px!important;
+  }
+  .home-v17 .living-paper footer{
+    left:18px!important;
+    right:18px!important;
+    bottom:16px!important;
+  }
+  .home-v17 .bench-side{
+    right:7px!important;
+    top:8px!important;
+    bottom:8px!important;
+  }
+  .home-v17 .bench-number{font-size:24px!important}
+  .home-v17 .bench-side p{font-size:5px!important}
+  .home-v17 .story-copy{
+    grid-row:4!important;
+    margin:0!important;
+    padding:0!important;
+    min-height:52px;
+    display:grid!important;
+    grid-template-columns:74px minmax(0,1fr)!important;
+    grid-template-rows:auto auto;
+    gap:2px 12px!important;
+    align-items:end;
+  }
+  .home-v17 .story-copy .kicker{
+    grid-column:1;
+    grid-row:1/span 2;
+    align-self:center;
+    margin:0!important;
+    font-size:6px!important;
+    line-height:1.5;
+  }
+  .home-v17 .story-copy blockquote{
+    grid-column:2;
+    grid-row:1;
+    margin:0!important;
+    font-size:clamp(20px,5.8vw,25px)!important;
+    line-height:.94!important;
+  }
+  .home-v17 .story-copy>p:not(.kicker){
+    grid-column:2;
+    grid-row:2;
+    display:block!important;
+    max-width:none!important;
+    margin:3px 0 0!important;
+    font-size:8px!important;
+    line-height:1.35!important;
+  }
+  .home-v17 .story-copy .text-link{display:none!important}
+
+  /* Explain the gesture once, then let the work speak. */
+  .home-v17 .story-workbench:after{
+    content:"SCROLL TO REVISE";
+    position:absolute;
+    z-index:5;
+    left:9px;
+    bottom:8px;
+    color:rgba(255,255,255,.50);
+    font:500 5.5px var(--mono);
+    letter-spacing:.12em;
+    pointer-events:none;
+  }
+
+  /* The revision reel has a real phone gesture. Vertical scrolling remains
+     native; only a clear horizontal swipe changes the revision. */
+  .home-v17 .field-reel-stage{
+    position:relative;
+    touch-action:pan-y;
+  }
+  .home-v17 .field-reel-stage:before{
+    content:"SWIPE 01 / 03";
+    position:absolute;
+    z-index:5;
+    top:12px;
+    right:12px;
+    padding:6px 8px;
+    background:rgba(10,10,9,.78);
+    color:#f7f2e8;
+    border:1px solid rgba(255,255,255,.2);
+    font:500 6px var(--mono);
+    letter-spacing:.1em;
+    pointer-events:none;
+  }
+  .home-v17 .field-reel-stage.is-changing figure,
+  .home-v17 .field-reel-stage.is-changing>article{
+    opacity:.55;
+    transform:translateY(5px)!important;
+  }
+
+  /* Make the mentor-review interaction feel like a stop, not another article. */
+  .home-v17 .critique-intro label{
+    position:sticky;
+    z-index:8;
+    bottom:58px;
+    background:rgba(232,229,221,.94);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 -8px 24px rgba(0,0,0,.06);
+  }
+
+  /* The final yellow CTA gets breathing room above the persistent chapter HUD. */
+  .home-v17 .v14-closing{padding-bottom:92px!important}
+  .home-v17 .site-footer{padding-bottom:54px}
+}
+
+@media (max-width: 380px){
+  .experience-rail{right:8px;bottom:8px;min-width:138px}
+  .home-v17 .story-sticky{padding-inline:10px!important}
+  .home-v17 .living-paper{width:86%!important;padding-inline:15px!important}
+  .home-v17 .living-paper h3{font-size:23px!important}
+  .home-v17 .story-copy{grid-template-columns:64px minmax(0,1fr)!important;gap:8px!important}
+  .home-v17 .story-copy blockquote{font-size:19px!important}
+}
+
+@media (max-width:720px) and (max-height:650px){
+  .home-v17 .story-sticky{
+    padding-top:12px!important;
+    gap:7px!important;
+  }
+  .home-v17 .story-header>span{display:none}
+  .home-v17 .story-header h2{font-size:26px!important}
+  .home-v17 .story-header p{display:none!important}
+  .home-v17 .story-nav button{height:28px!important}
+  .home-v17 .living-paper{min-height:80%!important;padding-top:15px!important}
+  .home-v17 .living-paper h3{font-size:22px!important;margin-block:7px 10px!important}
+  .home-v17 .living-body{font-size:9px!important}
+  .home-v17 .living-paper dl{margin-top:10px!important}
+  .home-v17 .story-copy>p:not(.kicker){display:none!important}
+  .home-v17 .story-copy{min-height:38px!important}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .experience-rail{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .home-v17 .living-research{height:auto!important;min-height:0!important}
+  .home-v17 .living-research:before{position:relative!important;top:auto!important}
+  .home-v17 .story-sticky{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;overflow:visible!important}
+  .home-v17 .critique-intro label{position:relative!important;bottom:auto!important}
+}
