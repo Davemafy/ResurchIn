@@ -316,10 +316,36 @@ img, video, svg, canvas { max-width: 100%; }
   .footer-base { min-width: 0; }
 }
 
+/* ---------- mobile hero: dossier opens on demand, never hangs off-screen ---------- */
+@media (max-width: 720px) {
+  .home-v17 .v14-hero {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding-bottom: 28px !important;
+  }
+
+  /* The desktop working-paper object is too large to be useful in a phone hero.
+     Keep the sample dossier as an explicit tap target instead. */
+  .home-v17 .document-orbit {
+    display: none !important;
+  }
+
+  .home-v17 .hero-method-track,
+  .hero-method-track {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    margin-top: 28px !important;
+  }
+}
+
 @media (max-width: 390px) {
   :root { --studio-pad: 18px; }
   .home-v17 .v14-hero {
-    min-height: 990px !important;
+    min-height: 0 !important;
     padding-inline: 18px !important;
   }
   .home-v17 .v14-headline h1 { font-size: clamp(45px, 13.5vw, 53px) !important; }
@@ -327,12 +353,7 @@ img, video, svg, canvas { max-width: 100%; }
     grid-template-columns: 1fr !important;
   }
   .home-v17 .v14-hero-bottom > p { grid-column: 1 !important; }
-  .home-v17 .document-orbit {
-    width: min(292px, calc(100vw - 36px)) !important;
-    height: 396px !important;
-    top: 455px !important;
-  }
-  .hero-method-track { left: 18px !important; right: 18px !important; }
+  .hero-method-track { left: auto !important; right: auto !important; }
   .story-workbench { height: 625px !important; min-height: 625px !important; }
   .home-v16 .living-paper,
   .home-v17 .living-paper { width: 84% !important; }
@@ -345,13 +366,8 @@ img, video, svg, canvas { max-width: 100%; }
 }
 
 @media (max-width: 340px) {
-  .home-v17 .v14-hero { min-height: 960px !important; }
+  .home-v17 .v14-hero { min-height: 0 !important; }
   .home-v17 .v14-headline h1 { font-size: 43px !important; }
-  .home-v17 .document-orbit {
-    width: 270px !important;
-    height: 372px !important;
-    top: 455px !important;
-  }
   .home-v17 .hero-paper h2 { font-size: 20px !important; }
   .home-v17 .hero-paper aside { display: none !important; }
   .story-workbench { height: 610px !important; min-height: 610px !important; }

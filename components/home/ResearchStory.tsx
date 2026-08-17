@@ -27,24 +27,6 @@ export function ResearchStory() {
   const [active, setActive] = useState(0);
   const [phaseChanging, setPhaseChanging] = useState(false);
   const reducedMotion = useRef(false);
-  const activeRef = useRef(0);
-
-
-  useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
-
-  const activate = useCallback((index: number) => {
-    if (index === activeRef.current) return;
-    activeRef.current = index;
-    setActive(index);
-    setPhaseChanging(true);
-    if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
-    phaseTimer.current = window.setTimeout(() => {
-      setPhaseChanging(false);
-      phaseTimer.current = null;
-    }, reducedMotion.current ? 0 : 380);
-  }, []);
 
   const setRef = useCallback((node: HTMLElement | null) => {
     sectionRef.current = node;
@@ -62,7 +44,7 @@ export function ResearchStory() {
       const travel = Math.max(sectionRef.current.offsetHeight - window.innerHeight, 1);
       const ratio = Math.max(0, Math.min(0.999999, -rect.top / travel));
       const next = Math.min(storyData.length - 1, Math.floor(ratio * storyData.length));
-      activate(next);
+      setActive((current) => current === next ? current : next);
     };
 
     const onScroll = () => {
@@ -77,15 +59,22 @@ export function ResearchStory() {
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [activate]);
+  }, []);
 
   useEffect(() => () => {
     if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
   }, []);
 
   const choose = (index: number) => {
-    if (index === activeRef.current && !phaseChanging) return;
-    activate(index);
+    if (index === active && !phaseChanging) return;
+    setPhaseChanging(true);
+    if (phaseTimer.current) window.clearTimeout(phaseTimer.current);
+    const delay = reducedMotion.current ? 0 : 170;
+    phaseTimer.current = window.setTimeout(() => {
+      setActive(index);
+      setPhaseChanging(false);
+      phaseTimer.current = null;
+    }, delay);
 
     if (window.innerWidth > 720 && sectionRef.current) {
       lockUntil.current = performance.now() + (reducedMotion.current ? 0 : 900);

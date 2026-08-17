@@ -152,16 +152,17 @@
   opacity:calc(.72 + (var(--section-progress,0) * .28));
 }
 
-/* Revision reel: the image feels like a moving field record, not a static card. */
-.home-v17 .field-reel-stage figure{
-  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * 22px),0);
-  transition:transform .65s var(--immersive-ease);
+/* Revision reel: intentionally static while scrolling.
+   The three versions still change when the user chooses Frame / Test / Defend,
+   but the image and copy no longer drift against the page scroll. */
+.home-v17 .field-reel{
+  scroll-margin-top:92px;
 }
+.home-v17 .field-reel-stage figure,
 .home-v17 .field-reel-stage>article{
-  transform:translate3d(0,calc((.5 - var(--section-progress,0)) * -14px),0);
-  transition:transform .65s var(--immersive-ease);
+  transform:none!important;
 }
-.home-v17 .field-reel.is-inview .field-reel-stage{
+.home-v17 .field-reel-stage{
   box-shadow:0 28px 90px rgba(0,0,0,.22);
 }
 
